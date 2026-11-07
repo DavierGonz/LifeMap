@@ -160,7 +160,7 @@ infraestructura/resultados existentes -> credencial Kaggle (solo metadata)
 No repite ingesta, entrenamiento ni benchmark. La promocion usa Caddy y una
 candidata temporal para servir mientras se actualiza la API principal.
 
-Preflight Azure #1 SUCCESS; #2 FAILURE intencional, promocion bloqueada e
+Preflight Azure #1 SUCCESS; #2/#3 FAILURE intencional, promocion bloqueada e
 imagen publica intacta. Credencial Kaggle registrada y enmascarada por Jenkins.
 GitHub es publico: lectura SCM sin PAT adicional. `lifemap-main` apunta a main
 con pollSCM cada dos minutos, deshabilitado hasta autorizar el primer push.

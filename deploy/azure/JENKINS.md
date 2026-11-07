@@ -39,7 +39,8 @@ no habilitar builds automaticos de forks/PR de terceros.
 ## Demostracion despues de autorizar push
 
 Preflight Azure ya ejecutado: build #1 SUCCESS (17 pytest y candidata real),
-build #2 FAILURE deliberado (17 pass / 1 fail). La promocion fue omitida y
+build #3 FAILURE deliberado con DEPLOY_PUBLIC=true (17 pass / 1 fail).
+El #2 tambien fallo en preflight. La promocion fue bloqueada y
 la imagen/commit de produccion no cambiaron. Evidencia en jenkins-evidence.json.
 pollscm-demo.patch contiene el cambio minimo exacto propuesto para una rama
 de demostracion; no esta aplicado ni publicado.

@@ -15,6 +15,69 @@
             {
               "_class": "hudson.model.BooleanParameterValue",
               "name": "DEPLOY_PUBLIC",
+              "value": true
+            },
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "FORCE_TEST_FAILURE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "_class": "hudson.model.CauseAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.workflow.libs.LibrariesAction"
+        },
+        {},
+        {
+          "_class": "hudson.tasks.junit.TestResultAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.displayurlapi.actions.RunDisplayAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [
+        {
+          "relativePath": "reports/api-image-before.txt"
+        },
+        {
+          "relativePath": "reports/pytest.xml"
+        },
+        {
+          "relativePath": "reports/source-commit.txt"
+        }
+      ],
+      "building": false,
+      "duration": 8690,
+      "number": 3,
+      "result": "FAILURE"
+    },
+    {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "actions": [
+        {
+          "_class": "hudson.model.ParametersAction",
+          "parameters": [
+            {
+              "_class": "hudson.model.StringParameterValue",
+              "name": "LOCAL_COMMIT",
+              "value": "8e558f35958bee24689e2e58dce3c1bdf02b5188"
+            },
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "DEPLOY_PUBLIC",
               "value": false
             },
             {
@@ -62,13 +125,7 @@
       "building": false,
       "duration": 9028,
       "number": 2,
-      "result": "FAILURE",
-      "junit": {
-        "_class": "hudson.tasks.junit.TestResult",
-        "failCount": 1,
-        "passCount": 17,
-        "skipCount": 0
-      }
+      "result": "FAILURE"
     },
     {
       "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
@@ -144,18 +201,12 @@
       "building": false,
       "duration": 42710,
       "number": 1,
-      "result": "SUCCESS",
-      "junit": {
-        "_class": "hudson.tasks.junit.TestResult",
-        "failCount": 0,
-        "passCount": 17,
-        "skipCount": 0
-      }
+      "result": "SUCCESS"
     }
   ],
   "verified": {
     "successful_build": 1,
-    "failed_build": 2,
+    "failed_build": 3,
     "failure_deliberate": true,
     "deployment_skipped_after_failure": true,
     "reports": {
@@ -207,7 +258,8 @@
     },
     "main_job_disabled_until_push": true,
     "main_poll_scm": "H/2 * * * *",
-    "github_read_credential_required": false
+    "github_read_credential_required": false,
+    "deployment_enabled_but_blocked": true
   },
   "availability": {
     "samples": 46,
@@ -219,5 +271,81 @@
   "production_image_unchanged": true,
   "caddy_reload_same_upstream_test_passed": true,
   "automatic_github_update_demonstrated": false,
-  "pending_approval": "First push of main, publish and merge the reviewed documentation demo branch, enable SCM job"
+  "pending_approval": "First push of main, publish and merge the reviewed documentation demo branch, enable SCM job",
+  "enabled_deployment_failure_proof": {
+    "build": {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "actions": [
+        {
+          "_class": "hudson.model.ParametersAction",
+          "parameters": [
+            {
+              "_class": "hudson.model.StringParameterValue",
+              "name": "LOCAL_COMMIT",
+              "value": "8e558f35958bee24689e2e58dce3c1bdf02b5188"
+            },
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "DEPLOY_PUBLIC",
+              "value": true
+            },
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "FORCE_TEST_FAILURE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "_class": "hudson.model.CauseAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.workflow.libs.LibrariesAction"
+        },
+        {},
+        {
+          "_class": "hudson.tasks.junit.TestResultAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.displayurlapi.actions.RunDisplayAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [
+        {
+          "relativePath": "reports/api-image-before.txt"
+        },
+        {
+          "relativePath": "reports/pytest.xml"
+        },
+        {
+          "relativePath": "reports/source-commit.txt"
+        }
+      ],
+      "building": false,
+      "number": 3,
+      "result": "FAILURE",
+      "junit": {
+        "_class": "hudson.tasks.junit.TestResult",
+        "failCount": 1,
+        "passCount": 17
+      }
+    },
+    "public_checks_during_fault": [
+      {
+        "status": 200,
+        "commit": "1c8ee682253a409a95f9d434fd93c56ade8a8d5f"
+      }
+    ],
+    "deployment_enabled_but_blocked": true
+  }
 }
