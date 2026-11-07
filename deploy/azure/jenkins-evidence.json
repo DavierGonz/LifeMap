@@ -1,0 +1,223 @@
+{
+  "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+  "builds": [
+    {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "actions": [
+        {
+          "_class": "hudson.model.ParametersAction",
+          "parameters": [
+            {
+              "_class": "hudson.model.StringParameterValue",
+              "name": "LOCAL_COMMIT",
+              "value": "8e558f35958bee24689e2e58dce3c1bdf02b5188"
+            },
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "DEPLOY_PUBLIC",
+              "value": false
+            },
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "FORCE_TEST_FAILURE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "_class": "hudson.model.CauseAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.workflow.libs.LibrariesAction"
+        },
+        {},
+        {
+          "_class": "hudson.tasks.junit.TestResultAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.displayurlapi.actions.RunDisplayAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [
+        {
+          "relativePath": "reports/api-image-before.txt"
+        },
+        {
+          "relativePath": "reports/pytest.xml"
+        },
+        {
+          "relativePath": "reports/source-commit.txt"
+        }
+      ],
+      "building": false,
+      "duration": 9028,
+      "number": 2,
+      "result": "FAILURE",
+      "junit": {
+        "_class": "hudson.tasks.junit.TestResult",
+        "failCount": 1,
+        "passCount": 17,
+        "skipCount": 0
+      }
+    },
+    {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "actions": [
+        {
+          "_class": "hudson.model.ParametersAction",
+          "parameters": [
+            {
+              "_class": "hudson.model.StringParameterValue",
+              "name": "LOCAL_COMMIT",
+              "value": "8e558f35958bee24689e2e58dce3c1bdf02b5188"
+            },
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "FORCE_TEST_FAILURE",
+              "value": false
+            },
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "DEPLOY_PUBLIC",
+              "value": false
+            }
+          ]
+        },
+        {
+          "_class": "hudson.model.CauseAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.workflow.libs.LibrariesAction"
+        },
+        {},
+        {},
+        {
+          "_class": "hudson.tasks.junit.TestResultAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.displayurlapi.actions.RunDisplayAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [
+        {
+          "relativePath": "reports/academic-results.json"
+        },
+        {
+          "relativePath": "reports/api-image-before.txt"
+        },
+        {
+          "relativePath": "reports/candidate-api-error.txt"
+        },
+        {
+          "relativePath": "reports/candidate-api.json"
+        },
+        {
+          "relativePath": "reports/kaggle-auth.json"
+        },
+        {
+          "relativePath": "reports/pytest.xml"
+        },
+        {
+          "relativePath": "reports/source-commit.txt"
+        }
+      ],
+      "building": false,
+      "duration": 42710,
+      "number": 1,
+      "result": "SUCCESS",
+      "junit": {
+        "_class": "hudson.tasks.junit.TestResult",
+        "failCount": 0,
+        "passCount": 17,
+        "skipCount": 0
+      }
+    }
+  ],
+  "verified": {
+    "successful_build": 1,
+    "failed_build": 2,
+    "failure_deliberate": true,
+    "deployment_skipped_after_failure": true,
+    "reports": {
+      "candidate-api.json": {
+        "/health": {
+          "status": 200
+        },
+        "/businesses/near?lat=39.9526&lon=-75.1652&radius_m=5000&category=Restaurants&limit=5": {
+          "status": 200
+        },
+        "/businesses/within": {
+          "status": 200
+        },
+        "/zones/summary?lat=39.9526&lon=-75.1652&radius_m=5000": {
+          "status": 200
+        },
+        "/stats/closure?group_by=geohash&min_business_days=3650&limit=5": {
+          "status": 200
+        },
+        "/predict": {
+          "status": 200
+        },
+        "/businesses/near?lat=nan&lon=0&radius_m=10 [invalid input]": {
+          "status": 400
+        },
+        "/predict [invalid input]": {
+          "status": 400
+        },
+        "commit": "8e558f35958bee24689e2e58dce3c1bdf02b5188",
+        "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+        "passed": true
+      },
+      "academic-results.json": {
+        "passed": true,
+        "businesses": 16944,
+        "reviews": 1320594,
+        "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+        "benchmark_runs": 24
+      },
+      "kaggle-auth.json": {
+        "credential_configured": true,
+        "metadata_http": 200,
+        "dataset": "yelp-dataset/yelp-dataset",
+        "current_version": 4,
+        "downloaded_bytes": 0
+      },
+      "source-commit.txt": "8e558f35958bee24689e2e58dce3c1bdf02b5188\n",
+      "pytest.xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"17\" time=\"0.330\" timestamp=\"2026-11-07T15:41:29.047317+00:00\" hostname=\"e0861881da89\"><testcase classname=\"tests.e1.test_core\" name=\"test_annualized_closure_formula\" time=\"0.000\" /><testcase classname=\"tests.e1.test_core\" name=\"test_geohash_standard_and_bounds\" time=\"0.001\" /><testcase classname=\"tests.e1.test_core\" name=\"test_stable_primary_category_does_not_expand_population\" time=\"0.000\" /><testcase classname=\"tests.e1.test_core\" name=\"test_murmur3_standard_and_probabilities\" time=\"0.001\" /><testcase classname=\"tests.e1.test_core\" name=\"test_reduction_comparison_checks_events_and_exposure\" time=\"0.000\" /><testcase classname=\"tests.e1.test_core\" name=\"test_invalid_queries_are_bounded_json[/businesses/near?lat=nan&amp;lon=0&amp;radius_m=10]\" time=\"0.005\" /><testcase classname=\"tests.e1.test_core\" name=\"test_invalid_queries_are_bounded_json[/businesses/near?lat=0&amp;lon=0&amp;radius_m=10&amp;limit=101]\" time=\"0.004\" /><testcase classname=\"tests.e1.test_core\" name=\"test_invalid_queries_are_bounded_json[/businesses/near?lat=0&amp;lat=1&amp;lon=0&amp;radius_m=10]\" time=\"0.004\" /><testcase classname=\"tests.e1.test_core\" name=\"test_invalid_queries_are_bounded_json[/stats/closure?group_by=untrusted]\" time=\"0.004\" /><testcase classname=\"tests.e1.test_core\" name=\"test_invalid_queries_are_bounded_json[/stats/closure?min_business_days=-1]\" time=\"0.004\" /><testcase classname=\"tests.e1.test_core\" name=\"test_self_intersecting_polygon_rejected\" time=\"0.004\" /><testcase classname=\"tests.e1.test_core\" name=\"test_empty_text_rejected\" time=\"0.004\" /><testcase classname=\"tests.e1.test_core\" name=\"test_wrong_json_shape_rejected\" time=\"0.004\" /><testcase classname=\"tests.e1.test_azure_ci\" name=\"test_switch_preserves_other_directives\" time=\"0.001\" /><testcase classname=\"tests.e1.test_azure_ci\" name=\"test_rejects_unexpected_configuration[wrong.example { reverse_proxy 127.0.0.1:5100 }-5101]\" time=\"0.001\" /><testcase classname=\"tests.e1.test_azure_ci\" name=\"test_rejects_unexpected_configuration[lifemap-e1-davier-2026.westus2.cloudapp.azure.com-5101]\" time=\"0.001\" /><testcase classname=\"tests.e1.test_azure_ci\" name=\"test_rejects_unexpected_configuration[lifemap-e1-davier-2026.westus2.cloudapp.azure.com reverse_proxy 127.0.0.1:5100-27017]\" time=\"0.001\" /></testsuite></testsuites>"
+    },
+    "main_job_disabled_until_push": true,
+    "main_poll_scm": "H/2 * * * *",
+    "github_read_credential_required": false
+  },
+  "availability": {
+    "samples": 46,
+    "failed": 0,
+    "commit_unchanged": true,
+    "commit": "1c8ee682253a409a95f9d434fd93c56ade8a8d5f",
+    "observation_seconds": 157.48
+  },
+  "production_image_unchanged": true,
+  "caddy_reload_same_upstream_test_passed": true,
+  "automatic_github_update_demonstrated": false,
+  "pending_approval": "First push of main, publish and merge the reviewed documentation demo branch, enable SCM job"
+}

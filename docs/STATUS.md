@@ -11,10 +11,14 @@ Ocho contenedores saludables; seis endpoints HTTP 200 desde Internet, TLS
 valido, cantidades/modelo/indices identicos al origen. Evidencia real en
 deploy/azure/deployment-evidence.json. No se reentreno ni descargo Yelp.
 Pendientes externos: autorizacion de primer push,
-configuracion del Jenkins nuevo, activacion GitHub/pollSCM y demostracion tras merge; comunicacion de area/
+activacion GitHub/pollSCM y demostracion tras merge; comunicacion de area/
 familia y exclusividad al profesor; sustentacion. SentimentStream no fue entregado
 como codigo fuente, por lo que su reutilizacion literal no esta verificada.
 E1.2/E1.9 ya tienen verificacion remota puntual; falta mantener disponibilidad
 durante evaluacion. E1.3 remoto y sustentacion E1.10 siguen pendientes.
 Power BI Desktop requiere decision posterior para E2; no bloquea E1.
 Presupuesto $0 COP; referencias protegidas; sin implementacion E2.
+
+Jenkins Azure configurado: Kaggle protegido, preflight #1 SUCCESS (17 tests),
+#2 fallo deliberado que bloqueo promocion. API publica sin cambios.
+Ver deploy/azure/jenkins-evidence.json y JENKINS.md.

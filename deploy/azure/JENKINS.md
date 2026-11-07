@@ -38,6 +38,12 @@ no habilitar builds automaticos de forks/PR de terceros.
 
 ## Demostracion despues de autorizar push
 
+Preflight Azure ya ejecutado: build #1 SUCCESS (17 pytest y candidata real),
+build #2 FAILURE deliberado (17 pass / 1 fail). La promocion fue omitida y
+la imagen/commit de produccion no cambiaron. Evidencia en jenkins-evidence.json.
+pollscm-demo.patch contiene el cambio minimo exacto propuesto para una rama
+de demostracion; no esta aplicado ni publicado.
+
 1. Publicar la rama main auditada. No se ejecuta sin autorizacion del usuario.
 2. Habilitar lifemap-main e iniciar una primera ejecucion para establecer
    el checkout y baseline SCM. Los cambios posteriores los detecta pollSCM

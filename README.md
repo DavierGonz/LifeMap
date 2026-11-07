@@ -149,28 +149,23 @@ usuario lector; `/predict` carga pesos/IDF reales con SHA256 y no inicia Spark.
 
 ## Jenkins, Git y demostracion
 
-Jenkins es local y autenticado. Su socket Docker otorga control del motor:
-no exponerlo a internet ni ejecutar Jenkinsfiles de terceros.
+Jenkins Azure es privado en localhost:8083. Administracion por tunel SSH,
+credenciales nuevas fuera de Git y cliente `.venv/Scripts/python.exe
+scripts/jenkins_azure.py`. Instrucciones: [Jenkins Azure](deploy/azure/JENKINS.md).
+No ejecutar los antiguos lanzadores de CI Windows contra el servidor.
 
-```powershell
-.\.venv\Scripts\python.exe scripts\jenkins_e1.py configure
-.\.venv\Scripts\python.exe scripts\jenkins_e1.py prepare
-.\.venv\Scripts\python.exe scripts\jenkins_e1.py run
-.\.venv\Scripts\python.exe scripts\jenkins_e1.py status
-# Demostracion aislada del gate: no modificar main ni produccion para fallar.
-.\.venv\Scripts\python.exe scripts\jenkins_e1.py run --fault
-```
+Pipeline Azure: checkout Git -> build API secuencial -> 17 pytest -> validar
+infraestructura/resultados existentes -> credencial Kaggle (solo metadata)
+-> candidata privada -> promocion publica condicionada a todos los gates.
+No repite ingesta, entrenamiento ni benchmark. La promocion usa Caddy y una
+candidata temporal para servir mientras se actualiza la API principal.
 
-`prepare` requiere un commit en main; transporta un bundle de Git a Jenkins sin
-push. Pipeline: checkout real -> imagenes secuenciales -> pytest/JUnit -> servicios
--> Kaggle/cache/carga aprobada -> modelos/resultados -> API candidata real -> promocion
-local. Si falla pytest, no alcanza la promocion. Los artifacts conservan SHA,
-resultados y estado; las credenciales se registran en Jenkins, nunca en Git.
-`lifemap-main` apunta a origin/main con pollSCM cada dos minutos y queda deshabilitado
-hasta primer push autorizado; el historial local no prueba aun un merge remoto.
-Despues de autorizar push/servidor, seguir [DEPLOYMENT](docs/DEPLOYMENT.md) para
-GitHub -> Jenkins -> aplicacion y la demostracion solicitada en vivo. No inventar
-contribuciones de integrantes ni dar por realizada la sustentacion.
+Preflight Azure #1 SUCCESS; #2 FAILURE intencional, promocion bloqueada e
+imagen publica intacta. Credencial Kaggle registrada y enmascarada por Jenkins.
+GitHub es publico: lectura SCM sin PAT adicional. `lifemap-main` apunta a main
+con pollSCM cada dos minutos, deshabilitado hasta autorizar el primer push.
+La prueba automatica GitHub sigue pendiente; no se confunde con el preflight.
+Cambio exacto de demostracion: deploy/azure/pollscm-demo.patch, sin aplicar.
 
 ## Informe y evidencia
 
