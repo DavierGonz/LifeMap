@@ -133,9 +133,10 @@ evitar escuchar en la interfaz frontend al resolver su propio nombre.
 No hay minimo obligatorio de 4 GiB antes de builds: se mide el consumo y se
 detiene ante OOM, agotamiento critico, reinicios inesperados o inestabilidad.
 
-No se traslado logica US Accidents, valores de muestreo, coleccion accidents,
-scripts de pipelines, endpoints del proyecto anterior o configuracion SCM.
-Discos solo se consulta como referencia; no hay Kafka incorporado aun.
+No se traslado logica especifica de US Accidents, valores de muestreo ni
+coleccion accidents. En E1 se adaptaron validadores/consultas y gates de CI
+de Geoespacial, y agregaciones/benchmark de Discos; ver REUSE.md.
+No hay Kafka incorporado.
 
 ## Entrega 2 y pendientes
 
@@ -146,8 +147,9 @@ retraso. Se definiran secretos/redes por necesidad y se revisara el presupuesto
 antes de aumentar limites. No se han reservado puertos, creado topics o
 instalado esas dependencias ahora.
 
-Tambien quedan pendientes los seis endpoints academicos completos, indices
-y colecciones Yelp, asistente/usuario Jenkins y pipeline con pollSCM,
-credenciales SCM, pruebas de negocio y despliegue. El servidor distinto, la URL y
-su disponibilidad, Power BI Desktop y area/categorias siguen sin resolver.
-No bloquean la preparacion local autorizada.
+E1 ya incorpora seis endpoints, indices y poblacion Yelp aprobada por el
+usuario, modelos/resultados y Jenkins autenticado con pipeline/gates locales.
+Siguen pendientes otro computador, URL publica y disponibilidad, primer push
+autorizado y demostracion remota, comunicacion/exclusividad de area/familia,
+fuente SentimentStream y sustentacion. Power BI Desktop es una decision E2.
+El estado vigente y las evidencias se enlazan desde README.md.

@@ -1,0 +1,882 @@
+{
+  "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+  "builds": [
+    {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "actions": [
+        {
+          "_class": "hudson.model.ParametersAction",
+          "parameters": [
+            {
+              "_class": "hudson.model.StringParameterValue",
+              "name": "LOCAL_COMMIT",
+              "value": "721108b0a1fee608196b7f56e860c93a58862edd"
+            },
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "FORCE_TEST_FAILURE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "_class": "hudson.model.CauseAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.workflow.libs.LibrariesAction"
+        },
+        {},
+        {
+          "_class": "hudson.tasks.junit.TestResultAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.displayurlapi.actions.RunDisplayAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [
+        {
+          "relativePath": "reports/api-image-before.txt"
+        },
+        {
+          "relativePath": "reports/pytest.xml"
+        },
+        {
+          "relativePath": "reports/source-commit.txt"
+        }
+      ],
+      "building": false,
+      "duration": 7130,
+      "number": 5,
+      "result": "FAILURE",
+      "url": "http://127.0.0.1:8083/job/lifemap-local-e1/5/",
+      "junit": {
+        "_class": "hudson.tasks.junit.TestResult",
+        "failCount": 1,
+        "passCount": 13,
+        "skipCount": 0
+      }
+    },
+    {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "actions": [
+        {
+          "_class": "hudson.model.ParametersAction",
+          "parameters": [
+            {
+              "_class": "hudson.model.StringParameterValue",
+              "name": "LOCAL_COMMIT",
+              "value": "721108b0a1fee608196b7f56e860c93a58862edd"
+            },
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "FORCE_TEST_FAILURE",
+              "value": false
+            }
+          ]
+        },
+        {
+          "_class": "hudson.model.CauseAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.workflow.libs.LibrariesAction"
+        },
+        {},
+        {},
+        {
+          "_class": "hudson.tasks.junit.TestResultAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.displayurlapi.actions.RunDisplayAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [
+        {
+          "relativePath": "reports/academic-results.json"
+        },
+        {
+          "relativePath": "reports/analytics-job.log"
+        },
+        {
+          "relativePath": "reports/api-image-after.txt"
+        },
+        {
+          "relativePath": "reports/api-image-before.txt"
+        },
+        {
+          "relativePath": "reports/candidate-api-error.txt"
+        },
+        {
+          "relativePath": "reports/candidate-api.json"
+        },
+        {
+          "relativePath": "reports/deployed-api.json"
+        },
+        {
+          "relativePath": "reports/deployment.txt"
+        },
+        {
+          "relativePath": "reports/ingestion.json"
+        },
+        {
+          "relativePath": "reports/kaggle-cache.json"
+        },
+        {
+          "relativePath": "reports/pytest.xml"
+        },
+        {
+          "relativePath": "reports/sentiment-job.log"
+        },
+        {
+          "relativePath": "reports/source-commit.txt"
+        }
+      ],
+      "building": false,
+      "duration": 65300,
+      "number": 4,
+      "result": "SUCCESS",
+      "url": "http://127.0.0.1:8083/job/lifemap-local-e1/4/",
+      "junit": {
+        "_class": "hudson.tasks.junit.TestResult",
+        "failCount": 0,
+        "passCount": 13,
+        "skipCount": 0
+      },
+      "deployed_api": {
+        "/health": {
+          "status": 200
+        },
+        "/businesses/near?lat=39.9526&lon=-75.1652&radius_m=5000&category=Restaurants&limit=5": {
+          "status": 200
+        },
+        "/businesses/within": {
+          "status": 200
+        },
+        "/zones/summary?lat=39.9526&lon=-75.1652&radius_m=5000": {
+          "status": 200
+        },
+        "/stats/closure?group_by=geohash&min_business_days=3650&limit=5": {
+          "status": 200
+        },
+        "/predict": {
+          "status": 200
+        },
+        "/businesses/near?lat=nan&lon=0&radius_m=10 [invalid input]": {
+          "status": 400
+        },
+        "/predict [invalid input]": {
+          "status": 400
+        },
+        "commit": "721108b0a1fee608196b7f56e860c93a58862edd",
+        "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+        "passed": true
+      },
+      "academic_results": {
+        "passed": true,
+        "businesses": 16944,
+        "reviews": 1320594,
+        "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+        "benchmark_runs": 24
+      },
+      "kaggle_cache": {
+        "manifest": {
+          "dataset": "yelp-dataset/yelp-dataset",
+          "version": 4,
+          "last_updated": "2022-03-17T22:59:01.257Z",
+          "license": "Other (specified in description)",
+          "source": "https://www.kaggle.com/datasets/yelp-dataset/yelp-dataset",
+          "downloaded_at_utc": "2026-11-07T03:59:44Z",
+          "artifacts": [
+            {
+              "kind": "business",
+              "name": "yelp_academic_dataset_business.json",
+              "bytes": 118863795,
+              "sha256": "392280627d83ecdcbff8006bba5db289f8436ef147d5a103b1ace5b54186727f"
+            },
+            {
+              "kind": "review",
+              "name": "yelp_academic_dataset_review.json",
+              "bytes": 5341868833,
+              "sha256": "a4edc050d14eec25373a75e7ee211d42f49f14f47230837d8c7849eb9c5f2f96"
+            },
+            {
+              "kind": "archive",
+              "name": "yelp.zip",
+              "bytes": 4374983563,
+              "sha256": "a07689ac11ea09b8cb04993ce4593f7157696088e707d8352c754dde279bfd5a"
+            }
+          ]
+        },
+        "transfer": {
+          "cache_hit": true,
+          "downloaded_bytes": 0
+        },
+        "schema": {
+          "business": {
+            "sample_rows": 1000,
+            "fields": {
+              "business_id": [
+                "str"
+              ],
+              "name": [
+                "str"
+              ],
+              "address": [
+                "str"
+              ],
+              "city": [
+                "str"
+              ],
+              "state": [
+                "str"
+              ],
+              "postal_code": [
+                "str"
+              ],
+              "latitude": [
+                "float"
+              ],
+              "longitude": [
+                "float"
+              ],
+              "stars": [
+                "float"
+              ],
+              "review_count": [
+                "int"
+              ],
+              "is_open": [
+                "int"
+              ],
+              "attributes": [
+                "NoneType",
+                "dict"
+              ],
+              "categories": [
+                "str"
+              ],
+              "hours": [
+                "NoneType",
+                "dict"
+              ]
+            }
+          },
+          "review": {
+            "sample_rows": 1000,
+            "fields": {
+              "review_id": [
+                "str"
+              ],
+              "user_id": [
+                "str"
+              ],
+              "business_id": [
+                "str"
+              ],
+              "stars": [
+                "float"
+              ],
+              "useful": [
+                "int"
+              ],
+              "funny": [
+                "int"
+              ],
+              "cool": [
+                "int"
+              ],
+              "text": [
+                "str"
+              ],
+              "date": [
+                "str"
+              ]
+            }
+          }
+        }
+      },
+      "ingestion": {
+        "load_cache_hit": true,
+        "verification": {
+          "businesses": 16944,
+          "reviews": 1320594
+        }
+      }
+    },
+    {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "actions": [
+        {
+          "_class": "hudson.model.ParametersAction",
+          "parameters": [
+            {
+              "_class": "hudson.model.StringParameterValue",
+              "name": "LOCAL_COMMIT",
+              "value": "5431be98b9d05c734785e51592a64d62c2f02142"
+            },
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "FORCE_TEST_FAILURE",
+              "value": true
+            }
+          ]
+        },
+        {
+          "_class": "hudson.model.CauseAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.workflow.libs.LibrariesAction"
+        },
+        {},
+        {
+          "_class": "hudson.tasks.junit.TestResultAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.displayurlapi.actions.RunDisplayAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [
+        {
+          "relativePath": "reports/academic-results.json"
+        },
+        {
+          "relativePath": "reports/analytics-job.log"
+        },
+        {
+          "relativePath": "reports/api-image-after.txt"
+        },
+        {
+          "relativePath": "reports/api-image-before.txt"
+        },
+        {
+          "relativePath": "reports/candidate-api-error.txt"
+        },
+        {
+          "relativePath": "reports/candidate-api.json"
+        },
+        {
+          "relativePath": "reports/deployed-api.json"
+        },
+        {
+          "relativePath": "reports/deployment.txt"
+        },
+        {
+          "relativePath": "reports/ingestion.json"
+        },
+        {
+          "relativePath": "reports/kaggle-cache.json"
+        },
+        {
+          "relativePath": "reports/pytest.xml"
+        },
+        {
+          "relativePath": "reports/sentiment-job.log"
+        },
+        {
+          "relativePath": "reports/source-commit.txt"
+        }
+      ],
+      "building": false,
+      "duration": 7723,
+      "number": 3,
+      "result": "FAILURE",
+      "url": "http://127.0.0.1:8083/job/lifemap-local-e1/3/",
+      "junit": {
+        "_class": "hudson.tasks.junit.TestResult",
+        "failCount": 1,
+        "passCount": 13,
+        "skipCount": 0
+      },
+      "deployed_api": {
+        "/health": {
+          "status": 200
+        },
+        "/businesses/near?lat=39.9526&lon=-75.1652&radius_m=5000&category=Restaurants&limit=5": {
+          "status": 200
+        },
+        "/businesses/within": {
+          "status": 200
+        },
+        "/zones/summary?lat=39.9526&lon=-75.1652&radius_m=5000": {
+          "status": 200
+        },
+        "/stats/closure?group_by=geohash&min_business_days=3650&limit=5": {
+          "status": 200
+        },
+        "/predict": {
+          "status": 200
+        },
+        "/businesses/near?lat=nan&lon=0&radius_m=10 [invalid input]": {
+          "status": 400
+        },
+        "/predict [invalid input]": {
+          "status": 400
+        },
+        "commit": "5431be98b9d05c734785e51592a64d62c2f02142",
+        "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+        "passed": true
+      },
+      "academic_results": {
+        "passed": true,
+        "businesses": 16944,
+        "reviews": 1320594,
+        "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+        "benchmark_runs": 24
+      },
+      "kaggle_cache": {
+        "manifest": {
+          "dataset": "yelp-dataset/yelp-dataset",
+          "version": 4,
+          "last_updated": "2022-03-17T22:59:01.257Z",
+          "license": "Other (specified in description)",
+          "source": "https://www.kaggle.com/datasets/yelp-dataset/yelp-dataset",
+          "downloaded_at_utc": "2026-11-07T03:59:44Z",
+          "artifacts": [
+            {
+              "kind": "business",
+              "name": "yelp_academic_dataset_business.json",
+              "bytes": 118863795,
+              "sha256": "392280627d83ecdcbff8006bba5db289f8436ef147d5a103b1ace5b54186727f"
+            },
+            {
+              "kind": "review",
+              "name": "yelp_academic_dataset_review.json",
+              "bytes": 5341868833,
+              "sha256": "a4edc050d14eec25373a75e7ee211d42f49f14f47230837d8c7849eb9c5f2f96"
+            },
+            {
+              "kind": "archive",
+              "name": "yelp.zip",
+              "bytes": 4374983563,
+              "sha256": "a07689ac11ea09b8cb04993ce4593f7157696088e707d8352c754dde279bfd5a"
+            }
+          ]
+        },
+        "transfer": {
+          "cache_hit": true,
+          "downloaded_bytes": 0
+        },
+        "schema": {
+          "business": {
+            "sample_rows": 1000,
+            "fields": {
+              "business_id": [
+                "str"
+              ],
+              "name": [
+                "str"
+              ],
+              "address": [
+                "str"
+              ],
+              "city": [
+                "str"
+              ],
+              "state": [
+                "str"
+              ],
+              "postal_code": [
+                "str"
+              ],
+              "latitude": [
+                "float"
+              ],
+              "longitude": [
+                "float"
+              ],
+              "stars": [
+                "float"
+              ],
+              "review_count": [
+                "int"
+              ],
+              "is_open": [
+                "int"
+              ],
+              "attributes": [
+                "NoneType",
+                "dict"
+              ],
+              "categories": [
+                "str"
+              ],
+              "hours": [
+                "NoneType",
+                "dict"
+              ]
+            }
+          },
+          "review": {
+            "sample_rows": 1000,
+            "fields": {
+              "review_id": [
+                "str"
+              ],
+              "user_id": [
+                "str"
+              ],
+              "business_id": [
+                "str"
+              ],
+              "stars": [
+                "float"
+              ],
+              "useful": [
+                "int"
+              ],
+              "funny": [
+                "int"
+              ],
+              "cool": [
+                "int"
+              ],
+              "text": [
+                "str"
+              ],
+              "date": [
+                "str"
+              ]
+            }
+          }
+        }
+      },
+      "ingestion": {
+        "load_cache_hit": true,
+        "verification": {
+          "businesses": 16944,
+          "reviews": 1320594
+        }
+      }
+    },
+    {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "actions": [
+        {
+          "_class": "hudson.model.ParametersAction",
+          "parameters": [
+            {
+              "_class": "hudson.model.StringParameterValue",
+              "name": "LOCAL_COMMIT",
+              "value": "5431be98b9d05c734785e51592a64d62c2f02142"
+            },
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "FORCE_TEST_FAILURE",
+              "value": false
+            }
+          ]
+        },
+        {
+          "_class": "hudson.model.CauseAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.workflow.libs.LibrariesAction"
+        },
+        {},
+        {},
+        {
+          "_class": "hudson.tasks.junit.TestResultAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.displayurlapi.actions.RunDisplayAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [
+        {
+          "relativePath": "reports/academic-results.json"
+        },
+        {
+          "relativePath": "reports/analytics-job.log"
+        },
+        {
+          "relativePath": "reports/api-image-after.txt"
+        },
+        {
+          "relativePath": "reports/api-image-before.txt"
+        },
+        {
+          "relativePath": "reports/candidate-api-error.txt"
+        },
+        {
+          "relativePath": "reports/candidate-api.json"
+        },
+        {
+          "relativePath": "reports/deployed-api.json"
+        },
+        {
+          "relativePath": "reports/deployment.txt"
+        },
+        {
+          "relativePath": "reports/ingestion.json"
+        },
+        {
+          "relativePath": "reports/kaggle-cache.json"
+        },
+        {
+          "relativePath": "reports/pytest.xml"
+        },
+        {
+          "relativePath": "reports/sentiment-job.log"
+        },
+        {
+          "relativePath": "reports/source-commit.txt"
+        }
+      ],
+      "building": false,
+      "duration": 131724,
+      "number": 2,
+      "result": "SUCCESS",
+      "url": "http://127.0.0.1:8083/job/lifemap-local-e1/2/",
+      "junit": {
+        "_class": "hudson.tasks.junit.TestResult",
+        "failCount": 0,
+        "passCount": 13,
+        "skipCount": 0
+      },
+      "deployed_api": {
+        "/health": {
+          "status": 200
+        },
+        "/businesses/near?lat=39.9526&lon=-75.1652&radius_m=5000&category=Restaurants&limit=5": {
+          "status": 200
+        },
+        "/businesses/within": {
+          "status": 200
+        },
+        "/zones/summary?lat=39.9526&lon=-75.1652&radius_m=5000": {
+          "status": 200
+        },
+        "/stats/closure?group_by=geohash&min_business_days=3650&limit=5": {
+          "status": 200
+        },
+        "/predict": {
+          "status": 200
+        },
+        "/businesses/near?lat=nan&lon=0&radius_m=10 [invalid input]": {
+          "status": 400
+        },
+        "/predict [invalid input]": {
+          "status": 400
+        },
+        "commit": "5431be98b9d05c734785e51592a64d62c2f02142",
+        "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+        "passed": true
+      },
+      "academic_results": {
+        "passed": true,
+        "businesses": 16944,
+        "reviews": 1320594,
+        "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+        "benchmark_runs": 24
+      },
+      "kaggle_cache": {
+        "manifest": {
+          "dataset": "yelp-dataset/yelp-dataset",
+          "version": 4,
+          "last_updated": "2022-03-17T22:59:01.257Z",
+          "license": "Other (specified in description)",
+          "source": "https://www.kaggle.com/datasets/yelp-dataset/yelp-dataset",
+          "downloaded_at_utc": "2026-11-07T03:59:44Z",
+          "artifacts": [
+            {
+              "kind": "business",
+              "name": "yelp_academic_dataset_business.json",
+              "bytes": 118863795,
+              "sha256": "392280627d83ecdcbff8006bba5db289f8436ef147d5a103b1ace5b54186727f"
+            },
+            {
+              "kind": "review",
+              "name": "yelp_academic_dataset_review.json",
+              "bytes": 5341868833,
+              "sha256": "a4edc050d14eec25373a75e7ee211d42f49f14f47230837d8c7849eb9c5f2f96"
+            },
+            {
+              "kind": "archive",
+              "name": "yelp.zip",
+              "bytes": 4374983563,
+              "sha256": "a07689ac11ea09b8cb04993ce4593f7157696088e707d8352c754dde279bfd5a"
+            }
+          ]
+        },
+        "transfer": {
+          "cache_hit": true,
+          "downloaded_bytes": 0
+        },
+        "schema": {
+          "business": {
+            "sample_rows": 1000,
+            "fields": {
+              "business_id": [
+                "str"
+              ],
+              "name": [
+                "str"
+              ],
+              "address": [
+                "str"
+              ],
+              "city": [
+                "str"
+              ],
+              "state": [
+                "str"
+              ],
+              "postal_code": [
+                "str"
+              ],
+              "latitude": [
+                "float"
+              ],
+              "longitude": [
+                "float"
+              ],
+              "stars": [
+                "float"
+              ],
+              "review_count": [
+                "int"
+              ],
+              "is_open": [
+                "int"
+              ],
+              "attributes": [
+                "NoneType",
+                "dict"
+              ],
+              "categories": [
+                "str"
+              ],
+              "hours": [
+                "NoneType",
+                "dict"
+              ]
+            }
+          },
+          "review": {
+            "sample_rows": 1000,
+            "fields": {
+              "review_id": [
+                "str"
+              ],
+              "user_id": [
+                "str"
+              ],
+              "business_id": [
+                "str"
+              ],
+              "stars": [
+                "float"
+              ],
+              "useful": [
+                "int"
+              ],
+              "funny": [
+                "int"
+              ],
+              "cool": [
+                "int"
+              ],
+              "text": [
+                "str"
+              ],
+              "date": [
+                "str"
+              ]
+            }
+          }
+        }
+      },
+      "ingestion": {
+        "load_cache_hit": true,
+        "verification": {
+          "businesses": 16944,
+          "reviews": 1320594
+        }
+      }
+    },
+    {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "actions": [
+        {
+          "_class": "hudson.model.ParametersAction",
+          "parameters": [
+            {
+              "_class": "hudson.model.StringParameterValue",
+              "name": "LOCAL_COMMIT",
+              "value": "ae08da45fec1464b166443813e22e3e96b04b698"
+            },
+            {
+              "_class": "hudson.model.BooleanParameterValue",
+              "name": "FORCE_TEST_FAILURE",
+              "value": false
+            }
+          ]
+        },
+        {
+          "_class": "hudson.model.CauseAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.workflow.libs.LibrariesAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.displayurlapi.actions.RunDisplayAction"
+        },
+        {
+          "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
+        },
+        {},
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+        },
+        {},
+        {}
+      ],
+      "artifacts": [],
+      "building": false,
+      "duration": 1753,
+      "number": 1,
+      "result": "FAILURE",
+      "url": "http://127.0.0.1:8083/job/lifemap-local-e1/1/"
+    }
+  ]
+}

@@ -43,6 +43,12 @@ def main():
     jobs=read('docs/reports/e1-execution.json')['jobs']
     compact_jobs=[{k:v for k,v in row.items() if k!='container_samples'} for row in jobs]
     value={'source':original['source'],'source_analysis':source_analysis,'selection':read('config/yelp_selection.json'),'sentiment':read('work/sentiment.json'),'analytics':read('work/analytics.json'),'ingestion_fixture_tests':original['tests'],'health':health,'closure_examples':rates,'unit_tests':{'host_unittest':21,'docker_pytest':13},'resources':{'windows':resources(),'docker_stats':stats,'spark_jobs':compact_jobs},'containers':state,'isolation':{'protected_containers_registered_and_stopped':len(old),'historical_volumes_preserved':len(old_volumes),'no_remote_push_or_deployment':True},'pending':['Second computer and public URL','Authorized first push and remote main/pollSCM demonstration','Teacher notification and area/category exclusivity','SentimentStream source code reuse verification','Live defense']}
+    for name in ['jenkins-memory','jenkins-memory-final']:
+        path=ROOT/'work'/f'{name}.json'
+        if path.exists():
+            samples=read(f'work/{name}.json')
+            value['resources'][name]={'samples':len(samples),'minimum_windows_available_gib':min(r['available_gib'] for r in samples),'peak_windows_cpu_percent':max(r.get('windows_cpu_percent',0) for r in samples),'after':samples[-1]}
+    if (ROOT/'work/fault-gate.json').exists(): value['jenkins_gate']=read('work/fault-gate.json')
     target=ROOT/'docs/reports/e1-evidence.json'
     target.write_text(json.dumps(value,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
     print(json.dumps({'written':str(target),'containers':state,'windows_available_gib':value['resources']['windows']['available_gib'],'isolation':value['isolation']}))

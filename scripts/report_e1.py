@@ -32,7 +32,7 @@ def sub(s):story.append(p(s,'SubLM'))
 def table(rows,widths=None):
     rows=[[p(escape(str(v)),'CellLM') for v in row] for row in rows]
     obj=Table(rows,colWidths=widths,repeatRows=1,hAlign='LEFT')
-    obj.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),grey),('TEXTCOLOR',(0,0),(-1,0),blue),('VALIGN',(0,0),(-1,-1),'TOP'),('BOTTOMPADDING',(0,0),(-1,-1),7),('TOPPADDING',(0,0),(-1,-1),7),('LINEBELOW',(0,0),(-1,0),.8,teal),('LINEBELOW',(0,1),(-1,-1),.25,colors.HexColor('#D6E0E5'))]))
+    obj.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),grey),('TEXTCOLOR',(0,0),(-1,0),blue),('VALIGN',(0,0),(-1,-1),'TOP'),('BOTTOMPADDING',(0,0),(-1,-1),5),('TOPPADDING',(0,0),(-1,-1),5),('LINEBELOW',(0,0),(-1,0),.8,teal),('LINEBELOW',(0,1),(-1,-1),.25,colors.HexColor('#D6E0E5'))]))
     story.append(obj);story.append(Spacer(1,7))
 def fmt(v):return f'{v:,.0f}'.replace(',','.')
 
@@ -58,7 +58,13 @@ para('Restaurants, Filadelfia y entorno: rectángulo [-76.1, 39.3, -74.4, 40.6].
 heading(2,'Datos y vida observada')
 para('Fuente: <b>yelp-dataset/yelp-dataset, versión 4</b>, actualización 17-03-2022. JSONL: negocio con 14 campos y reseña con 9. Claves: business_id y review_id; ubicación decimal, categorías, is_open, texto, estrellas y fecha. Corte máximo de reseñas: 19-01-2022 19:48:45; mínimo: 16-02-2005 03:23:22.')
 sub('Limpieza cuantificada sobre la fuente completa')
-table([['Entidad / regla secuencial','Antes','Descartados','Después'],['Negocios: JSON, coordenadas faltantes/no numéricas/fuera de rango','150.346','0','150.346'],['Negocios: ID, is_open, tipo categorías, duplicados','150.346','0','150.346'],['Reseñas: JSON, IDs y texto vacío','6.990.280','0','6.990.280'],['Reseñas: fecha y estrellas inválidas','6.990.280','0','6.990.280'],['Reseñas: huérfanas / negocio descartado / duplicadas','6.990.280','0','6.990.280'],['Filtro autorizado Restaurants + rectángulo','6.990.280','5.669.686 fuera de alcance','1.320.594']],[225,90,110,90])
+business_rules=['JSON invalido','Sin coordenadas','Coordenadas no numericas','Coordenadas fuera de rango','Sin business_id','is_open invalido','Tipo categorias invalido','Duplicados']
+review_rules=['JSON invalido','Sin review_id','Sin business_id','Texto vacio','Fecha invalida','Estrellas invalidas','business_id huerfano','Negocio descartado','Duplicados']
+rows=[['Regla negocios','Antes / despues (ret.)','Regla resenas','Antes / despues (ret.)']]
+for i in range(9):
+    rows.append([business_rules[i] if i<8 else '-', '150.346 / 150.346 (0)' if i<8 else '-', review_rules[i], '6.990.280 / 6.990.280 (0)'])
+table(rows,[145,110,145,115])
+para('Filtro autorizado Restaurants + rectangulo: 150.346 negocios limpios a 16.944; 6.990.280 resenas limpias a 1.320.594 (5.669.686 fuera de alcance, no errores).')
 para('Cada regla individual conserva los mismos conteos antes/después: no hubo descartes en esta fuente bajo las validaciones aplicadas. Esto no prueba ausencia de otros errores semánticos. El JSON de evidencia conserva todas las reglas, esquemas y huellas; fixtures introducen errores y duplicados para comprobar que sí se detectan.')
 para('Coordenadas finitas y válidas evitan geometrías inválidas; IDs permiten joins estables; texto/fecha/estrellas válidos permiten NLP y vida observada. Deduplicación global por ID: primera fila válida en orden físico. Join por business_id: <b>0 huérfanas</b>. Dask lee bloques de 8 MiB (14 particiones de negocios, 636 de reseñas), usando ambos workers; caché compartida persistente y deduplicación SQLite en disco del coordinador.')
 sub('Modelo MongoDB y aproximaciones explícitas')
@@ -81,7 +87,7 @@ matrix_rows=[['Modelo / real','Negativo','Neutral','Positivo']]
 for name,label in [('naive_bayes','NB'),('logistic_regression','LR')]:
     matrix_rows.extend([[label+' / '+['neg.','neutral','pos.'][i]]+[fmt(n) for n in row] for i,row in enumerate(sent['models'][name]['confusion_matrix'])])
 table(matrix_rows,[225,95,95,100])
-para('Mayoría positiva (66,0%): accuracy favorece esa clase. NB: accuracy 0,7699, macro F1 0,6775; LR: 0,8287 y 0,6540. Se selecciona <b>Naive Bayes</b> por macro F1; neutral sigue siendo difícil. NB smoothing=1; LR 12 iteraciones, reg=0,1; sin búsqueda extensa. La comparación usa el mismo test, no una evaluación final independiente.',)
+para('Mayoría positiva (66,1%): accuracy favorece esa clase. NB: accuracy 0,7699, macro F1 0,6775; LR: 0,8287 y 0,6540. Se selecciona <b>Naive Bayes</b> por macro F1; neutral sigue siendo difícil. NB smoothing=1; LR 12 iteraciones, reg=0,1; sin búsqueda extensa. La comparación usa el mismo test, no una evaluación final independiente.',)
 para('PipelineModel Spark y pesos/IDF guardados. Paridad Spark/API: 30 textos reales, mismas clases y probabilidades con tolerancia 10^-6. Las 1.320.594 reseñas tienen predicción persistida. La procedencia literal de SentimentStream queda pendiente: su fuente no fue suministrada; se implementó el flujo exigido, sin atribuir una reutilización inexistente.')
 
 heading(4,'MapReduce y exposición')
@@ -121,7 +127,9 @@ sub('Evidencia de pruebas y Jenkins')
 builds=jenkins.get('builds',[])
 summary=', '.join(f"#{r['number']} {r.get('result') or 'en curso'}" for r in sorted(builds,key=lambda r:r['number'])) or 'Pendiente de ejecución; no acreditado'
 para('Pruebas: 21 unittest locales, 13 pytest Docker, fixtures distribuidos en ambos workers con GeoJSON/idempotencia, paridad de 30 textos, igualdad RDD/DataFrame y 24 benchmarks. Historial local Jenkins: '+escape(summary)+'. Detalle de parámetros, JUnit y artifacts en e1-jenkins.json.')
-para('Jenkins usa checkout de Git bundle local, builds secuenciales, pytest, infraestructura, caché/ingesta, resultados académicos, API candidata y promoción local. El fallo deliberado de pytest debe impedir alcanzar despliegue; sus evidencias se conservan. Credencial Kaggle registrada en Jenkins. GitHub origin conserva visibilidad pública, sin push; pollSCM cada dos minutos preparado y job remoto deshabilitado hasta autorización.')
+gate=data.get('jenkins_gate')
+gate_text=(f"Build #{gate['successful_build']} exitoso; #{gate['failed_build']} falla intencionalmente en pytest, omite despliegue y conserva exactamente la imagen anterior de la API." if gate else 'La prueba de bloqueo del despliegue sigue pendiente.')
+para('Jenkins usa checkout de Git bundle local, builds secuenciales, pytest, infraestructura, caché/ingesta, resultados académicos, API candidata y promoción local. '+gate_text+' Credencial Kaggle registrada en Jenkins. GitHub origin conserva visibilidad pública, sin push; pollSCM cada dos minutos preparado y job remoto deshabilitado hasta autorización.')
 sub('Aceptación: no confundir local con público')
 para('<b>E1.1:</b> Compose/README y salud local; falta equipo limpio externo. <b>E1.2:</b> pendiente servidor distinto y URL pública. <b>E1.3:</b> pipeline/gate locales; falta merge remoto y disparo por main. <b>E1.4-E1.5:</b> ingesta/datos/vida comprobados. <b>E1.6:</b> modelos y métricas reales; falta verificar reutilización literal de SentimentStream. <b>E1.7-E1.8:</b> agregación y benchmark completos. <b>E1.9:</b> seis rutas locales, falta URL desplegada. <b>E1.10:</b> informe/README; sustentación y cambio remoto en vivo pendientes.')
 para('Pendientes externos: segundo equipo gratuito autorizado, disponibilidad pública, primer push autorizado y profesor (exclusividad de selección). Procedimiento sin costo en DEPLOYMENT.md; ningún servicio contratado ni administrativo expuesto. No se inventan autores/aportes. Power BI queda para E2; Kafka, streaming, supervivencia y riesgo no implementados.')

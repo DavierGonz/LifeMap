@@ -1,0 +1,4063 @@
+{
+  "source": {
+    "dataset": "yelp-dataset/yelp-dataset",
+    "version": 4,
+    "last_updated": "2022-03-17T22:59:01.257Z",
+    "license": "Other (specified in description)",
+    "source": "https://www.kaggle.com/datasets/yelp-dataset/yelp-dataset",
+    "downloaded_at_utc": "2026-11-07T03:59:44Z",
+    "artifacts": [
+      {
+        "kind": "business",
+        "name": "yelp_academic_dataset_business.json",
+        "bytes": 118863795,
+        "sha256": "392280627d83ecdcbff8006bba5db289f8436ef147d5a103b1ace5b54186727f"
+      },
+      {
+        "kind": "review",
+        "name": "yelp_academic_dataset_review.json",
+        "bytes": 5341868833,
+        "sha256": "a4edc050d14eec25373a75e7ee211d42f49f14f47230837d8c7849eb9c5f2f96"
+      },
+      {
+        "kind": "archive",
+        "name": "yelp.zip",
+        "bytes": 4374983563,
+        "sha256": "a07689ac11ea09b8cb04993ce4593f7157696088e707d8352c754dde279bfd5a"
+      }
+    ]
+  },
+  "source_analysis": {
+    "dataset": "yelp-dataset/yelp-dataset",
+    "dataset_version": 4,
+    "fingerprint": "ed816f9a99f9e462c857d7bde755299c6d00f82c4dc8bb3015b3fcd84dada5d2",
+    "schema": {
+      "business": {
+        "sample_rows": 1000,
+        "fields": {
+          "business_id": [
+            "str"
+          ],
+          "name": [
+            "str"
+          ],
+          "address": [
+            "str"
+          ],
+          "city": [
+            "str"
+          ],
+          "state": [
+            "str"
+          ],
+          "postal_code": [
+            "str"
+          ],
+          "latitude": [
+            "float"
+          ],
+          "longitude": [
+            "float"
+          ],
+          "stars": [
+            "float"
+          ],
+          "review_count": [
+            "int"
+          ],
+          "is_open": [
+            "int"
+          ],
+          "attributes": [
+            "NoneType",
+            "dict"
+          ],
+          "categories": [
+            "str"
+          ],
+          "hours": [
+            "NoneType",
+            "dict"
+          ]
+        }
+      },
+      "review": {
+        "sample_rows": 1000,
+        "fields": {
+          "review_id": [
+            "str"
+          ],
+          "user_id": [
+            "str"
+          ],
+          "business_id": [
+            "str"
+          ],
+          "stars": [
+            "float"
+          ],
+          "useful": [
+            "int"
+          ],
+          "funny": [
+            "int"
+          ],
+          "cool": [
+            "int"
+          ],
+          "text": [
+            "str"
+          ],
+          "date": [
+            "str"
+          ]
+        }
+      }
+    },
+    "counts": {
+      "business": {
+        "read": 150346,
+        "unique_clean": 150346,
+        "steps": [
+          {
+            "rule": "invalid_json",
+            "before": 150346,
+            "removed": 0,
+            "after": 150346
+          },
+          {
+            "rule": "missing_coordinates",
+            "before": 150346,
+            "removed": 0,
+            "after": 150346
+          },
+          {
+            "rule": "invalid_coordinates",
+            "before": 150346,
+            "removed": 0,
+            "after": 150346
+          },
+          {
+            "rule": "out_of_range_coordinates",
+            "before": 150346,
+            "removed": 0,
+            "after": 150346
+          },
+          {
+            "rule": "missing_business_id",
+            "before": 150346,
+            "removed": 0,
+            "after": 150346
+          },
+          {
+            "rule": "invalid_is_open",
+            "before": 150346,
+            "removed": 0,
+            "after": 150346
+          },
+          {
+            "rule": "invalid_categories_type",
+            "before": 150346,
+            "removed": 0,
+            "after": 150346
+          },
+          {
+            "rule": "duplicates",
+            "before": 150346,
+            "removed": 0,
+            "after": 150346
+          }
+        ]
+      },
+      "review": {
+        "read": 6990280,
+        "unique_clean": 6990280,
+        "steps": [
+          {
+            "rule": "invalid_json",
+            "before": 6990280,
+            "removed": 0,
+            "after": 6990280
+          },
+          {
+            "rule": "missing_review_id",
+            "before": 6990280,
+            "removed": 0,
+            "after": 6990280
+          },
+          {
+            "rule": "missing_business_id",
+            "before": 6990280,
+            "removed": 0,
+            "after": 6990280
+          },
+          {
+            "rule": "empty_text",
+            "before": 6990280,
+            "removed": 0,
+            "after": 6990280
+          },
+          {
+            "rule": "invalid_date",
+            "before": 6990280,
+            "removed": 0,
+            "after": 6990280
+          },
+          {
+            "rule": "invalid_stars",
+            "before": 6990280,
+            "removed": 0,
+            "after": 6990280
+          },
+          {
+            "rule": "orphan_business_id",
+            "before": 6990280,
+            "removed": 0,
+            "after": 6990280
+          },
+          {
+            "rule": "business_removed_by_cleaning",
+            "before": 6990280,
+            "removed": 0,
+            "after": 6990280
+          },
+          {
+            "rule": "duplicates",
+            "before": 6990280,
+            "removed": 0,
+            "after": 6990280
+          }
+        ]
+      }
+    },
+    "dataset_cutoff": "2022-01-19 19:48:45",
+    "source_first_review": "2005-02-16 03:23:22",
+    "life_approximation": {
+      "duration": "(last clean matched review - first clean matched review).total_seconds()/86400; zero for one timestamp, null if no reviews",
+      "event": "is_open == 0",
+      "censored": "is_open == 1",
+      "cutoff": "max parseable civil date in full source review file",
+      "limitations": "Review dates approximate opening/closing. Open businesses remain censored. True opening, closing and age at delayed entry are unknown; no lifetime before first review is invented."
+    },
+    "worker_partition_counts": {
+      "lifemap-worker-1": 325,
+      "lifemap-worker-2": 325
+    },
+    "viable_combinations": [
+      {
+        "area_id": "philadelphia",
+        "area_label": "Filadelfia y entorno",
+        "bbox": [
+          -76.1,
+          39.3,
+          -74.4,
+          40.6
+        ],
+        "family": "Food and dining",
+        "businesses": 21360,
+        "unique_clean_reviews": 1456167,
+        "viable": true
+      },
+      {
+        "area_id": "philadelphia",
+        "area_label": "Filadelfia y entorno",
+        "bbox": [
+          -76.1,
+          39.3,
+          -74.4,
+          40.6
+        ],
+        "family": "Restaurants",
+        "businesses": 16944,
+        "unique_clean_reviews": 1320594,
+        "viable": true
+      }
+    ]
+  },
+  "selection": {
+    "status": "approved_by_user",
+    "dataset_version": 4,
+    "analysis_fingerprint": "ed816f9a99f9e462c857d7bde755299c6d00f82c4dc8bb3015b3fcd84dada5d2",
+    "area_id": "philadelphia",
+    "family": "Restaurants",
+    "teacher_confirmation": "pending_notification_and_exclusivity"
+  },
+  "sentiment": {
+    "run_id": "restaurants-f56f79e85065-e1-v1",
+    "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+    "source_load": "f56f79e8506512236030e3b74450c5367289fd3bfdd6d31dc722faff420aa1a5",
+    "reviews": 1320594,
+    "distribution": [
+      {
+        "split": "test",
+        "label": 2.0,
+        "count": 171493
+      },
+      {
+        "split": "test",
+        "label": 1.0,
+        "count": 32691
+      },
+      {
+        "split": "train",
+        "label": 0.0,
+        "count": 226163
+      },
+      {
+        "split": "train",
+        "label": 1.0,
+        "count": 133415
+      },
+      {
+        "split": "train",
+        "label": 2.0,
+        "count": 700970
+      },
+      {
+        "split": "test",
+        "label": 0.0,
+        "count": 55862
+      }
+    ],
+    "business_split": {
+      "train": 13555,
+      "test": 3389
+    },
+    "business_overlap": 0,
+    "models": {
+      "naive_bayes": {
+        "confusion_matrix": [
+          [
+            40772,
+            12586,
+            2504
+          ],
+          [
+            6772,
+            18366,
+            7553
+          ],
+          [
+            8633,
+            21776,
+            141084
+          ]
+        ],
+        "per_class": [
+          {
+            "class": "negative",
+            "support": 55862,
+            "precision": 0.7257774534061983,
+            "recall": 0.7298700368765887,
+            "f1": 0.7278179919492319
+          },
+          {
+            "class": "neutral",
+            "support": 32691,
+            "precision": 0.34831588529813384,
+            "recall": 0.5618060016518308,
+            "f1": 0.4300214238050083
+          },
+          {
+            "class": "positive",
+            "support": 171493,
+            "precision": 0.9334594848518932,
+            "recall": 0.8226808091292356,
+            "f1": 0.8745761451055996
+          }
+        ],
+        "macro_f1": 0.6774718536199466,
+        "accuracy": 0.7699483937457219,
+        "fit_and_evaluation_seconds": 15.901
+      },
+      "logistic_regression": {
+        "confusion_matrix": [
+          [
+            42703,
+            2308,
+            10851
+          ],
+          [
+            7241,
+            5703,
+            19747
+          ],
+          [
+            2123,
+            2270,
+            167100
+          ]
+        ],
+        "per_class": [
+          {
+            "class": "negative",
+            "support": 55862,
+            "precision": 0.8201548005454511,
+            "recall": 0.7644373635029179,
+            "f1": 0.791316513633963
+          },
+          {
+            "class": "neutral",
+            "support": 32691,
+            "precision": 0.5547125765976072,
+            "recall": 0.17445168394971092,
+            "f1": 0.26542865121474446
+          },
+          {
+            "class": "positive",
+            "support": 171493,
+            "precision": 0.8452285809669293,
+            "recall": 0.974383794090721,
+            "f1": 0.9052225000067716
+          }
+        ],
+        "macro_f1": 0.653989221618493,
+        "accuracy": 0.828722610615045,
+        "fit_and_evaluation_seconds": 25.923
+      }
+    },
+    "selected": "naive_bayes",
+    "selection_metric": "macro F1 on business-disjoint held-out test; comparison of two models",
+    "num_features": 8192,
+    "idf_fit": "training businesses only",
+    "predictor_spark_parity_samples": 30,
+    "feature_source": "text only",
+    "class_order": [
+      "negative",
+      "neutral",
+      "positive"
+    ],
+    "prediction_path": "/data/lifemap-e1/restaurants-f56f79e85065-e1-v1/predictions",
+    "model_directory": "/models/restaurants-f56f79e85065-e1-v1",
+    "checkpoint_recovered_from_real_metrics_log": true,
+    "publication_resumed": true,
+    "resume_seconds": 543.954
+  },
+  "analytics": {
+    "run_id": "restaurants-f56f79e85065-e1-v1",
+    "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+    "businesses": 16944,
+    "reviews": 1320594,
+    "rdd_dataframe_equal": true,
+    "groups": {
+      "category": 210,
+      "geohash": 390
+    },
+    "minimum_business_days": 3650.0,
+    "minimum_justification": "ten aggregated business-years to avoid ranking near-zero-exposure groups; operational threshold, not a confidence interval",
+    "closure_formula": "closures / (business_days / 365) * 100",
+    "category_rule": "alphabetically first non-family source tag; population remains Restaurants",
+    "geohash_precision": 5,
+    "benchmark_times": [
+      {
+        "partitions": 2,
+        "mode": "city",
+        "repetition": 1,
+        "seconds": 1.00741878000008
+      },
+      {
+        "partitions": 2,
+        "mode": "city",
+        "repetition": 2,
+        "seconds": 0.7459432939995168
+      },
+      {
+        "partitions": 2,
+        "mode": "city",
+        "repetition": 3,
+        "seconds": 0.7500342900002579
+      },
+      {
+        "partitions": 2,
+        "mode": "round_robin",
+        "repetition": 1,
+        "seconds": 0.9487079359987547
+      },
+      {
+        "partitions": 2,
+        "mode": "round_robin",
+        "repetition": 2,
+        "seconds": 0.786686268998892
+      },
+      {
+        "partitions": 2,
+        "mode": "round_robin",
+        "repetition": 3,
+        "seconds": 0.6946234189999814
+      },
+      {
+        "partitions": 8,
+        "mode": "city",
+        "repetition": 1,
+        "seconds": 2.213816127999962
+      },
+      {
+        "partitions": 8,
+        "mode": "city",
+        "repetition": 2,
+        "seconds": 2.036193699999785
+      },
+      {
+        "partitions": 8,
+        "mode": "city",
+        "repetition": 3,
+        "seconds": 2.1882854079995013
+      },
+      {
+        "partitions": 8,
+        "mode": "round_robin",
+        "repetition": 1,
+        "seconds": 2.1377364710006077
+      },
+      {
+        "partitions": 8,
+        "mode": "round_robin",
+        "repetition": 2,
+        "seconds": 2.334240645999671
+      },
+      {
+        "partitions": 8,
+        "mode": "round_robin",
+        "repetition": 3,
+        "seconds": 2.0442922559996077
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "repetition": 1,
+        "seconds": 8.558531031001621
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "repetition": 2,
+        "seconds": 8.482806751999306
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "repetition": 3,
+        "seconds": 8.171472649000862
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "repetition": 1,
+        "seconds": 8.02297071599969
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "repetition": 2,
+        "seconds": 7.918738608999774
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "repetition": 3,
+        "seconds": 7.835616368000046
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "repetition": 1,
+        "seconds": 44.93362852999962
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "repetition": 2,
+        "seconds": 44.158541983999385
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "repetition": 3,
+        "seconds": 43.669740216999344
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "repetition": 1,
+        "seconds": 46.93828342800043
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "repetition": 2,
+        "seconds": 46.43279863200041
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "repetition": 3,
+        "seconds": 46.42143760399995
+      }
+    ],
+    "benchmark_summary": [
+      {
+        "partitions": 2,
+        "mode": "city",
+        "mean_seconds": 0.8344654546666183,
+        "median_seconds": 0.7500342900002579,
+        "stdev_seconds": 0.14979593993161572,
+        "min_seconds": 0.7459432939995168,
+        "max_seconds": 1.00741878000008,
+        "empty_partitions": 0,
+        "max_partition_rows": 12441,
+        "min_partition_rows": 4503,
+        "max_over_mean_rows": 1.468484419263456
+      },
+      {
+        "partitions": 2,
+        "mode": "round_robin",
+        "mean_seconds": 0.810005874665876,
+        "median_seconds": 0.786686268998892,
+        "stdev_seconds": 0.12863743020976712,
+        "min_seconds": 0.6946234189999814,
+        "max_seconds": 0.9487079359987547,
+        "empty_partitions": 0,
+        "max_partition_rows": 8472,
+        "min_partition_rows": 8472,
+        "max_over_mean_rows": 1.0
+      },
+      {
+        "partitions": 8,
+        "mode": "city",
+        "mean_seconds": 2.1460984119997497,
+        "median_seconds": 2.1882854079995013,
+        "stdev_seconds": 0.09603248776212049,
+        "min_seconds": 2.036193699999785,
+        "max_seconds": 2.213816127999962,
+        "empty_partitions": 0,
+        "max_partition_rows": 7634,
+        "min_partition_rows": 1028,
+        "max_over_mean_rows": 3.604343720491029
+      },
+      {
+        "partitions": 8,
+        "mode": "round_robin",
+        "mean_seconds": 2.172089790999962,
+        "median_seconds": 2.1377364710006077,
+        "stdev_seconds": 0.14799537209703797,
+        "min_seconds": 2.0442922559996077,
+        "max_seconds": 2.334240645999671,
+        "empty_partitions": 0,
+        "max_partition_rows": 2118,
+        "min_partition_rows": 2118,
+        "max_over_mean_rows": 1.0
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "mean_seconds": 8.404270144000597,
+        "median_seconds": 8.482806751999306,
+        "stdev_seconds": 0.20513299799451745,
+        "min_seconds": 8.171472649000862,
+        "max_seconds": 8.558531031001621,
+        "empty_partitions": 0,
+        "max_partition_rows": 6596,
+        "min_partition_rows": 127,
+        "max_over_mean_rows": 12.45703493862134
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "mean_seconds": 7.925775230999837,
+        "median_seconds": 7.918738608999774,
+        "stdev_seconds": 0.09387517491579855,
+        "min_seconds": 7.835616368000046,
+        "max_seconds": 8.02297071599969,
+        "empty_partitions": 0,
+        "max_partition_rows": 530,
+        "min_partition_rows": 529,
+        "max_over_mean_rows": 1.0009442870632672
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "mean_seconds": 44.25397024366612,
+        "median_seconds": 44.158541983999385,
+        "stdev_seconds": 0.6373251379727142,
+        "min_seconds": 43.669740216999344,
+        "max_seconds": 44.93362852999962,
+        "empty_partitions": 19,
+        "max_partition_rows": 5854,
+        "min_partition_rows": 0,
+        "max_over_mean_rows": 69.09820585457979
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "mean_seconds": 46.59750655466693,
+        "median_seconds": 46.43279863200041,
+        "stdev_seconds": 0.2951760936941278,
+        "min_seconds": 46.42143760399995,
+        "max_seconds": 46.93828342800043,
+        "empty_partitions": 0,
+        "max_partition_rows": 85,
+        "min_partition_rows": 84,
+        "max_over_mean_rows": 1.0033050047214354
+      }
+    ],
+    "partition_distribution": [
+      {
+        "partitions": 2,
+        "mode": "city",
+        "partition_id": 0,
+        "rows": 4503
+      },
+      {
+        "partitions": 2,
+        "mode": "city",
+        "partition_id": 1,
+        "rows": 12441
+      },
+      {
+        "partitions": 2,
+        "mode": "round_robin",
+        "partition_id": 0,
+        "rows": 8472
+      },
+      {
+        "partitions": 2,
+        "mode": "round_robin",
+        "partition_id": 1,
+        "rows": 8472
+      },
+      {
+        "partitions": 8,
+        "mode": "city",
+        "partition_id": 0,
+        "rows": 1366
+      },
+      {
+        "partitions": 8,
+        "mode": "city",
+        "partition_id": 1,
+        "rows": 7634
+      },
+      {
+        "partitions": 8,
+        "mode": "city",
+        "partition_id": 2,
+        "rows": 1028
+      },
+      {
+        "partitions": 8,
+        "mode": "city",
+        "partition_id": 3,
+        "rows": 2111
+      },
+      {
+        "partitions": 8,
+        "mode": "city",
+        "partition_id": 4,
+        "rows": 1029
+      },
+      {
+        "partitions": 8,
+        "mode": "city",
+        "partition_id": 5,
+        "rows": 1644
+      },
+      {
+        "partitions": 8,
+        "mode": "city",
+        "partition_id": 6,
+        "rows": 1080
+      },
+      {
+        "partitions": 8,
+        "mode": "city",
+        "partition_id": 7,
+        "rows": 1052
+      },
+      {
+        "partitions": 8,
+        "mode": "round_robin",
+        "partition_id": 0,
+        "rows": 2118
+      },
+      {
+        "partitions": 8,
+        "mode": "round_robin",
+        "partition_id": 1,
+        "rows": 2118
+      },
+      {
+        "partitions": 8,
+        "mode": "round_robin",
+        "partition_id": 2,
+        "rows": 2118
+      },
+      {
+        "partitions": 8,
+        "mode": "round_robin",
+        "partition_id": 3,
+        "rows": 2118
+      },
+      {
+        "partitions": 8,
+        "mode": "round_robin",
+        "partition_id": 4,
+        "rows": 2118
+      },
+      {
+        "partitions": 8,
+        "mode": "round_robin",
+        "partition_id": 5,
+        "rows": 2118
+      },
+      {
+        "partitions": 8,
+        "mode": "round_robin",
+        "partition_id": 6,
+        "rows": 2118
+      },
+      {
+        "partitions": 8,
+        "mode": "round_robin",
+        "partition_id": 7,
+        "rows": 2118
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 0,
+        "rows": 255
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 1,
+        "rows": 272
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 2,
+        "rows": 202
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 3,
+        "rows": 580
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 4,
+        "rows": 183
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 5,
+        "rows": 609
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 6,
+        "rows": 279
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 7,
+        "rows": 225
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 8,
+        "rows": 484
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 9,
+        "rows": 463
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 10,
+        "rows": 225
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 11,
+        "rows": 559
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 12,
+        "rows": 303
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 13,
+        "rows": 226
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 14,
+        "rows": 127
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 15,
+        "rows": 358
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 16,
+        "rows": 392
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 17,
+        "rows": 303
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 18,
+        "rows": 359
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 19,
+        "rows": 451
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 20,
+        "rows": 254
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 21,
+        "rows": 458
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 22,
+        "rows": 374
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 23,
+        "rows": 204
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 24,
+        "rows": 235
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 25,
+        "rows": 6596
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 26,
+        "rows": 242
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 27,
+        "rows": 521
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 28,
+        "rows": 289
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 29,
+        "rows": 351
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 30,
+        "rows": 300
+      },
+      {
+        "partitions": 32,
+        "mode": "city",
+        "partition_id": 31,
+        "rows": 265
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 0,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 1,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 2,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 3,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 4,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 5,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 6,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 7,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 8,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 9,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 10,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 11,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 12,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 13,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 14,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 15,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 16,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 17,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 18,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 19,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 20,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 21,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 22,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 23,
+        "rows": 530
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 24,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 25,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 26,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 27,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 28,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 29,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 30,
+        "rows": 529
+      },
+      {
+        "partitions": 32,
+        "mode": "round_robin",
+        "partition_id": 31,
+        "rows": 529
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 0,
+        "rows": 58
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 1,
+        "rows": 105
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 2,
+        "rows": 69
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 3,
+        "rows": 298
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 4,
+        "rows": 119
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 5,
+        "rows": 6
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 6,
+        "rows": 30
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 7,
+        "rows": 9
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 8,
+        "rows": 4
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 9,
+        "rows": 88
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 10,
+        "rows": 2
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 11,
+        "rows": 431
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 12,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 13,
+        "rows": 186
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 14,
+        "rows": 21
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 15,
+        "rows": 170
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 16,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 17,
+        "rows": 27
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 18,
+        "rows": 237
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 19,
+        "rows": 55
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 20,
+        "rows": 20
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 21,
+        "rows": 78
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 22,
+        "rows": 3
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 23,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 24,
+        "rows": 5
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 25,
+        "rows": 5854
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 26,
+        "rows": 1
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 27,
+        "rows": 20
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 28,
+        "rows": 58
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 29,
+        "rows": 9
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 30,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 31,
+        "rows": 88
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 32,
+        "rows": 9
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 33,
+        "rows": 102
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 34,
+        "rows": 2
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 35,
+        "rows": 304
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 36,
+        "rows": 89
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 37,
+        "rows": 59
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 38,
+        "rows": 89
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 39,
+        "rows": 19
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 40,
+        "rows": 16
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 41,
+        "rows": 19
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 42,
+        "rows": 47
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 43,
+        "rows": 170
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 44,
+        "rows": 125
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 45,
+        "rows": 86
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 46,
+        "rows": 138
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 47,
+        "rows": 103
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 48,
+        "rows": 25
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 49,
+        "rows": 6
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 50,
+        "rows": 51
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 51,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 52,
+        "rows": 23
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 53,
+        "rows": 22
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 54,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 55,
+        "rows": 3
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 56,
+        "rows": 64
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 57,
+        "rows": 34
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 58,
+        "rows": 32
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 59,
+        "rows": 18
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 60,
+        "rows": 163
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 61,
+        "rows": 113
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 62,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 63,
+        "rows": 46
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 64,
+        "rows": 21
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 65,
+        "rows": 2
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 66,
+        "rows": 124
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 67,
+        "rows": 46
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 68,
+        "rows": 46
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 69,
+        "rows": 28
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 70,
+        "rows": 27
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 71,
+        "rows": 15
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 72,
+        "rows": 22
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 73,
+        "rows": 223
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 74,
+        "rows": 12
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 75,
+        "rows": 16
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 76,
+        "rows": 18
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 77,
+        "rows": 27
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 78,
+        "rows": 2
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 79,
+        "rows": 139
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 80,
+        "rows": 130
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 81,
+        "rows": 99
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 82,
+        "rows": 20
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 83,
+        "rows": 50
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 84,
+        "rows": 8
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 85,
+        "rows": 164
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 86,
+        "rows": 270
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 87,
+        "rows": 14
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 88,
+        "rows": 2
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 89,
+        "rows": 70
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 90,
+        "rows": 2
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 91,
+        "rows": 9
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 92,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 93,
+        "rows": 45
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 94,
+        "rows": 12
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 95,
+        "rows": 44
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 96,
+        "rows": 152
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 97,
+        "rows": 622
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 98,
+        "rows": 49
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 99,
+        "rows": 187
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 100,
+        "rows": 48
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 101,
+        "rows": 2
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 102,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 103,
+        "rows": 1
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 104,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 105,
+        "rows": 15
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 106,
+        "rows": 1
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 107,
+        "rows": 55
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 108,
+        "rows": 36
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 109,
+        "rows": 1
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 110,
+        "rows": 89
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 111,
+        "rows": 7
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 112,
+        "rows": 13
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 113,
+        "rows": 11
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 114,
+        "rows": 29
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 115,
+        "rows": 243
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 116,
+        "rows": 1
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 117,
+        "rows": 9
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 118,
+        "rows": 20
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 119,
+        "rows": 5
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 120,
+        "rows": 68
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 121,
+        "rows": 110
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 122,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 123,
+        "rows": 2
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 124,
+        "rows": 28
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 125,
+        "rows": 123
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 126,
+        "rows": 195
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 127,
+        "rows": 12
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 128,
+        "rows": 131
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 129,
+        "rows": 11
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 130,
+        "rows": 67
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 131,
+        "rows": 48
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 132,
+        "rows": 19
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 133,
+        "rows": 174
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 134,
+        "rows": 2
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 135,
+        "rows": 23
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 136,
+        "rows": 115
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 137,
+        "rows": 10
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 138,
+        "rows": 1
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 139,
+        "rows": 8
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 140,
+        "rows": 12
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 141,
+        "rows": 70
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 142,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 143,
+        "rows": 36
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 144,
+        "rows": 79
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 145,
+        "rows": 43
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 146,
+        "rows": 137
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 147,
+        "rows": 7
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 148,
+        "rows": 5
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 149,
+        "rows": 131
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 150,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 151,
+        "rows": 2
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 152,
+        "rows": 142
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 153,
+        "rows": 2
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 154,
+        "rows": 38
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 155,
+        "rows": 68
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 156,
+        "rows": 52
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 157,
+        "rows": 16
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 158,
+        "rows": 3
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 159,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 160,
+        "rows": 36
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 161,
+        "rows": 37
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 162,
+        "rows": 16
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 163,
+        "rows": 59
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 164,
+        "rows": 18
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 165,
+        "rows": 65
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 166,
+        "rows": 100
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 167,
+        "rows": 94
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 168,
+        "rows": 51
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 169,
+        "rows": 37
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 170,
+        "rows": 7
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 171,
+        "rows": 5
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 172,
+        "rows": 42
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 173,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 174,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 175,
+        "rows": 1
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 176,
+        "rows": 51
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 177,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 178,
+        "rows": 49
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 179,
+        "rows": 6
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 180,
+        "rows": 3
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 181,
+        "rows": 20
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 182,
+        "rows": 61
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 183,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 184,
+        "rows": 60
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 185,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 186,
+        "rows": 22
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 187,
+        "rows": 2
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 188,
+        "rows": 0
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 189,
+        "rows": 79
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 190,
+        "rows": 16
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 191,
+        "rows": 141
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 192,
+        "rows": 112
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 193,
+        "rows": 23
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 194,
+        "rows": 13
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 195,
+        "rows": 4
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 196,
+        "rows": 96
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 197,
+        "rows": 131
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 198,
+        "rows": 2
+      },
+      {
+        "partitions": 200,
+        "mode": "city",
+        "partition_id": 199,
+        "rows": 80
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 0,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 1,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 2,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 3,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 4,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 5,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 6,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 7,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 8,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 9,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 10,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 11,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 12,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 13,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 14,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 15,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 16,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 17,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 18,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 19,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 20,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 21,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 22,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 23,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 24,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 25,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 26,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 27,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 28,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 29,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 30,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 31,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 32,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 33,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 34,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 35,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 36,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 37,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 38,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 39,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 40,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 41,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 42,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 43,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 44,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 45,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 46,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 47,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 48,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 49,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 50,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 51,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 52,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 53,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 54,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 55,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 56,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 57,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 58,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 59,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 60,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 61,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 62,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 63,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 64,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 65,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 66,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 67,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 68,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 69,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 70,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 71,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 72,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 73,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 74,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 75,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 76,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 77,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 78,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 79,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 80,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 81,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 82,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 83,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 84,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 85,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 86,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 87,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 88,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 89,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 90,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 91,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 92,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 93,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 94,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 95,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 96,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 97,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 98,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 99,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 100,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 101,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 102,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 103,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 104,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 105,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 106,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 107,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 108,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 109,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 110,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 111,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 112,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 113,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 114,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 115,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 116,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 117,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 118,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 119,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 120,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 121,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 122,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 123,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 124,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 125,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 126,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 127,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 128,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 129,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 130,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 131,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 132,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 133,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 134,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 135,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 136,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 137,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 138,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 139,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 140,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 141,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 142,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 143,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 144,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 145,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 146,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 147,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 148,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 149,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 150,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 151,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 152,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 153,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 154,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 155,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 156,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 157,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 158,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 159,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 160,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 161,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 162,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 163,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 164,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 165,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 166,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 167,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 168,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 169,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 170,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 171,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 172,
+        "rows": 85
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 173,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 174,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 175,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 176,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 177,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 178,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 179,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 180,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 181,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 182,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 183,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 184,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 185,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 186,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 187,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 188,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 189,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 190,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 191,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 192,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 193,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 194,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 195,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 196,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 197,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 198,
+        "rows": 84
+      },
+      {
+        "partitions": 200,
+        "mode": "round_robin",
+        "partition_id": 199,
+        "rows": 84
+      }
+    ],
+    "benchmark_operation": "both category and geohash RDD reductions with collection and independent DataFrame equality checks; repartition included",
+    "benchmark_source": "16944 observed business lifetimes, MEMORY_AND_DISK materialized before timing",
+    "warmup": "one unmeasured pair of reductions per partition/mode configuration",
+    "spark": "3.5.8",
+    "master": "spark://spark-master-internal:7077",
+    "seconds": 482.831,
+    "total_closures": 5753,
+    "total_business_days": 43435605.035312496
+  },
+  "ingestion_fixture_tests": {
+    "status": "passed",
+    "distributed_workers": [
+      "lifemap-worker-2",
+      "lifemap-worker-1"
+    ],
+    "fixture_counts": {
+      "read": 6,
+      "clean_before_duplicates": 3,
+      "orphan_business_id": 1,
+      "unique": 2,
+      "empty_text": 1,
+      "business_removed_by_cleaning": 1,
+      "duplicates": 1
+    },
+    "life": [
+      2,
+      "2020-01-01 00:00:00",
+      "2020-01-03 00:00:00"
+    ],
+    "mongodb": {
+      "geojson_index_and_query": true,
+      "idempotent_business_and_review_batches": true,
+      "distributed_writer_batches_both_workers": true,
+      "definitive_counts": {
+        "businesses": 0,
+        "reviews": 0
+      },
+      "fixture_collections": [
+        "__yelp_ingestion_test_businesses",
+        "__yelp_ingestion_test_reviews"
+      ]
+    }
+  },
+  "health": {
+    "commit": "721108b0a1fee608196b7f56e860c93a58862edd",
+    "commit_configured": true,
+    "scope": "delivery_1",
+    "service": "lifemap-api",
+    "services": {
+      "api": {
+        "status": "ok"
+      },
+      "dask": {
+        "status": "ok",
+        "workers": 2
+      },
+      "mongodb": {
+        "status": "ok"
+      },
+      "spark": {
+        "status": "ok",
+        "workers": 1
+      }
+    },
+    "status": "ok"
+  },
+  "closure_examples": {
+    "count": 5,
+    "group_by": "category",
+    "minimum_business_days": 3650.0,
+    "results": [
+      {
+        "business_days": 5016561.855497686,
+        "businesses": 1902,
+        "closures": 831,
+        "key": "American (New)",
+        "kind": "category",
+        "minimum_business_days": 3650.0,
+        "rate_pct": 6.046272501705424,
+        "rdd_dataframe_equal": true,
+        "run_id": "restaurants-f56f79e85065-e1-v1"
+      },
+      {
+        "business_days": 5088806.237523154,
+        "businesses": 1788,
+        "closures": 557,
+        "key": "American (Traditional)",
+        "kind": "category",
+        "minimum_business_days": 3650.0,
+        "rate_pct": 3.995141306440339,
+        "rdd_dataframe_equal": true,
+        "run_id": "restaurants-f56f79e85065-e1-v1"
+      },
+      {
+        "business_days": 2737354.669525462,
+        "businesses": 988,
+        "closures": 381,
+        "key": "Italian",
+        "kind": "category",
+        "minimum_business_days": 3650.0,
+        "rate_pct": 5.08026970520805,
+        "rdd_dataframe_equal": true,
+        "run_id": "restaurants-f56f79e85065-e1-v1"
+      },
+      {
+        "business_days": 2874621.615972226,
+        "businesses": 994,
+        "closures": 266,
+        "key": "Pizza",
+        "kind": "category",
+        "minimum_business_days": 3650.0,
+        "rate_pct": 3.377487995656193,
+        "rdd_dataframe_equal": true,
+        "run_id": "restaurants-f56f79e85065-e1-v1"
+      },
+      {
+        "business_days": 1797725.8383564816,
+        "businesses": 749,
+        "closures": 254,
+        "key": "Breakfast & Brunch",
+        "kind": "category",
+        "minimum_business_days": 3650.0,
+        "rate_pct": 5.157071118517015,
+        "rdd_dataframe_equal": true,
+        "run_id": "restaurants-f56f79e85065-e1-v1"
+      }
+    ]
+  },
+  "unit_tests": {
+    "host_unittest": 21,
+    "docker_pytest": 13
+  },
+  "resources": {
+    "windows": {
+      "utc": "2026-11-07T10:49:14.085940+00:00",
+      "available_bytes": 2622468096,
+      "available_gib": 2.442,
+      "load_percent": 84
+    },
+    "docker_stats": [
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "0.18%",
+        "Container": "d9a2722d957fe25767aefba94c00c4ba7a570a31458d51aef99c4c7637c10de3",
+        "ID": "d9a2722d957f",
+        "MemPerc": "18.95%",
+        "MemUsage": "48.51MiB / 256MiB",
+        "Name": "lifemap-api-1",
+        "NetIO": "57.8kB / 37.1kB",
+        "PIDs": "7"
+      },
+      {
+        "BlockIO": "0B / 233kB",
+        "CPUPerc": "0.08%",
+        "Container": "0e137ba39ac48d397918eafd19d1196f6e469b55b6263f162ad7e2594b297a5a",
+        "ID": "0e137ba39ac4",
+        "MemPerc": "9.00%",
+        "MemUsage": "138.2MiB / 1.5GiB",
+        "Name": "lifemap-spark-worker-1",
+        "NetIO": "5.14kB / 17.4kB",
+        "PIDs": "30"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "4.80%",
+        "Container": "4877397dbe6ea2b09893fc71bbe0e4b704f6812d69080e074ceafd7221807f33",
+        "ID": "4877397dbe6e",
+        "MemPerc": "9.55%",
+        "MemUsage": "97.77MiB / 1GiB",
+        "Name": "lifemap-dask-worker-1-1",
+        "NetIO": "70.5kB / 235kB",
+        "PIDs": "13"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "4.78%",
+        "Container": "ea72a228451605e932ea11b8d80e9e1ff36c8d3f5188bfd3f419ed2ca2d51a0e",
+        "ID": "ea72a2284516",
+        "MemPerc": "9.66%",
+        "MemUsage": "98.96MiB / 1GiB",
+        "Name": "lifemap-dask-worker-2-1",
+        "NetIO": "70.5kB / 235kB",
+        "PIDs": "13"
+      },
+      {
+        "BlockIO": "0B / 410kB",
+        "CPUPerc": "0.08%",
+        "Container": "4db100e5ab8f33e032feb881ac8d2ad09f0e43e7bda9adfd63b99228073889fa",
+        "ID": "4db100e5ab8f",
+        "MemPerc": "13.49%",
+        "MemUsage": "138.1MiB / 1GiB",
+        "Name": "lifemap-spark-master-1",
+        "NetIO": "32.1kB / 24.1kB",
+        "PIDs": "30"
+      },
+      {
+        "BlockIO": "0B / 659kB",
+        "CPUPerc": "15.49%",
+        "Container": "ae9f032dd7a2a26f95791fe362720af0fb66a2e6213197db0030264080683287",
+        "ID": "ae9f032dd7a2",
+        "MemPerc": "53.19%",
+        "MemUsage": "408.5MiB / 768MiB",
+        "Name": "lifemap-mongodb-1",
+        "NetIO": "60.4kB / 80.5kB",
+        "PIDs": "58"
+      },
+      {
+        "BlockIO": "13GB / 4.1kB",
+        "CPUPerc": "2.02%",
+        "Container": "831fcab02dc6537beabd3206fae77c67f2fddd4f2d93e832d59eef6900cf60c5",
+        "ID": "831fcab02dc6",
+        "MemPerc": "16.96%",
+        "MemUsage": "65.12MiB / 384MiB",
+        "Name": "lifemap-dask-scheduler-1",
+        "NetIO": "481kB / 150kB",
+        "PIDs": "3"
+      },
+      {
+        "BlockIO": "336MB / 33.6MB",
+        "CPUPerc": "0.09%",
+        "Container": "8d615c137a12297d30017fad80d40f333f34708e42413063186994a05701fad6",
+        "ID": "8d615c137a12",
+        "MemPerc": "73.44%",
+        "MemUsage": "564MiB / 768MiB",
+        "Name": "lifemap-jenkins-1",
+        "NetIO": "100kB / 457kB",
+        "PIDs": "51"
+      }
+    ],
+    "spark_jobs": [
+      {
+        "job": "train",
+        "args": [],
+        "returncode": 1,
+        "abort_reason": null,
+        "seconds": 3.05,
+        "minimum_available_gib": 1.718,
+        "peak_windows_cpu_percent": 21.5,
+        "before": {
+          "utc": "2026-11-07T04:28:24.403585+00:00",
+          "available_bytes": 1887150080,
+          "available_gib": 1.758,
+          "load_percent": 88
+        },
+        "after": {
+          "utc": "2026-11-07T04:28:27.445416+00:00",
+          "available_bytes": 1906659328,
+          "available_gib": 1.776,
+          "load_percent": 88,
+          "windows_cpu_percent": 9.0
+        }
+      },
+      {
+        "job": "train",
+        "args": [],
+        "returncode": 1,
+        "abort_reason": null,
+        "seconds": 3.02,
+        "minimum_available_gib": 1.657,
+        "peak_windows_cpu_percent": 37.5,
+        "before": {
+          "utc": "2026-11-07T04:30:20.194522+00:00",
+          "available_bytes": 1784713216,
+          "available_gib": 1.662,
+          "load_percent": 89
+        },
+        "after": {
+          "utc": "2026-11-07T04:30:23.222378+00:00",
+          "available_bytes": 1797869568,
+          "available_gib": 1.674,
+          "load_percent": 89,
+          "windows_cpu_percent": 5.3
+        }
+      },
+      {
+        "job": "train",
+        "args": [],
+        "returncode": 143,
+        "abort_reason": "critical_host_memory",
+        "seconds": 460.12,
+        "minimum_available_gib": 0.468,
+        "peak_windows_cpu_percent": 36.4,
+        "before": {
+          "utc": "2026-11-07T04:31:01.408765+00:00",
+          "available_bytes": 1805533184,
+          "available_gib": 1.682,
+          "load_percent": 89
+        },
+        "after": {
+          "utc": "2026-11-07T04:38:41.532397+00:00",
+          "available_bytes": 532078592,
+          "available_gib": 0.496,
+          "load_percent": 96,
+          "windows_cpu_percent": 14.3
+        }
+      },
+      {
+        "job": "train",
+        "args": [],
+        "returncode": 0,
+        "abort_reason": null,
+        "seconds": 550.64,
+        "minimum_available_gib": 1.651,
+        "peak_windows_cpu_percent": 33.7,
+        "before": {
+          "utc": "2026-11-07T04:43:30.953002+00:00",
+          "available_bytes": 3088850944,
+          "available_gib": 2.877,
+          "load_percent": 81
+        },
+        "after": {
+          "utc": "2026-11-07T04:52:41.589461+00:00",
+          "available_bytes": 2164150272,
+          "available_gib": 2.016,
+          "load_percent": 87,
+          "windows_cpu_percent": 6.4
+        }
+      },
+      {
+        "job": "analytics",
+        "args": [],
+        "returncode": 0,
+        "abort_reason": null,
+        "seconds": 489.59,
+        "minimum_available_gib": 1.714,
+        "peak_windows_cpu_percent": 24.9,
+        "before": {
+          "utc": "2026-11-07T04:54:19.518989+00:00",
+          "available_bytes": 2492428288,
+          "available_gib": 2.321,
+          "load_percent": 85
+        },
+        "after": {
+          "utc": "2026-11-07T05:02:29.111293+00:00",
+          "available_bytes": 2017026048,
+          "available_gib": 1.879,
+          "load_percent": 88,
+          "windows_cpu_percent": 5.3
+        }
+      }
+    ],
+    "jenkins-memory": {
+      "samples": 10,
+      "minimum_windows_available_gib": 0.477,
+      "peak_windows_cpu_percent": 30.6,
+      "after": {
+        "utc": "2026-11-07T10:44:17.829458+00:00",
+        "available_bytes": 3231698944,
+        "available_gib": 3.01,
+        "load_percent": 80,
+        "windows_cpu_percent": 14.6
+      }
+    },
+    "jenkins-memory-final": {
+      "samples": 61,
+      "minimum_windows_available_gib": 2.295,
+      "peak_windows_cpu_percent": 37.1,
+      "after": {
+        "utc": "2026-11-07T10:47:30.429948+00:00",
+        "available_bytes": 2463948800,
+        "available_gib": 2.295,
+        "load_percent": 85,
+        "windows_cpu_percent": 27.1
+      }
+    }
+  },
+  "containers": [
+    {
+      "name": "lifemap-mongodb-1",
+      "image": "sha256:5afcd8962bad12df443311cafbd3de69b8cca4c9d9cf913ba29b9dc0ab324fe9",
+      "status": "running",
+      "health": "healthy",
+      "oom_killed": false,
+      "restart_count": 0
+    },
+    {
+      "name": "lifemap-spark-master-1",
+      "image": "sha256:b110343c4f8ab5bd627b8120e6bd2c490631741ce5d683732bf9616e9406f54f",
+      "status": "running",
+      "health": "healthy",
+      "oom_killed": false,
+      "restart_count": 0
+    },
+    {
+      "name": "lifemap-spark-worker-1",
+      "image": "sha256:b110343c4f8ab5bd627b8120e6bd2c490631741ce5d683732bf9616e9406f54f",
+      "status": "running",
+      "health": "healthy",
+      "oom_killed": false,
+      "restart_count": 0
+    },
+    {
+      "name": "lifemap-dask-scheduler-1",
+      "image": "sha256:dce8306314b803913735a7927e9ac7d6f11ebab8e1676017d82256c206a42dad",
+      "status": "running",
+      "health": "healthy",
+      "oom_killed": false,
+      "restart_count": 0
+    },
+    {
+      "name": "lifemap-dask-worker-1-1",
+      "image": "sha256:dce8306314b803913735a7927e9ac7d6f11ebab8e1676017d82256c206a42dad",
+      "status": "running",
+      "health": "healthy",
+      "oom_killed": false,
+      "restart_count": 0
+    },
+    {
+      "name": "lifemap-dask-worker-2-1",
+      "image": "sha256:dce8306314b803913735a7927e9ac7d6f11ebab8e1676017d82256c206a42dad",
+      "status": "running",
+      "health": "healthy",
+      "oom_killed": false,
+      "restart_count": 0
+    },
+    {
+      "name": "lifemap-api-1",
+      "image": "sha256:e70d525b111038cb5b9d1d810aabeaa12aaa3cc9b6cd177b6fc6dfb47b41f7e0",
+      "status": "running",
+      "health": "healthy",
+      "oom_killed": false,
+      "restart_count": 0
+    },
+    {
+      "name": "lifemap-jenkins-1",
+      "image": "sha256:ddda80b37704cc12677db108642f2b0e1ebc373e39c7c5ae38e7f9506e3f9079",
+      "status": "running",
+      "health": "healthy",
+      "oom_killed": false,
+      "restart_count": 0
+    }
+  ],
+  "isolation": {
+    "protected_containers_registered_and_stopped": 22,
+    "historical_volumes_preserved": 24,
+    "no_remote_push_or_deployment": true
+  },
+  "pending": [
+    "Second computer and public URL",
+    "Authorized first push and remote main/pollSCM demonstration",
+    "Teacher notification and area/category exclusivity",
+    "SentimentStream source code reuse verification",
+    "Live defense"
+  ],
+  "jenkins_gate": {
+    "failed_build": 5,
+    "successful_build": 4,
+    "pytest_failed": true,
+    "deployment_stage_skipped": true,
+    "api_image_unchanged": true,
+    "image_before": "sha256:e70d525b111038cb5b9d1d810aabeaa12aaa3cc9b6cd177b6fc6dfb47b41f7e0",
+    "image_after": "sha256:e70d525b111038cb5b9d1d810aabeaa12aaa3cc9b6cd177b6fc6dfb47b41f7e0",
+    "stale_deployment_artifacts_absent": true
+  }
+}
