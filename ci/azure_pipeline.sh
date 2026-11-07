@@ -80,7 +80,7 @@ case "${1:-}" in
   docker exec lifemap-api-1 python /app/tests/e1/smoke_api.py --expected-commit "$revision" > reports/deployed-api.json
   proxy 5100 "$revision"
   set_revision "$revision"
-  docker exec "$CANDIDATE" python /app/tests/e1/smoke_api.py https://lifemap-e1-davier-2026.westus2.cloudapp.azure.com --expected-commit "$revision" > reports/public-api.json
+  docker run --rm --network host --memory 128m --cpus 0.5 --entrypoint python "$IMAGE" /app/tests/e1/smoke_api.py https://lifemap-e1-davier-2026.westus2.cloudapp.azure.com --expected-commit "$revision" > reports/public-api.json
   printf 'Azure promotion passed all gates.\n' > reports/deployment.txt
   ;;
  cleanup)

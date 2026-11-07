@@ -347,5 +347,34 @@
       }
     ],
     "deployment_enabled_but_blocked": true
+  },
+  "public_gate_host_network_test": {
+    "/health": {
+      "status": 200
+    },
+    "/businesses/near?lat=39.9526&lon=-75.1652&radius_m=5000&category=Restaurants&limit=5": {
+      "status": 200
+    },
+    "/businesses/within": {
+      "status": 200
+    },
+    "/zones/summary?lat=39.9526&lon=-75.1652&radius_m=5000": {
+      "status": 200
+    },
+    "/stats/closure?group_by=geohash&min_business_days=3650&limit=5": {
+      "status": 200
+    },
+    "/predict": {
+      "status": 200
+    },
+    "/businesses/near?lat=nan&lon=0&radius_m=10 [invalid input]": {
+      "status": 400
+    },
+    "/predict [invalid input]": {
+      "status": 400
+    },
+    "commit": "1c8ee682253a409a95f9d434fd93c56ade8a8d5f",
+    "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+    "passed": true
   }
 }
