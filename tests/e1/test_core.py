@@ -58,3 +58,10 @@ def test_empty_text_rejected(client):
 
 def test_wrong_json_shape_rejected(client):
     assert client.post('/predict',json={'text':{'$ne':None}}).status_code==400
+
+def test_home_and_bundled_assets_are_served(client):
+    response=client.get('/')
+    assert response.status_code==200 and response.mimetype=='text/html'
+    assert b'id="map"' in response.data and b'id="predict-form"' in response.data
+    for path in ['/static/app.js','/static/app.css','/static/vendor/leaflet/leaflet.js']:
+        assert client.get(path).status_code==200

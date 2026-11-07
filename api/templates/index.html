@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explora los negocios de Filadelfia, sus reseñas y su vida observada con LifeMap.">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>LifeMap · Los lugares y sus historias</title>
+  <link rel="icon" href="{{ url_for('static',filename='brand.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static',filename='vendor/leaflet/leaflet.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='app.css',v='e1-ui-1') }}">
+  <script defer src="{{ url_for('static',filename='vendor/leaflet/leaflet.js') }}"></script>
+  <script defer src="{{ url_for('static',filename='app.js',v='e1-ui-1') }}"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Ir al contenido</a>
+<aside class="sidebar" aria-label="Buscar negocios">
+  <a class="brand" href="/" aria-label="LifeMap, inicio"><img src="{{ url_for('static',filename='brand.svg') }}" width="40" height="40" alt=""><span>Life<span class="brand-light">Map</span><small>LUGARES CON HISTORIA</small></span></a>
+  <div class="workspace-label"><span class="small-pin" aria-hidden="true">⌖</span> Filadelfia y entorno <span class="region">US</span></div>
+  <div class="filter-heading"><span class="eyebrow">TU PUNTO DE PARTIDA</span><h2>Encuentra un lugar.</h2><p>Elige una zona o haz clic en el mapa para explorar sus negocios.</p></div>
+  <form id="search-form">
+    <label for="location">Ubicación</label>
+    <select id="location"><option value="39.9526,-75.1652">Center City</option><option value="39.955,-75.193">University City</option><option value="39.969,-75.134">Fishtown</option><option value="39.933,-75.164">South Philadelphia</option><option value="custom" disabled>Punto del mapa</option></select>
+    <details class="coordinates"><summary>Usar coordenadas</summary><div class="coordinate-grid"><label for="latitude">Latitud<input id="latitude" type="number" step="any" min="-90" max="90" value="39.9526" required></label><label for="longitude">Longitud<input id="longitude" type="number" step="any" min="-180" max="180" value="-75.1652" required></label></div></details>
+    <label for="radius">Radio de búsqueda <span class="label-note">en metros</span></label><div class="input-unit"><input id="radius" type="number" min="1" max="50000" step="1" value="3000" required><span>m</span></div><p class="field-note">Desde 1 m hasta 50 km alrededor del punto.</p>
+    <label for="category">Categoría</label><input id="category" list="category-options" maxlength="128" placeholder="Todas las categorías" autocomplete="off"><datalist id="category-options"><option value="Restaurants"><option value="Italian"><option value="Pizza"><option value="American (New)"><option value="American (Traditional)"><option value="Breakfast &amp; Brunch"><option value="Coffee &amp; Tea"><option value="Mexican"><option value="Japanese"><option value="Chinese"><option value="Sandwiches"><option value="Bars"></datalist>
+    <label for="limit">Máximo de resultados</label><select id="limit"><option value="20">20 negocios</option><option value="50" selected>50 negocios</option><option value="100">100 negocios</option></select>
+    <button class="button primary" id="search-button" type="submit"><span aria-hidden="true">⌕</span> Explorar negocios <span aria-hidden="true">↗</span></button>
+    <p id="search-message" class="message" role="status" aria-live="polite">Preparando el mapa…</p>
+  </form>
+  <div class="sidebar-bottom"><div class="dataset-badge"><span>YELP OPEN DATASET</span><strong>16.944 <small>negocios</small></strong><p>Restaurants · selección académica</p></div><a href="/health" target="_blank" rel="noopener" class="service-link"><i id="service-dot"></i><span id="service-status">Comprobando servicio</span><span aria-hidden="true">↗</span></a></div>
+</aside>
+<main id="main">
+  <header class="topbar"><nav aria-label="Secciones"><a class="active" href="#explorer">Explorar</a><a href="#closure">Tasas de cierre</a><a href="#sentiment">Analizar una reseña</a></nav><span class="edition">LIFEMAP <b>E1</b></span></header>
+  <div class="content">
+    <section class="intro"><div><div class="eyebrow">UNA CIUDAD, MILES DE HISTORIAS</div><h1>Conoce el lugar.<br><em>Entiende su historia.</em></h1><p>Negocios, reseñas y vida observada en Filadelfia.</p></div><div class="source-note"><span class="dot"></span> Datos reales de Yelp<small>Fuente histórica · corte enero de 2022</small></div></section>
+    <section class="explorer" id="explorer" aria-label="Mapa y negocios">
+      <div class="map-panel"><div class="panel-title"><div><span class="eyebrow">EXPLORADOR GEOGRÁFICO</span><h2>Un vistazo al vecindario</h2></div><button id="reset-map" class="button subtle" type="button">↗ Filadelfia</button></div><div class="map-wrap"><div id="map" tabindex="0" aria-label="Mapa interactivo. También puedes buscar con los campos de coordenadas."></div><button id="search-here" class="map-action button" type="button">⌖ Buscar en el centro del mapa</button><p class="tile-message" id="tile-message" hidden>El fondo cartográfico no está disponible. Los negocios y las consultas siguen funcionando.</p></div><div class="map-footer"><div class="legend"><span><i class="open-dot"></i> Abierto</span><span><i class="closed-dot"></i> Cerrado</span><span><i class="center-dot"></i> Centro</span></div><span>Estado en la fuente histórica</span></div></div>
+      <aside class="results-panel" aria-label="Negocios encontrados"><div class="results-title"><h2>En tu radio</h2><span id="result-count" class="count-pill">—</span></div><p id="results-note" class="muted">Selecciona un negocio para conocerlo.</p><div id="results-list" class="results-list" aria-label="Lista de negocios"><p class="empty-state">Buscando negocios reales…</p></div><section id="business-detail" class="business-detail" aria-label="Negocio seleccionado" aria-live="polite"><div class="detail-empty"><span aria-hidden="true">⌖</span><p>Cada punto tiene una historia.<br>Selecciona uno para descubrirla.</p></div></section></aside>
+    </section>
+    <div class="insights">
+      <section class="insight-card" id="closure" aria-labelledby="closure-title"><div class="card-heading"><div><div class="eyebrow">VIDA OBSERVADA</div><h2 id="closure-title">El cierre, en contexto.</h2></div><span class="card-index">01</span></div><p class="card-description">Grupos con más cierres registrados en toda la selección.</p><div class="segmented" role="group" aria-label="Agrupar tasas de cierre"><button type="button" data-group="category" aria-pressed="true">Por categoría</button><button type="button" data-group="geohash" aria-pressed="false">Por zona</button></div><p id="stats-message" class="message" role="status" aria-live="polite">Consultando las tasas…</p><div id="closure-chart" class="closure-chart" aria-label="Tasas de cierre anualizadas"></div><p class="method-note">Cierres por 100 negocios-año de vida observada. Mínimo: 3.650 días-negocio por grupo. Aproximación con primera y última reseña; no son fechas reales de apertura y cierre. Esta vista no cambia con el radio del mapa.</p></section>
+      <section class="insight-card" id="sentiment" aria-labelledby="sentiment-title"><div class="card-heading"><div><div class="eyebrow">LAS PALABRAS TAMBIÉN CUENTAN</div><h2 id="sentiment-title">¿Qué dice una reseña?</h2></div><span class="card-index">02</span></div><p class="card-description">Explora su sentimiento con el modelo entrenado de LifeMap.</p><form id="predict-form"><label for="review-text">Texto de la reseña</label><textarea id="review-text" rows="4" maxlength="10000" placeholder="The food was excellent and the staff made us feel welcome…" required></textarea><div class="review-help"><span>Modelo entrenado con reseñas en inglés.</span><span id="char-count">0 / 10.000</span></div><button class="button primary" id="predict-button" type="submit">Clasificar reseña <span aria-hidden="true">↗</span></button></form><p id="predict-message" class="message" role="status" aria-live="polite"></p><div id="prediction-result" class="prediction-result" aria-live="polite"><p class="prediction-placeholder">Una nueva perspectiva, a unas palabras de distancia.</p></div></section>
+    </div>
+    <footer class="page-footer"><span>LifeMap <b>·</b> Proyecto académico de Big Data</span><span>Yelp v4 · 1.320.594 reseñas en la selección</span></footer>
+  </div>
+</main>
+<noscript><div class="no-script">Activa JavaScript para utilizar el mapa y los formularios. <a href="/health">Consultar estado de la API</a>.</div></noscript>
+</body>
+</html>

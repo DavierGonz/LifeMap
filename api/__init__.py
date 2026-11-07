@@ -3,7 +3,7 @@ import os
 import re
 from concurrent.futures import ThreadPoolExecutor
 
-from flask import Flask, jsonify,request
+from flask import Flask, jsonify,request,render_template
 from werkzeug.exceptions import BadRequest,HTTPException,ServiceUnavailable
 from pymongo.errors import PyMongoError
 from functools import lru_cache
@@ -19,6 +19,10 @@ def create_app():
     app = Flask(__name__)
     app.config["MAX_CONTENT_LENGTH"] = 32 * 1024
     repository.configure(app)
+
+    @app.get('/')
+    def index():
+        return render_template('index.html')
 
     def category(value):
         if value is None: return None
