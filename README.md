@@ -1,5 +1,7 @@
 # LifeMap - Entrega 1
 
+Validacion E1.3: actualizacion de documentacion detectada por pollSCM.
+
 Proyecto universitario: Yelp -> Dask -> MongoDB -> Spark MLlib/MapReduce -> Flask.
 La ruta `/` abre el explorador visual con Leaflet/OpenStreetMap, filtros,
 negocios reales, tasas de cierre y clasificador de resenas. `/health` conserva
