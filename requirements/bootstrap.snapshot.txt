@@ -1,0 +1,4 @@
+# Inventario de herramientas incluidas por venv con CPython 3.10.11 en Windows.
+# No es un lock de aplicacion ni una instruccion de instalacion global.
+pip==23.0.1
+setuptools==65.5.0

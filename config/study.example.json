@@ -1,0 +1,11 @@
+{
+  "status": "pending_human_selection",
+  "metropolitan_area": null,
+  "category_family": null,
+  "primary_category_rule": null,
+  "sentiment_training_cutoff": null,
+  "streaming_cutoff_T": null,
+  "geohash_precision": null,
+  "minimum_business_days": null,
+  "notes": "Plantilla de decisiones. No constituye una seleccion ni habilita procesamiento."
+}

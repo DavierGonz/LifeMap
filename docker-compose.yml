@@ -1,0 +1,206 @@
+name: lifemap
+
+x-common: &common
+  restart: unless-stopped
+  init: true
+  logging:
+    driver: json-file
+    options: {max-size: '10m', max-file: '3'}
+
+x-dask: &dask
+  <<: *common
+  image: lifemap-dask:infra-v1
+  build: {context: ., dockerfile: docker/dask/Dockerfile}
+  networks: [backend]
+  secrets: [mongo_writer_password]
+  environment:
+    DASK_DISTRIBUTED__WORKER__MEMORY__TARGET: '0.60'
+    DASK_DISTRIBUTED__WORKER__MEMORY__SPILL: '0.70'
+    DASK_DISTRIBUTED__WORKER__MEMORY__PAUSE: '0.80'
+    DASK_DISTRIBUTED__WORKER__MEMORY__TERMINATE: '0.95'
+    OMP_NUM_THREADS: '1'
+    OPENBLAS_NUM_THREADS: '1'
+
+x-spark: &spark
+  <<: *common
+  image: lifemap-spark:infra-v1
+  build: {context: ., dockerfile: docker/spark/Dockerfile}
+  networks: [backend]
+  secrets: [mongo_reader_password, mongo_writer_password]
+  entrypoint: [/opt/spark/bin/spark-class]
+
+services:
+  mongodb:
+    <<: *common
+    image: lifemap-mongo:infra-v1
+    build: {context: ., dockerfile: docker/mongo/Dockerfile}
+    command: [mongod, --auth, --wiredTigerCacheSizeGB, '0.25', --bind_ip_all]
+    networks: [backend]
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: lifemap_admin
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo_root_password
+      MONGO_DATABASE: lifemap
+      MONGO_WRITER_USERNAME: lifemap_writer
+      MONGO_WRITER_PASSWORD_FILE: /run/secrets/mongo_writer_password
+      MONGO_READER_USERNAME: lifemap_reader
+      MONGO_READER_PASSWORD_FILE: /run/secrets/mongo_reader_password
+    secrets: [mongo_root_password, mongo_writer_password, mongo_reader_password]
+    volumes: [mongo_data:/data/db, mongo_config:/data/configdb]
+    mem_limit: 768m
+    cpus: 1.0
+    healthcheck:
+      test: [CMD, mongosh, --quiet, --file, /opt/lifemap/check_mongo.js]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  spark-master:
+    <<: *spark
+    networks:
+      backend: {aliases: [spark-master-internal]}
+      frontend: {}
+    command: [org.apache.spark.deploy.master.Master, --host, spark-master-internal, --port, '7077', --webui-port, '8080']
+    ports: ['127.0.0.1:${SPARK_UI_PORT:-8082}:8080']
+    volumes: [dataset_cache:/data, model_store:/models, spark_master_scratch:/scratch]
+    mem_limit: 1024m
+    cpus: 1.0
+    healthcheck:
+      test: [CMD, python3, /opt/lifemap/check_spark.py, master]
+      interval: 30s
+      timeout: 8s
+      retries: 5
+      start_period: 30s
+
+  spark-worker:
+    <<: *spark
+    command: [org.apache.spark.deploy.worker.Worker, --host, spark-worker, --cores, '1', --memory, 1g, --webui-port, '8080', spark://spark-master-internal:7077]
+    volumes: [dataset_cache:/data, model_store:/models, spark_worker_scratch:/scratch]
+    mem_limit: 1536m
+    cpus: 1.0
+    depends_on:
+      spark-master: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python3, /opt/lifemap/check_spark.py, worker]
+      interval: 30s
+      timeout: 8s
+      retries: 5
+      start_period: 30s
+
+  dask-scheduler:
+    <<: *dask
+    networks: [backend, frontend]
+    volumes: [dataset_cache:/data]
+    command: [dask, scheduler, --host, '0.0.0.0', --port, '8786', --dashboard-address, ':8787']
+    ports: ['127.0.0.1:${DASK_UI_PORT:-8788}:8787']
+    mem_limit: 384m
+    cpus: 0.5
+    healthcheck:
+      test: [CMD, python, /opt/lifemap/check_dask.py]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  dask-worker-1:
+    <<: *dask
+    command: [dask, worker, tcp://dask-scheduler:8786, --name, lifemap-worker-1, --nworkers, '1', --nthreads, '1', --memory-limit, 768MiB, --local-directory, /scratch, --no-dashboard]
+    volumes: [dataset_cache:/data, dask_worker_1_scratch:/scratch]
+    mem_limit: 1024m
+    cpus: 1.0
+    depends_on:
+      dask-scheduler: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python, /opt/lifemap/check_dask.py, lifemap-worker-1]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  dask-worker-2:
+    <<: *dask
+    command: [dask, worker, tcp://dask-scheduler:8786, --name, lifemap-worker-2, --nworkers, '1', --nthreads, '1', --memory-limit, 768MiB, --local-directory, /scratch, --no-dashboard]
+    volumes: [dataset_cache:/data, dask_worker_2_scratch:/scratch]
+    mem_limit: 1024m
+    cpus: 1.0
+    depends_on:
+      dask-scheduler: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python, /opt/lifemap/check_dask.py, lifemap-worker-2]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  api:
+    <<: *common
+    image: lifemap-api:infra-v1
+    build: {context: ., dockerfile: docker/api/Dockerfile, args: {VCS_REF: '${DEPLOYED_COMMIT:-unreleased}'}}
+    networks: [backend, frontend]
+    ports: ['127.0.0.1:${API_PORT:-5100}:5000']
+    environment:
+      MONGO_HOST: mongodb
+      MONGO_DATABASE: lifemap
+      MONGO_READER_USERNAME: lifemap_reader
+      MONGO_READER_PASSWORD_FILE: /run/secrets/mongo_reader_password
+      SPARK_STATUS_URL: http://spark-master:8080/json/
+      DASK_STATUS_URL: http://dask-scheduler:8787/json/counts.json
+      DEPLOYED_COMMIT: ${DEPLOYED_COMMIT:-unreleased}
+    secrets: [mongo_reader_password]
+    volumes: [model_store:/models:ro]
+    mem_limit: 256m
+    cpus: 0.5
+    depends_on:
+      mongodb: {condition: service_healthy}
+      spark-worker: {condition: service_healthy}
+      dask-worker-1: {condition: service_healthy}
+      dask-worker-2: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python, -c, 'import urllib.request; urllib.request.urlopen("http://127.0.0.1:5000/health", timeout=7).close()']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  jenkins:
+    <<: *common
+    image: lifemap-jenkins:infra-v1
+    build: {context: ., dockerfile: docker/jenkins/Dockerfile}
+    networks: [ci]
+    group_add: ['0']
+    environment:
+      JAVA_OPTS: '-Xms128m -Xmx384m -Djava.awt.headless=true'
+    ports: ['127.0.0.1:${JENKINS_PORT:-8083}:8080']
+    volumes: [jenkins_home:/var/jenkins_home, '/var/run/docker.sock:/var/run/docker.sock']
+    mem_limit: 768m
+    cpus: 1.0
+    healthcheck:
+      test: [CMD-SHELL, 'curl --fail --silent http://127.0.0.1:8080/login >/dev/null']
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 120s
+
+networks:
+  backend: {internal: true}
+  frontend: {}
+  ci: {}
+
+volumes:
+  mongo_data:
+  mongo_config:
+  dataset_cache:
+  model_store:
+  spark_master_scratch:
+  spark_worker_scratch:
+  dask_worker_1_scratch:
+  dask_worker_2_scratch:
+  jenkins_home:
+
+secrets:
+  mongo_root_password:
+    file: ${MONGO_ROOT_PASSWORD_FILE:-./.secrets/mongo_root_password.txt}
+  mongo_writer_password:
+    file: ${MONGO_WRITER_PASSWORD_FILE:-./.secrets/mongo_writer_password.txt}
+  mongo_reader_password:
+    file: ${MONGO_READER_PASSWORD_FILE:-./.secrets/mongo_reader_password.txt}

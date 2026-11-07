@@ -1,0 +1,3 @@
+# Lock de dependencias de aplicacion del host para la preparacion local.
+# Conjunto vacio deliberado: no se requieren paquetes externos.
+# El bootstrap de venv se registra por separado en bootstrap.snapshot.txt.

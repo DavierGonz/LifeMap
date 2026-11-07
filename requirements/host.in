@@ -1,0 +1,3 @@
+# Preparacion inicial: cero dependencias de aplicacion en el host.
+# La comprobacion local utiliza unicamente la biblioteca estandar de Python 3.10.
+# Agregar dependencias solo en una fase autorizada y actualizar host.lock.txt.

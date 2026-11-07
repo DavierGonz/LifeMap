@@ -1,0 +1,3 @@
+# PySpark/MLlib vienen en la imagen; NumPy es necesario para su API Python.
+-r mongo.lock.txt
+numpy==1.26.4

@@ -1,0 +1,31 @@
+{
+  "status": "candidates_only_not_selected_or_teacher_approved",
+  "area_definition": "Reproducible longitude/latitude rectangles around Yelp urban clusters; exploratory metropolitan approximations, not official administrative boundaries. Inclusive bounds, no overlap.",
+  "areas": [
+    {"id":"philadelphia","label":"Filadelfia y entorno","bbox":[-76.1,39.3,-74.4,40.6]},
+    {"id":"tampa_bay","label":"Bahia de Tampa","bbox":[-83.1,27.4,-81.9,28.6]},
+    {"id":"indianapolis","label":"Indianapolis y entorno","bbox":[-86.7,39.3,-85.6,40.3]},
+    {"id":"new_orleans","label":"Nueva Orleans y entorno","bbox":[-90.6,29.4,-89.5,30.4]},
+    {"id":"nashville","label":"Nashville y entorno","bbox":[-87.3,35.6,-86.2,36.6]},
+    {"id":"tucson","label":"Tucson y entorno","bbox":[-111.5,31.8,-110.5,32.6]},
+    {"id":"reno","label":"Reno y entorno","bbox":[-120.2,39.0,-119.3,40.1]},
+    {"id":"santa_barbara","label":"Santa Barbara y entorno","bbox":[-120.4,34.2,-119.2,34.8]},
+    {"id":"saint_louis","label":"Saint Louis y entorno","bbox":[-91.0,38.2,-89.5,39.1]},
+    {"id":"boise","label":"Boise y entorno","bbox":[-117.0,43.2,-115.8,44.1]},
+    {"id":"edmonton","label":"Edmonton y entorno","bbox":[-114.3,53.1,-112.8,54.0]}
+  ],
+  "families": {
+    "Restaurants":["Restaurants"],
+    "Food":["Food"],
+    "Nightlife":["Nightlife"],
+    "Food and dining":["Restaurants","Food","Nightlife"],
+    "Shopping":["Shopping"],
+    "Beauty and spas":["Beauty & Spas"],
+    "Health and medical":["Health & Medical"],
+    "Automotive":["Automotive"],
+    "Home services":["Home Services"],
+    "Hotels and travel":["Hotels & Travel"]
+  },
+  "minimum_unique_clean_reviews": 1000000,
+  "family_matching": "Exact category tokens, case-sensitive; union within each family; overlapping families are compared separately, never added together."
+}

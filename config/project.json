@@ -1,0 +1,22 @@
+{
+  "name": "LifeMap",
+  "stage": "yelp_prepared_pending_scope_approval",
+  "budget": {
+    "currency": "COP",
+    "maximum_new_spend": 0,
+    "payment_cards_allowed": false,
+    "billing_activation_allowed": false
+  },
+  "local_python": {
+    "required_major_minor": "3.10",
+    "bootstrap_version": "3.10.11",
+    "venv_directory": ".venv",
+    "global_project_installations_allowed": false
+  },
+  "pending_decisions": [
+    "external_server",
+    "public_url_and_availability",
+    "power_bi_desktop_acceptance",
+    "study_area_and_categories"
+  ]
+}

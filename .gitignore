@@ -1,0 +1,55 @@
+# Entornos y archivos locales
+.venv/
+.venv*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+build/
+dist/
+
+# Credenciales y configuracion privada
+.env
+.env.*
+!.env.example
+secrets/
+.secrets/
+*.pem
+*.key
+kaggle.json
+
+# Datos, modelos, checkpoints y resultados de ejecucion
+/data/
+/models/
+/checkpoints/
+/artifacts/
+/outputs/
+/reports/
+/work/
+*.log
+*.pid
+# Conservar historiales locales; versionar solo la evidencia academica final.
+/docs/reports/*
+!/docs/reports/e1-evidence.json
+!/docs/reports/e1-jenkins.json
+!/docs/reports/LifeMap-Entrega1.pdf
+*.pbix
+*.pbit
+
+# Insumos originales locales: revisar antes de cualquier publicacion
+/Insumos/
+
+# Editores: compartir solo configuracion explicita del proyecto
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store
