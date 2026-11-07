@@ -25,14 +25,15 @@ tres repeticiones. Evidencias finales: `docs/reports/e1-evidence.json`,
 **Despliegue externo ejecutado:** la API responde en
 https://lifemap-e1-davier-2026.westus2.cloudapp.azure.com con ocho servicios
 saludables y seis endpoints comprobados desde Internet. Evidencia en
-deploy/azure/deployment-evidence.json. Faltan
-primer push autorizado y demostracion GitHub -> Jenkins -> URL. El repositorio
-origin conserva la visibilidad publica elegida por el usuario, sin push.
+deploy/azure/deployment-evidence.json. Repositorio publico:
+https://github.com/DavierGonz/LifeMap. El flujo de actualizacion es
+GitHub main -> pollSCM cada dos minutos -> Jenkins -> API candidata -> Azure.
 La sustentacion y la reutilizacion verificable de SentimentStream tambien
 requieren atencion: su codigo no esta en las referencias suministradas.
 
-Servidor Azure comunicado: Ubuntu 24.04 x64, 20.230.240.88; preparacion sin
-operaciones remotas en [deploy/azure](deploy/azure/README.md).
+Servidor Azure verificado: Ubuntu 24.04 x64, 20.230.240.88. La documentacion
+de [deploy/azure](deploy/azure/README.md) conserva el procedimiento de migracion;
+no es necesario repetirlo para actualizar la API con Jenkins.
 
 ## Arranque desde cero (Windows / Docker Desktop + WSL2)
 
@@ -41,16 +42,21 @@ libres para cache, Parquet, modelos e imagenes. En Linux pueden emplearse los
 mismos archivos Compose; los lanzadores host estan preparados para Windows.
 No usar recursos ni credenciales de otros proyectos.
 
-Obtener primero el codigo: mientras origin siga vacio, transferir un bundle
-creado con `git bundle create lifemap.bundle main` y ejecutar
-`git clone lifemap.bundle D:\Proyects\LifeMap`. El bundle contiene solo lo
-versionado, sin secretos/datos. Tras el primer push autorizado, se podra usar
-`git clone https://github.com/DavierGonz/LifeMap.git D:\Proyects\LifeMap`.
+Obtener el codigo con
+`git clone --branch main https://github.com/DavierGonz/LifeMap.git D:\Proyects\LifeMap`.
+El repositorio no incluye secretos, datasets, dumps ni modelos entrenados.
+Para una instalacion nueva, ejecutar las etapas de datos descritas abajo o
+restaurar una copia privada autorizada con el procedimiento de deploy/azure.
 
 ```powershell
 Set-Location D:\Proyects\LifeMap
 # Solo si .venv todavia no existe:
 py -3.10 -m venv .venv
+@'
+[global]
+require-virtualenv = true
+disable-pip-version-check = true
+'@ | Set-Content -LiteralPath .venv\pip.ini -Encoding ascii
 # Desde este punto toda ejecucion Python Windows usa este interprete.
 .\.venv\Scripts\python.exe scripts\check_environment.py
 ```
@@ -166,9 +172,11 @@ candidata temporal para servir mientras se actualiza la API principal.
 Preflight Azure #1 SUCCESS; #2/#3 FAILURE intencional, promocion bloqueada e
 imagen publica intacta. Credencial Kaggle registrada y enmascarada por Jenkins.
 GitHub es publico: lectura SCM sin PAT adicional. `lifemap-main` apunta a main
-con pollSCM cada dos minutos, deshabilitado hasta autorizar el primer push.
-La prueba automatica GitHub sigue pendiente; no se confunde con el preflight.
-Cambio exacto de demostracion: deploy/azure/pollscm-demo.patch, sin aplicar.
+con pollSCM cada dos minutos. Su activacion requiere publicar primero main y
+establecer el checkout inicial; los merges posteriores se detectan por sondeo.
+La prueba automatica se distingue del preflight: debe registrar SCMTrigger,
+el commit de GitHub, pytest/JUnit y el mismo SHA en /health publico.
+Cambio minimo de demostracion: deploy/azure/pollscm-demo.patch.
 
 ## Informe y evidencia
 

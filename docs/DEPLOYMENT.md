@@ -3,10 +3,10 @@
 Servidor externo comunicado por el usuario: Ubuntu 24.04 x64 en Azure,
 azureuser@20.230.240.88, 4 vCPU, 16 GiB RAM y disco de 128 GiB.
 Preparacion e instrucciones concretas: [deploy/azure](../deploy/azure/README.md).
-No se ha accedido a la VM; URL HTTPS y validacion remota siguen pendientes.
-El servicio local no acredita E1.2. No se ha hecho push, merge remoto o
-despliegue publico. El repositorio https://github.com/DavierGonz/LifeMap esta
-publico por decision del usuario; todavia no contiene estos commits locales.
+La VM y HTTPS ya fueron validados; la raiz sirve la interfaz y los seis
+endpoints funcionan con los datos restaurados. Las secciones siguientes
+conservan el procedimiento para otra instalacion, no tareas que deban repetirse.
+Repositorio publico: https://github.com/DavierGonz/LifeMap.
 
 ## Segundo equipo sin gasto
 
