@@ -23,6 +23,8 @@ case "${1:-}" in
  prepare)
   umask 077; mkdir -p reports .ci
   rm -f .ci/tests.passed .ci/candidate.passed
+  # Solo artifacts temporales de este workspace; los builds archivados se conservan.
+  rm -f reports/*.json reports/*.xml reports/*.txt reports/*.log
   git rev-parse HEAD > reports/source-commit.txt
   export DEPLOYED_COMMIT="$(git rev-parse HEAD)"
   printf 'DEPLOYED_COMMIT=%s\n' "$DEPLOYED_COMMIT" > .env.ci
@@ -44,7 +46,7 @@ case "${1:-}" in
  test)
   paths=(/app/tests/e1/test_core.py)
   if [[ "${FORCE_TEST_FAILURE:-false}" == true ]]; then paths+=(/app/ci/faults/test_forced_failure.py); fi
-  docker create --name "$TEST" --label "lifemap.ci_run=$RUN_ID" --network none --memory 256m --cpus 1 "$TEST_IMAGE" python -m pytest -q --junitxml=/tmp/pytest.xml "${paths[@]}"
+  docker create --name "$TEST" --label "lifemap.ci_run=$RUN_ID" --network none --memory 256m --cpus 1 "$TEST_IMAGE" python -m pytest -q -p no:cacheprovider --junitxml=/tmp/pytest.xml "${paths[@]}"
   status=0; docker start -a "$TEST" || status=$?
   docker cp "$TEST:/tmp/pytest.xml" reports/pytest.xml
   if [[ "$status" == 0 ]]; then touch .ci/tests.passed; fi

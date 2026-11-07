@@ -6,16 +6,16 @@ indicado; no sustituyen la demostracion exigida en repositorio y URL publica.
 
 | Criterio | Verificacion prevista | Estado |
 |---|---|---|
-| E1.1 Orquestacion y reproducibilidad | Arranque limpio, README y salud de servicios | Ocho servicios validados localmente; demostracion de arranque limpio/pipeline pendiente |
-| E1.2 Despliegue funcional | Servidor distinto, URL disponible y SHA correcto | Pendiente de servidor y URL |
-| E1.3 Integracion y despliegue continuo | Jenkins automatico y fallo bloqueante | Pendiente |
-| E1.4 Ingesta y limpieza Dask | Descarga automatica y conteos por regla | Yelp v4 completo analizado con dos workers; falta seleccion, carga definitiva e integracion Jenkins |
-| E1.5 Modelo de datos y vida | GeoJSON, indice, relaciones, exposicion y censura | Modelo/indices/fixtures validados; vida agregada preparada; poblacion definitiva pendiente |
-| E1.6 Sentimiento | NB/LR, grupos disjuntos y metricas por clase | Pendiente |
-| E1.7 MapReduce y tasa | RDD igual a DataFrame y formula anualizada | Pendiente |
-| E1.8 Balanceo de carga | 2/8/32/200, repeticiones, dispersion y sesgo | Pendiente |
-| E1.9 API geoespacial | Seis endpoints exactos en URL publica | Pendiente |
-| E1.10 Informe y sustentacion | Maximo seis paginas y cambio desplegado en vivo | Pendiente |
+| E1.1 Orquestacion y reproducibilidad | Compose + README, servicios saludables | Comprobado localmente; falta prueba en otro equipo limpio |
+| E1.2 Despliegue funcional | Otro equipo, URL publica y SHA | Pendiente externo; no acreditado con localhost |
+| E1.3 Integracion y despliegue continuo | Pipeline, credencial y gate | Jenkins local exitoso y fallo bloqueante; falta merge remoto/pollSCM real |
+| E1.4 Ingesta y limpieza Dask | Descarga automatica y reglas contadas | Comprobado Yelp v4, ambos workers, cache y carga autorizada |
+| E1.5 Datos y vida observada | GeoJSON/2dsphere, lotes, evento/censura | Comprobado 16.944 negocios / 1.320.594 resenas; aproximaciones documentadas |
+| E1.6 Sentimiento | NB/LR y division por negocio | Entrenados, metricas y paridad; fuente SentimentStream no suministrada, reutilizacion literal pendiente |
+| E1.7 MapReduce y tasa | reduceByKey igual a groupBy | Comprobado, 210 categorias / 390 celdas; minimo 3.650 dias |
+| E1.8 Balanceo | Cuatro N, tres repeticiones y sesgo | Comprobado: 24 mediciones y filas por particion |
+| E1.9 API geoespacial | Seis rutas con consultas/validacion | Comprobado local; falta URL desplegada |
+| E1.10 Informe y sustentacion | Hasta seis paginas y cambio en vivo | Informe/README preparados; sustentacion y cambio remoto pendientes |
 | E2.1 Integracion y despliegue | Kafka en mismo Compose y regresion de E1 | Pendiente |
 | E2.2 Productor temporal | Reserva posterior a T, clave y particiones | Pendiente |
 | E2.3 Inferencia streaming | Modelo E1 congelado y predicciones persistidas | Pendiente |

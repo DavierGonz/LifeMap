@@ -122,7 +122,21 @@ def run(client,fault):
         print(json.dumps({'queued':True,'queue_path':urllib.parse.urlsplit(response.headers['Location']).path,'fault':fault}))
 
 def status(client):
-    result=client.get('job/lifemap-local-e1/api/json?tree=builds[number,result,building,url,actions[parameters[name,value]],artifacts[relativePath]]')
+    result=client.get('job/lifemap-local-e1/api/json?tree=builds[number,result,building,duration,url,actions[parameters[name,value]],artifacts[relativePath]]')
+    for build in result['builds']:
+        number=build['number']
+        if build['building']: continue
+        try:
+            build['junit']=client.get(f'job/lifemap-local-e1/{number}/testReport/api/json?tree=failCount,passCount,skipCount')
+        except urllib.error.HTTPError as exc:
+            if exc.code!=404: raise
+        paths={row['relativePath'] for row in build['artifacts']}
+        for artifact,key in [('deployed-api.json','deployed_api'),('academic-results.json','academic_results'),('kaggle-cache.json','kaggle_cache'),('ingestion.json','ingestion')]:
+            if 'reports/'+artifact in paths:
+                with client.request(f'job/lifemap-local-e1/{number}/artifact/reports/{artifact}') as response:
+                    payload=response.read().decode()
+                try: build[key]=json.loads(payload)
+                except ValueError: build[key]={'artifact_available':True}
     (ROOT/'docs/reports/e1-jenkins.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
     print(json.dumps(result,indent=2))
 
