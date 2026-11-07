@@ -167,7 +167,7 @@ services:
     image: lifemap-jenkins:infra-v1
     build: {context: ., dockerfile: docker/jenkins/Dockerfile}
     networks: [ci]
-    group_add: ['0']
+    group_add: ['${DOCKER_SOCKET_GID:-0}']
     environment:
       JAVA_OPTS: '-Xms128m -Xmx384m -Djava.awt.headless=true'
     ports: ['127.0.0.1:${JENKINS_PORT:-8083}:8080']

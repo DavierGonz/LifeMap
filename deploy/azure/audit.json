@@ -1,0 +1,36 @@
+{
+  "audited_commit": "1c8ee682253a409a95f9d434fd93c56ade8a8d5f",
+  "remote_operations_executed": true,
+  "local_docker_engine_available": true,
+  "compose_static_validation": "passed",
+  "architecture": "linux/amd64",
+  "base_images": [
+    {
+      "reference": "mongo:8.0.16@sha256:4b58ebcb1dc7a7b4e84cd8ce9098d48764ae4478876898ff9551acf2ac4a6a6d",
+      "linux_amd64": true
+    },
+    {
+      "reference": "spark:3.5.8-java17-python3@sha256:5363cd7d22758958565206f67a764356ebebb9fa8f5721e9c55aa86a78efafda",
+      "linux_amd64": true
+    },
+    {
+      "reference": "python:3.10.20-slim-bookworm@sha256:019e31cc1f52e4139d338bca44f27b71339a9da261738fd80fab9cf4595152fc",
+      "linux_amd64": true
+    },
+    {
+      "reference": "docker:29.5.3-cli@sha256:11e1133c30f3ceb73c6bdc7dfb78b3f9ed8e8e0d1d0400e91c5ec2eb240bf2ff",
+      "linux_amd64": true
+    },
+    {
+      "reference": "jenkins/jenkins:2.568.3-jdk21@sha256:c1e4c349365f6d16d88595b2c5f7e8ff39b8ae1d061f62420bac193b4b9616d0",
+      "linux_amd64": true
+    }
+  ],
+  "core_services": 8,
+  "remote_runtime_validation": "passed_eight_healthy",
+  "volume_sizes": "minimal_results_and_models_transferred; complete Kaggle cache deferred",
+  "server_details": "verified_via_SSH",
+  "deployment_evidence": "deployment-evidence.json",
+  "public_url": "https://lifemap-e1-davier-2026.westus2.cloudapp.azure.com",
+  "ssh_private_key_content_displayed_copied_or_modified": false
+}

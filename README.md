@@ -19,11 +19,17 @@ RDD y DataFrame coinciden; benchmark real 2/8/32/200 particiones, dos repartos,
 tres repeticiones. Evidencias finales: `docs/reports/e1-evidence.json`,
 `docs/reports/e1-jenkins.json` e informe `docs/reports/LifeMap-Entrega1.pdf`.
 
-**No se cumple aun el despliegue externo:** faltan otro computador, URL publica,
+**Despliegue externo ejecutado:** la API responde en
+https://lifemap-e1-davier-2026.westus2.cloudapp.azure.com con ocho servicios
+saludables y seis endpoints comprobados desde Internet. Evidencia en
+deploy/azure/deployment-evidence.json. Faltan
 primer push autorizado y demostracion GitHub -> Jenkins -> URL. El repositorio
 origin conserva la visibilidad publica elegida por el usuario, sin push.
 La sustentacion y la reutilizacion verificable de SentimentStream tambien
 requieren atencion: su codigo no esta en las referencias suministradas.
+
+Servidor Azure comunicado: Ubuntu 24.04 x64, 20.230.240.88; preparacion sin
+operaciones remotas en [deploy/azure](deploy/azure/README.md).
 
 ## Arranque desde cero (Windows / Docker Desktop + WSL2)
 

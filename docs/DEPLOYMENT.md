@@ -1,6 +1,9 @@
 # Despliegue y demostracion de Entrega 1
 
-Estado externo: no se ha identificado otro computador autorizado ni URL publica.
+Servidor externo comunicado por el usuario: Ubuntu 24.04 x64 en Azure,
+azureuser@20.230.240.88, 4 vCPU, 16 GiB RAM y disco de 128 GiB.
+Preparacion e instrucciones concretas: [deploy/azure](../deploy/azure/README.md).
+No se ha accedido a la VM; URL HTTPS y validacion remota siguen pendientes.
 El servicio local no acredita E1.2. No se ha hecho push, merge remoto o
 despliegue publico. El repositorio https://github.com/DavierGonz/LifeMap esta
 publico por decision del usuario; todavia no contiene estos commits locales.

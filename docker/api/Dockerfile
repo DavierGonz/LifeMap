@@ -12,6 +12,7 @@ COPY ml /app/ml
 COPY analytics /app/analytics
 COPY storage /app/storage
 COPY tests/e1 /app/tests/e1
+COPY ci/__init__.py ci/azure_promote.py /app/ci/
 ENV PYTHONPATH=/app
 USER app
 EXPOSE 5000

@@ -4,6 +4,7 @@ pipeline {
     triggers { pollSCM('H/2 * * * *') }
     parameters {
         string(name: 'LOCAL_COMMIT', defaultValue: '', description: 'Solo demostracion local, SHA de bundle preparado')
+        booleanParam(name: 'DEPLOY_PUBLIC', defaultValue: true, description: 'Promover solo tras gates; false para preflight')
         booleanParam(name: 'FORCE_TEST_FAILURE', defaultValue: false, description: 'Demostrar que pytest impide desplegar')
     }
     stages {
@@ -22,26 +23,28 @@ pipeline {
                 }
             }
         }
-        stage('Configuration') { steps { sh 'bash ci/pipeline.sh prepare' } }
-        stage('Sequential images') { steps { sh 'bash ci/pipeline.sh build' } }
-        stage('pytest gate') { steps { sh 'bash ci/pipeline.sh test' } }
-        stage('Infrastructure') { steps { sh 'bash ci/pipeline.sh infrastructure' } }
-        stage('Kaggle cache and approved ingestion') {
+        stage('Configuration') { steps { sh 'bash ci/azure_pipeline.sh prepare' } }
+        stage('API images sequential') { steps { sh 'bash ci/azure_pipeline.sh build' } }
+        stage('pytest gate') { steps { sh 'bash ci/azure_pipeline.sh test' } }
+        stage('Existing results') { steps { sh 'bash ci/azure_pipeline.sh verify' } }
+        stage('Kaggle credential') {
             steps {
                 withCredentials([string(credentialsId: 'lifemap-kaggle', variable: 'KAGGLE_CREDENTIAL')]) {
-                    sh 'bash ci/pipeline.sh ingestion'
+                    sh 'bash ci/azure_pipeline.sh kaggle'
                 }
             }
         }
-        stage('Academic results gate') { steps { sh 'bash ci/pipeline.sh results' } }
-        stage('Candidate API integration') { steps { sh 'bash ci/pipeline.sh candidate' } }
-        stage('Promote local application') { steps { sh 'bash ci/pipeline.sh deploy' } }
+        stage('Candidate API integration') { steps { sh 'bash ci/azure_pipeline.sh candidate' } }
+        stage('Promote Azure API') {
+            when { expression { params.DEPLOY_PUBLIC } }
+            steps { sh 'bash ci/azure_pipeline.sh deploy' }
+        }
     }
     post {
         always {
             junit testResults: 'reports/pytest.xml', allowEmptyResults: true
             archiveArtifacts artifacts: 'reports/*', allowEmptyArchive: true
-            sh 'bash ci/pipeline.sh cleanup'
+            sh 'bash ci/azure_pipeline.sh cleanup'
         }
     }
 }

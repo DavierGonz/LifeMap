@@ -1,0 +1,6 @@
+lifemap-e1-davier-2026.westus2.cloudapp.azure.com {
+    encode gzip
+    @root path /
+    redir @root /health 302
+    reverse_proxy 127.0.0.1:5100
+}

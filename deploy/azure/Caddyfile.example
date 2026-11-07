@@ -1,0 +1,6 @@
+# Host Ubuntu: sustituir por el FQDN EXACTO mostrado en la IP publica de Azure.
+# No ejecutar con el marcador. No publicar interfaces administrativas.
+https://REEMPLAZAR_FQDN {
+    encode gzip
+    reverse_proxy 127.0.0.1:5100
+}

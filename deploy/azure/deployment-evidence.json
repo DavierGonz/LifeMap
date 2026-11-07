@@ -1,0 +1,511 @@
+{
+  "verified_utc": "2026-11-07T15:28:57.123981+00:00",
+  "url": "https://lifemap-e1-davier-2026.westus2.cloudapp.azure.com",
+  "health": {
+    "commit": "1c8ee682253a409a95f9d434fd93c56ade8a8d5f",
+    "commit_configured": true,
+    "scope": "delivery_1",
+    "service": "lifemap-api",
+    "services": {
+      "api": {
+        "status": "ok"
+      },
+      "dask": {
+        "status": "ok",
+        "workers": 2
+      },
+      "mongodb": {
+        "status": "ok"
+      },
+      "spark": {
+        "status": "ok",
+        "workers": 1
+      }
+    },
+    "status": "ok"
+  },
+  "source_commit": "1c8ee682253a409a95f9d434fd93c56ade8a8d5f",
+  "runtime": {
+    "containers": [
+      {
+        "name": "lifemap-api-1",
+        "state": "running",
+        "health": "healthy",
+        "oom_killed": false,
+        "restart_count": 0,
+        "image": "sha256:e73b6c7b27f742f60d6c2afe73ff7b892fe5f109188f07dbfb230a14886dbbed"
+      },
+      {
+        "name": "lifemap-dask-scheduler-1",
+        "state": "running",
+        "health": "healthy",
+        "oom_killed": false,
+        "restart_count": 0,
+        "image": "sha256:2a0ce46ffe0fd7fba5769dd22cf35f05260e2f1d0878a43e791c519bf1f7fc19"
+      },
+      {
+        "name": "lifemap-dask-worker-1-1",
+        "state": "running",
+        "health": "healthy",
+        "oom_killed": false,
+        "restart_count": 0,
+        "image": "sha256:2a0ce46ffe0fd7fba5769dd22cf35f05260e2f1d0878a43e791c519bf1f7fc19"
+      },
+      {
+        "name": "lifemap-dask-worker-2-1",
+        "state": "running",
+        "health": "healthy",
+        "oom_killed": false,
+        "restart_count": 0,
+        "image": "sha256:2a0ce46ffe0fd7fba5769dd22cf35f05260e2f1d0878a43e791c519bf1f7fc19"
+      },
+      {
+        "name": "lifemap-jenkins-1",
+        "state": "running",
+        "health": "healthy",
+        "oom_killed": false,
+        "restart_count": 0,
+        "image": "sha256:ddda80b37704cc12677db108642f2b0e1ebc373e39c7c5ae38e7f9506e3f9079"
+      },
+      {
+        "name": "lifemap-mongodb-1",
+        "state": "running",
+        "health": "healthy",
+        "oom_killed": false,
+        "restart_count": 0,
+        "image": "sha256:1d54a17b8c811335c661f33c796a7687a9a8d45202d7c57eaef4d5009783b099"
+      },
+      {
+        "name": "lifemap-spark-master-1",
+        "state": "running",
+        "health": "healthy",
+        "oom_killed": false,
+        "restart_count": 0,
+        "image": "sha256:88760abbada1b0d312344b8480acb886a3f623a5042637dc4cacb34fc7efa62e"
+      },
+      {
+        "name": "lifemap-spark-worker-1",
+        "state": "running",
+        "health": "healthy",
+        "oom_killed": false,
+        "restart_count": 0,
+        "image": "sha256:88760abbada1b0d312344b8480acb886a3f623a5042637dc4cacb34fc7efa62e"
+      }
+    ],
+    "images_identical_to_source": true,
+    "images": {
+      "mongo": "sha256:1d54a17b8c811335c661f33c796a7687a9a8d45202d7c57eaef4d5009783b099",
+      "spark": "sha256:88760abbada1b0d312344b8480acb886a3f623a5042637dc4cacb34fc7efa62e",
+      "dask": "sha256:2a0ce46ffe0fd7fba5769dd22cf35f05260e2f1d0878a43e791c519bf1f7fc19",
+      "api": "sha256:e73b6c7b27f742f60d6c2afe73ff7b892fe5f109188f07dbfb230a14886dbbed",
+      "jenkins": "sha256:ddda80b37704cc12677db108642f2b0e1ebc373e39c7c5ae38e7f9506e3f9079"
+    },
+    "docker_stats": [
+      {
+        "BlockIO": "0B / 295MB",
+        "CPUPerc": "0.08%",
+        "Container": "a3c7151977fa9b1005a9c848e137741d19b2727cb96b6135062da8e1768ee798",
+        "ID": "a3c7151977fa",
+        "MemPerc": "53.02%",
+        "MemUsage": "407.2MiB / 768MiB",
+        "Name": "lifemap-jenkins-1",
+        "NetIO": "7.11MB / 44.8kB",
+        "PIDs": "39"
+      },
+      {
+        "BlockIO": "0B / 164kB",
+        "CPUPerc": "0.05%",
+        "Container": "af56aa7af53e7f01dadb0a9feeb5c0d244f5e2c1491cd83220068ac06d4d117b",
+        "ID": "af56aa7af53e",
+        "MemPerc": "8.88%",
+        "MemUsage": "136.4MiB / 1.5GiB",
+        "Name": "lifemap-spark-worker-1",
+        "NetIO": "4.64kB / 20kB",
+        "PIDs": "30"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "2.80%",
+        "Container": "1d8b762d1c521dbe23b97193681ddd197379e9381e92f1bbe9972498ca39f05f",
+        "ID": "1d8b762d1c52",
+        "MemPerc": "9.58%",
+        "MemUsage": "98.12MiB / 1GiB",
+        "Name": "lifemap-dask-worker-2-1",
+        "NetIO": "121kB / 406kB",
+        "PIDs": "13"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "2.78%",
+        "Container": "5845440387b3b094b8f63c0c972e11189367b96687ac656d30b6bebf4be3e043",
+        "ID": "5845440387b3",
+        "MemPerc": "9.68%",
+        "MemUsage": "99.16MiB / 1GiB",
+        "Name": "lifemap-dask-worker-1-1",
+        "NetIO": "121kB / 406kB",
+        "PIDs": "13"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "1.12%",
+        "Container": "3a70691273c294890b39f6a8003e9dbb89c15ec9b6d489462f820d6a7800ac46",
+        "ID": "3a70691273c2",
+        "MemPerc": "17.12%",
+        "MemUsage": "65.74MiB / 384MiB",
+        "Name": "lifemap-dask-scheduler-1",
+        "NetIO": "833kB / 269kB",
+        "PIDs": "3"
+      },
+      {
+        "BlockIO": "0B / 172kB",
+        "CPUPerc": "0.06%",
+        "Container": "2406d0046253e82a7594165829e2fac7a41128acc8165d0d68eb26faf0c8b55d",
+        "ID": "2406d0046253",
+        "MemPerc": "12.69%",
+        "MemUsage": "130MiB / 1GiB",
+        "Name": "lifemap-spark-master-1",
+        "NetIO": "31kB / 22.7kB",
+        "PIDs": "30"
+      },
+      {
+        "BlockIO": "4.1kB / 0B",
+        "CPUPerc": "0.04%",
+        "Container": "f61aedb22432f371ac71f0d140041dff4b916a09ec8ffdfce2c2e45ec1fa164b",
+        "ID": "f61aedb22432",
+        "MemPerc": "18.24%",
+        "MemUsage": "46.71MiB / 256MiB",
+        "Name": "lifemap-api-1",
+        "NetIO": "255kB / 239kB",
+        "PIDs": "7"
+      },
+      {
+        "BlockIO": "1.66GB / 3.53GB",
+        "CPUPerc": "0.32%",
+        "Container": "3e9371aeef62475444c19649f6079a7a45949dc961a16405979684815b4f2c0c",
+        "ID": "3e9371aeef62",
+        "MemPerc": "57.67%",
+        "MemUsage": "442.9MiB / 768MiB",
+        "Name": "lifemap-mongodb-1",
+        "NetIO": "183kB / 188kB",
+        "PIDs": "47"
+      }
+    ],
+    "memory_available_bytes": 14292332544,
+    "memory_available_gib": 13.31,
+    "checksums_all_verified": true,
+    "listeners": "State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\nLISTEN 0      4096       127.0.0.1:5100      0.0.0.0:*          \nLISTEN 0      4096       127.0.0.1:8083      0.0.0.0:*          \nLISTEN 0      4096       127.0.0.1:8082      0.0.0.0:*          \nLISTEN 0      4096         0.0.0.0:22        0.0.0.0:*          \nLISTEN 0      4096       127.0.0.1:2019      0.0.0.0:*          \nLISTEN 0      4096       127.0.0.1:8788      0.0.0.0:*          \nLISTEN 0      4096      127.0.0.54:53        0.0.0.0:*          \nLISTEN 0      4096   127.0.0.53%lo:53        0.0.0.0:*          \nLISTEN 0      4096            [::]:22           [::]:*          \nLISTEN 0      4096               *:80              *:*          \nLISTEN 0      4096               *:443             *:*",
+    "disk": "Filesystem        1B-blocks        Used    Available Use% Mounted on\n/dev/root      132011507712 11973300224 120021430272  10% /",
+    "caddy": "active\nv2.11.9 h1:bhZtcRKQOq0fuLvEgCdPYvUxXyGn9kzjG4lh2332DTE="
+  },
+  "public_api_tests": {
+    "base_url": "https://lifemap-e1-davier-2026.westus2.cloudapp.azure.com",
+    "health": {
+      "commit": "1c8ee682253a409a95f9d434fd93c56ade8a8d5f",
+      "commit_configured": true,
+      "scope": "delivery_1",
+      "service": "lifemap-api",
+      "services": {
+        "api": {
+          "status": "ok"
+        },
+        "dask": {
+          "status": "ok",
+          "workers": 2
+        },
+        "mongodb": {
+          "status": "ok"
+        },
+        "spark": {
+          "status": "ok",
+          "workers": 1
+        }
+      },
+      "status": "ok"
+    },
+    "tests": {
+      "/health": {
+        "status": 200
+      },
+      "/businesses/near?lat=39.9526&lon=-75.1652&radius_m=5000&category=Restaurants&limit=5": {
+        "status": 200
+      },
+      "/businesses/within": {
+        "status": 200
+      },
+      "/zones/summary?lat=39.9526&lon=-75.1652&radius_m=5000": {
+        "status": 200
+      },
+      "/stats/closure?group_by=geohash&min_business_days=3650&limit=5": {
+        "status": 200
+      },
+      "/predict": {
+        "status": 200
+      },
+      "/businesses/near?lat=nan&lon=0&radius_m=10 [invalid input]": {
+        "status": 400
+      },
+      "/predict [invalid input]": {
+        "status": 400
+      },
+      "commit": "1c8ee682253a409a95f9d434fd93c56ade8a8d5f",
+      "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+      "passed": true
+    }
+  },
+  "public_security": {
+    "host": "lifemap-e1-davier-2026.westus2.cloudapp.azure.com",
+    "ip": "20.230.240.88",
+    "external_ports": [
+      {
+        "port": 80,
+        "reachable": true
+      },
+      {
+        "port": 443,
+        "reachable": true
+      },
+      {
+        "port": 27017,
+        "reachable": false,
+        "result": "TimeoutError"
+      },
+      {
+        "port": 7077,
+        "reachable": false,
+        "result": "TimeoutError"
+      },
+      {
+        "port": 8080,
+        "reachable": false,
+        "result": "TimeoutError"
+      },
+      {
+        "port": 8082,
+        "reachable": false,
+        "result": "TimeoutError"
+      },
+      {
+        "port": 8786,
+        "reachable": false,
+        "result": "TimeoutError"
+      },
+      {
+        "port": 8787,
+        "reachable": false,
+        "result": "TimeoutError"
+      },
+      {
+        "port": 8788,
+        "reachable": false,
+        "result": "TimeoutError"
+      },
+      {
+        "port": 8083,
+        "reachable": false,
+        "result": "TimeoutError"
+      },
+      {
+        "port": 5100,
+        "reachable": false,
+        "result": "TimeoutError"
+      },
+      {
+        "port": 2019,
+        "reachable": false,
+        "result": "TimeoutError"
+      }
+    ],
+    "tls": {
+      "verified": true,
+      "version": "TLSv1.3",
+      "issuer": [
+        [
+          [
+            "countryName",
+            "US"
+          ]
+        ],
+        [
+          [
+            "organizationName",
+            "Let's Encrypt"
+          ]
+        ],
+        [
+          [
+            "commonName",
+            "YE2"
+          ]
+        ]
+      ],
+      "expires": "Feb  5 14:18:00 2027 GMT",
+      "subject_alt_names": [
+        [
+          "DNS",
+          "lifemap-e1-davier-2026.westus2.cloudapp.azure.com"
+        ]
+      ]
+    },
+    "http_redirect": {
+      "status": 308,
+      "location": "https://lifemap-e1-davier-2026.westus2.cloudapp.azure.com/health"
+    }
+  },
+  "data_verification": {
+    "counts": {
+      "businesses": 16944,
+      "reviews": 1320594
+    },
+    "reviews_with_expected_model": 1320594,
+    "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+    "business_indexes": {
+      "_id_": {
+        "v": 2,
+        "key": [
+          [
+            "_id",
+            1
+          ]
+        ]
+      },
+      "location_2dsphere": {
+        "v": 2,
+        "key": [
+          [
+            "location",
+            "2dsphere"
+          ]
+        ],
+        "2dsphereIndexVersion": 3
+      }
+    },
+    "review_indexes": {
+      "_id_": {
+        "v": 2,
+        "key": [
+          [
+            "_id",
+            1
+          ]
+        ]
+      },
+      "business_date": {
+        "v": 2,
+        "key": [
+          [
+            "business_id",
+            1
+          ],
+          [
+            "date",
+            1
+          ]
+        ]
+      }
+    },
+    "closures": 5753,
+    "business_days": 43435605.0353125,
+    "closure_groups": {
+      "category": 210,
+      "geohash": 390
+    },
+    "approved_selection": {
+      "status": "approved_by_user",
+      "dataset_version": 4,
+      "analysis_fingerprint": "ed816f9a99f9e462c857d7bde755299c6d00f82c4dc8bb3015b3fcd84dada5d2",
+      "area_id": "philadelphia",
+      "family": "Restaurants",
+      "teacher_confirmation": "pending_notification_and_exclusivity"
+    },
+    "passed": true
+  },
+  "source_target_data_verification_identical": true,
+  "transfers": [
+    {
+      "file": "lifemap.bundle",
+      "sha256": "c90e602acc83205f23650dfa03078b2716f873f665e657a95ebc95e748120102",
+      "bytes": 131150,
+      "seconds": 5.3,
+      "remote_sha256_verified": true
+    },
+    {
+      "file": "deploy-config.tgz",
+      "sha256": "289fa45194ba9d650b0639f351d0579fcf53bac2d1961ef4b69888ea8093e46f",
+      "bytes": 7992,
+      "seconds": 4.5,
+      "remote_sha256_verified": true
+    },
+    {
+      "file": "models.tgz",
+      "sha256": "518a36eb31eb6542b2bea42aff95f9f94f29aa287264c52b5c3fd0cdae2caf24",
+      "bytes": 535054,
+      "seconds": 5.1,
+      "remote_sha256_verified": true
+    },
+    {
+      "file": "results.tgz",
+      "sha256": "55e81463f4380db6b61a342447aed65661198d7b9c5b76d8ddb3b938c2d5eaca",
+      "bytes": 10487,
+      "seconds": 4.4,
+      "remote_sha256_verified": true
+    },
+    {
+      "file": "mongo-image.tar.gz",
+      "sha256": "01a14cce315abf9eb7748376c1d4acc727e91dac394891eb565987e52fc03c81",
+      "bytes": 296836387,
+      "seconds": 123.4,
+      "remote_sha256_verified": true
+    },
+    {
+      "file": "mongo.archive.gz",
+      "sha256": "f6d7c60c9c10f3a9c8decdc123d234227c15155a81982e324ef3702ece9853c3",
+      "bytes": 481965585,
+      "seconds": 198.9,
+      "remote_sha256_verified": true
+    },
+    {
+      "file": "api-image.tar.gz",
+      "sha256": "6cd79ff9b90fb5665bb3deb1c28c66a02b4421f6497fec9872047f87ac8f2354",
+      "bytes": 50729671,
+      "seconds": 24.1,
+      "remote_sha256_verified": true
+    },
+    {
+      "file": "spark-image.tar.gz",
+      "sha256": "1ea3a85697c05806029817a834171a91cd888ea0b0e5c595e69b388332c069cb",
+      "bytes": 687858434,
+      "seconds": 270.7,
+      "remote_sha256_verified": true
+    },
+    {
+      "file": "dask-image.tar.gz",
+      "sha256": "b2add55759052f111f2fa15f6dce3d7160fdd98d99387f55a8b46cd58381478d",
+      "bytes": 164697174,
+      "seconds": 69.7,
+      "remote_sha256_verified": true
+    },
+    {
+      "file": "jenkins-image.tar.gz",
+      "sha256": "cf7e9a814c277a7d0556647f6de3d7ac61bc4d49c2857fb2852e13236ecbacbd",
+      "bytes": 415573450,
+      "seconds": 161.7,
+      "remote_sha256_verified": true
+    }
+  ],
+  "caddy_config_sha256": "5bd7c5f6d1d87feba6baed7f281713982262e0e271237ef6a82e6ce26785b0f2",
+  "identity_key_content_displayed_copied_or_modified": false,
+  "ssh_key_used_only_as_identity": true,
+  "new_server_mongodb_secrets": true,
+  "dataset_redownloaded": false,
+  "models_retrained": false,
+  "github_push_or_merge": false,
+  "paid_resources_created": false,
+  "delivery_2_implemented": false,
+  "pending": [
+    "GitHub to Jenkins integration (deferred by user)",
+    "Full Kaggle/prepared cache transfer for replaying ingestion pipeline (not needed to serve API)",
+    "New server Jenkins initial setup and credentials before enabling jobs",
+    "Teacher notification and exclusivity of area/category",
+    "Sustained evaluation availability and live defense"
+  ]
+}
