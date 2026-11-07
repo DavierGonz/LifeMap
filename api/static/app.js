@@ -88,7 +88,7 @@
       markers.clearLayers(); selection.clearLayers();
       radiusCircle = L.circle([lat, lon], {radius, color: '#65835a', weight: 1.3, dashArray: '5 5', fillColor: '#adbf8a', fillOpacity: .07, interactive: false}).addTo(selection);
       centerMarker = L.marker([lat, lon], {icon: L.divIcon({className: 'search-center', iconSize: [14,14], iconAnchor: [7,7]}), interactive: false}).addTo(selection);
-      map.fitBounds(radiusCircle.getBounds(), {padding: [25,25], maxZoom: 16, animate: false});
+      if (!data.count) map.fitBounds(radiusCircle.getBounds(), {padding: [25,25], maxZoom: 16, animate: false});
     }
     if (!data.count) list.append(node('p', 'No encontramos negocios con esos filtros.', 'empty-state'));
     data.businesses.forEach((business, i) => {
@@ -99,10 +99,19 @@
       if (markers) {
         const coordinates = business.location.coordinates;
         const marker = L.circleMarker([coordinates[1], coordinates[0]], {radius: 7, color: '#fff', weight: 2, fillColor: color(business), fillOpacity: .85, bubblingMouseEvents: false}).addTo(markers);
-        marker.bindTooltip(node('span', business.name), {direction: 'top', offset: [0,-8]}); marker.on('click', () => showBusiness(i, false)); state.markers.push(marker);
+        marker.bindTooltip(node('span', business.name), {direction: 'top', offset: [0,-8]}); marker.on('click', () => showBusiness(i, false));
+        const point = marker.getElement();
+        if (point) {
+          point.setAttribute('aria-label', business.name); point.setAttribute('role', 'button'); point.setAttribute('tabindex', '0');
+          point.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showBusiness(i, false); } });
+        }
+        state.markers.push(marker);
       }
     });
-    if (data.count) showBusiness(0, false);
+    if (data.count) {
+      if (markers) map.fitBounds(markers.getBounds().extend([lat, lon]), {padding: [35,35], maxZoom: 17, animate: false});
+      showBusiness(0, false);
+    }
   }
   $('search-form').addEventListener('submit', async event => {
     event.preventDefault(); if (!$('search-form').reportValidity()) return;
@@ -148,7 +157,12 @@
         bar.append(label, track); bar.title = `${num(row.closures)} cierres · ${num(row.businesses)} negocios · ${decimal.format(row.business_days)} días-negocio`; chart.append(bar);
       });
       message('stats-message', data.count ? '' : 'No hay grupos con exposición suficiente.');
-    } catch (error) { if (id === state.statsId) message('stats-message', friendly(error), true); }
+    } catch (error) {
+      if (id === state.statsId) {
+        $('closure-chart').replaceChildren(node('p', 'No se pudieron cargar estas tasas. Pulsa la opción para reintentar.', 'empty-state'));
+        message('stats-message', friendly(error), true);
+      }
+    }
   }
   document.querySelectorAll('[data-group]').forEach(button => button.addEventListener('click', () => loadClosure(button.dataset.group)));
   $('review-text').addEventListener('input', () => { $('char-count').textContent = `${fmt.format($('review-text').value.length)} / 10.000`; });
@@ -156,6 +170,7 @@
     event.preventDefault(); const review = $('review-text').value.trim();
     if (!review) { message('predict-message','Escribe una reseña antes de clasificar.',true); $('review-text').focus(); return; }
     $('predict-button').disabled = true; message('predict-message','Analizando el texto…');
+    $('prediction-result').replaceChildren(node('p', 'El modelo está analizando la reseña…', 'prediction-placeholder'));
     try {
       const result = await api('/predict', {method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({text: review})});
       const names = {negative: 'Negativa', neutral: 'Neutral', positive: 'Positiva'};
@@ -167,7 +182,10 @@
         row.append(node('span', names[label]), track, node('span', `${decimal.format(probability*100)} %`)); output.append(row);
       }
       message('predict-message','Clasificación completada con el modelo entrenado.');
-    } catch (error) { message('predict-message',friendly(error),true); }
+    } catch (error) {
+      $('prediction-result').replaceChildren(node('p', 'No hay una clasificación para este texto.', 'prediction-placeholder'));
+      message('predict-message',friendly(error),true);
+    }
     finally { $('predict-button').disabled = false; }
   });
   api('/health').then(data => { $('service-status').textContent = data.status === 'ok' ? 'Servicio disponible' : 'Servicio con incidencias'; $('service-dot').className = data.status === 'ok' ? 'ready' : ''; }).catch(() => { $('service-status').textContent = 'Estado no disponible'; });

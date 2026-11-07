@@ -55,6 +55,8 @@ case "${1:-}" in
  candidate)
   test -f .ci/tests.passed
   docker create --name "$CANDIDATE" --label "lifemap.ci_run=$RUN_ID" --network lifemap_backend --memory 256m --cpus 0.5 -p 127.0.0.1:5101:5000 --mount type=volume,src=lifemap_model_store,dst=/models,readonly --mount "type=bind,src=$(reader_source),dst=/run/secrets/mongo_reader_password,readonly" -e MONGO_HOST=mongodb -e MONGO_READER_PASSWORD_FILE=/run/secrets/mongo_reader_password -e SPARK_STATUS_URL=http://spark-master:8080/json/ -e DASK_STATUS_URL=http://dask-scheduler:8787/json/counts.json "$IMAGE"
+  # La red interna por si sola no habilita el puerto loopback para Caddy.
+  docker network connect lifemap_frontend "$CANDIDATE"
   docker start "$CANDIDATE"
   for attempt in $(seq 1 30); do
     if docker exec "$CANDIDATE" python /app/tests/e1/smoke_api.py --expected-commit "$(git rev-parse HEAD)" > reports/candidate-api.json 2>reports/candidate-api-error.txt; then touch .ci/candidate.passed; break; fi

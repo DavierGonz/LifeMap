@@ -18,6 +18,13 @@ def main(base='http://127.0.0.1:5000',expected_commit=None):
         return data
     health=call('/health');assert health['status']=='ok' and health['commit_configured']
     if expected_commit: assert health['commit']==expected_commit
+    with urlopen(base+'/',timeout=12) as response:
+        html=response.read()
+        assert response.status==200 and 'text/html' in response.headers['Content-Type']
+        assert b'id="map"' in html and b'id="predict-form"' in html
+    result['/']={'status':200,'interface':True}
+    for asset in ['/static/app.js','/static/app.css','/static/vendor/leaflet/leaflet.js']:
+        with urlopen(base+asset,timeout=12) as response:assert response.status==200
     near=call('/businesses/near?lat=39.9526&lon=-75.1652&radius_m=5000&category=Restaurants&limit=5')
     assert 0<len(near['businesses'])<=5
     polygon={'type':'Polygon','coordinates':[[[-75.3,39.85],[-75.0,39.85],[-75.0,40.1],[-75.3,40.1],[-75.3,39.85]]]}
