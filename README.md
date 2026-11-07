@@ -1,6 +1,9 @@
 # LifeMap - Entrega 1
 
 Proyecto universitario: Yelp -> Dask -> MongoDB -> Spark MLlib/MapReduce -> Flask.
+La ruta `/` abre el explorador visual con Leaflet/OpenStreetMap, filtros,
+negocios reales, tasas de cierre y clasificador de resenas. `/health` conserva
+el estado JSON de la API. No requiere Node ni un servicio frontend adicional.
 Presupuesto $0 COP. Entrega 2 fuera de alcance. Referencias Geoespacial y Discos
 consultadas sin modificar sus recursos. Codigo adaptado y limites: [REUSE](docs/REUSE.md).
 
@@ -154,7 +157,7 @@ credenciales nuevas fuera de Git y cliente `.venv/Scripts/python.exe
 scripts/jenkins_azure.py`. Instrucciones: [Jenkins Azure](deploy/azure/JENKINS.md).
 No ejecutar los antiguos lanzadores de CI Windows contra el servidor.
 
-Pipeline Azure: checkout Git -> build API secuencial -> 17 pytest -> validar
+Pipeline Azure: checkout Git -> build API secuencial -> 18 pytest -> validar
 infraestructura/resultados existentes -> credencial Kaggle (solo metadata)
 -> candidata privada -> promocion publica condicionada a todos los gates.
 No repite ingesta, entrenamiento ni benchmark. La promocion usa Caddy y una
