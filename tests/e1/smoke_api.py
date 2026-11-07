@@ -13,7 +13,8 @@ def main(base='http://127.0.0.1:5000',expected_commit=None):
             with urlopen(request,timeout=12) as response: status=response.status;data=json.load(response)
         except HTTPError as exc: status=exc.code;data=json.load(exc)
         assert status==expected,(path,status)
-        result[path]={'status':status}
+        key=path if expected==200 else path+' [invalid input]'
+        result[key]={'status':status}
         return data
     health=call('/health');assert health['status']=='ok' and health['commit_configured']
     if expected_commit: assert health['commit']==expected_commit

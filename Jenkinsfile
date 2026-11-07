@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    options { disableConcurrentBuilds(); skipDefaultCheckout(true); timestamps() }
+    options { disableConcurrentBuilds(); skipDefaultCheckout(true) }
     triggers { pollSCM('H/2 * * * *') }
     parameters {
         string(name: 'LOCAL_COMMIT', defaultValue: '', description: 'Solo demostracion local, SHA de bundle preparado')
