@@ -27,6 +27,18 @@ class InfrastructureIsolationTests(unittest.TestCase):
         self.assertEqual(validate_model(self.model), [])
         self.assertEqual(validate_sources(), [])
 
+    def test_e2_kafka_is_internal_kraft_and_preserves_e1_services(self):
+        model = load_model(include_e2=True)
+        self.assertEqual(validate_model(model), [])
+        for name, service in self.model['services'].items():
+            self.assertEqual(model['services'][name], service)
+        kafka = model['services']['kafka']
+        self.assertFalse(kafka.get('ports'))
+        self.assertEqual(set(kafka['networks']), {'backend'})
+        self.assertEqual(kafka['environment']['KAFKA_NUM_PARTITIONS'], '3')
+        model['services']['kafka']['ports'] = [{'host_ip': '127.0.0.1', 'published': '9092'}]
+        self.assertTrue(any('Kafka must have no host port' in error for error in validate_model(model)))
+
     def test_rejects_public_admin_port(self):
         model = copy.deepcopy(self.model)
         model["services"]["jenkins"]["ports"][0]["host_ip"] = "0.0.0.0"

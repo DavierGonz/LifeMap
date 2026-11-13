@@ -17,7 +17,7 @@ SERVICES = {
 FORBIDDEN_HOST_PORTS = {27017, 27018, 5000, 8080, 8081, 8787}
 
 
-def load_model(root=ROOT):
+def load_model(root=ROOT, include_e2=False):
     # config analiza archivos; no consulta ni inicia el motor Docker.
     environment = os.environ.copy()
     for key in (
@@ -27,7 +27,8 @@ def load_model(root=ROOT):
     ):
         environment.pop(key, None)
     result = subprocess.run(
-        ["docker", "compose", "--project-name", "lifemap", "--env-file",
+        ["docker", "compose", *( ['--profile', 'e2'] if include_e2 else [] ),
+         "--project-name", "lifemap", "--env-file",
          str(root / ".env.example"), "-f", str(root / "docker-compose.yml"),
          "config", "--format", "json"],
         cwd=root, env=environment, text=True, capture_output=True,
@@ -43,12 +44,14 @@ def is_inside(path, parent):
 def validate_model(model, root=ROOT):
     errors = []
     services = model.get("services", {})
-    if model.get("name") != "lifemap" or set(services) != SERVICES:
-        errors.append("Expected the lifemap project and exactly eight base services")
+    if model.get("name") != "lifemap" or set(services) not in (SERVICES, SERVICES | {'kafka'}):
+        errors.append("Expected eight E1 services and optional E2 Kafka")
     total_memory = 0
     published = []
     for name, service in services.items():
-        if not service.get("image", "").startswith("lifemap-"):
+        if not service.get("image", "").startswith("lifemap-") and not (
+            name == 'kafka' and re.fullmatch(r'apache/kafka:4\.1\.2@sha256:[0-9a-f]{64}', service.get('image', ''))
+        ):
             errors.append(f"{name}: image must belong to LifeMap")
         if "container_name" in service:
             errors.append(f"{name}: fixed global container names are forbidden")
@@ -69,6 +72,12 @@ def validate_model(model, root=ROOT):
                 and volume["target"] == "/var/run/docker.sock"
             ):
                 errors.append(f"{name}: unexpected host bind mount")
+        if name == 'kafka':
+            if service.get('ports') or set(service.get('networks', {})) != {'backend'}:
+                errors.append('Kafka must have no host port and remain on internal backend')
+            if service.get('environment', {}).get('KAFKA_PROCESS_ROLES') != 'broker,controller':
+                errors.append('Kafka must use KRaft')
+            continue
         build = service.get("build", {})
         context = Path(build.get("context", "."))
         dockerfile = context / build.get("dockerfile", "Dockerfile")
@@ -78,8 +87,8 @@ def validate_model(model, root=ROOT):
             errors.append(f"{name}: missing Dockerfile")
     if len(published) != len(set(published)):
         errors.append("Duplicate published host ports")
-    if total_memory > 7 * 1024 ** 3:
-        errors.append("Base memory limits exceed the initial 7 GiB budget")
+    if total_memory > (8 if 'kafka' in services else 7) * 1024 ** 3:
+        errors.append("Memory limits exceed E1 budget plus 1 GiB for E2 Kafka")
     mongo = services.get("mongodb", {})
     if mongo.get("ports") or "--auth" not in mongo.get("command", []):
         errors.append("MongoDB must authenticate and have no host port")
@@ -120,7 +129,7 @@ def validate_model(model, root=ROOT):
 def validate_sources(root=ROOT):
     errors = []
     # Compilar a memoria no importa los modulos ni ejecuta instaladores/sondas.
-    for directory in ("api", "scripts", "docker", "tests"):
+    for directory in ("api", "scripts", "docker", "tests", "streaming"):
         for path in (root / directory).rglob("*.py"):
             try:
                 ast.parse(path.read_text(encoding="utf-8"), filename=str(path))

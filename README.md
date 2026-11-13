@@ -6,7 +6,7 @@ Proyecto universitario: Yelp -> Dask -> MongoDB -> Spark MLlib/MapReduce -> Flas
 La ruta `/` abre el explorador visual con Leaflet/OpenStreetMap, filtros,
 negocios reales, tasas de cierre y clasificador de resenas. `/health` conserva
 el estado JSON de la API. No requiere Node ni un servicio frontend adicional.
-Presupuesto $0 COP. Entrega 2 fuera de alcance. Referencias Geoespacial y Discos
+Presupuesto $0 COP. E1 publicada; E2 en desarrollo local (fase 1). Referencias Geoespacial y Discos
 consultadas sin modificar sus recursos. Codigo adaptado y limites: [REUSE](docs/REUSE.md).
 
 ## Resultado y alcance
@@ -192,3 +192,7 @@ Las capturas corresponden a sus ejecuciones originales, no al tiempo presente.
 Jenkins #4 SUCCESS y #5 FAILURE son la demostracion final del gate; #1 conserva
 el error inicial de configuracion y #2/#3 las primeras pruebas. #5 conserva
 la misma imagen API y no archiva artifacts de despliegues anteriores.
+# Entrega 2 — fase 1 local
+
+Kafka y productor temporal: [ejecucion y verificacion](docs/streaming.md).
+Esta fase no despliega cambios en Azure ni implementa Structured Streaming.
