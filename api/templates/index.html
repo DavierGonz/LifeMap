@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{ url_for('static',filename='app.css',v='e1-ui-1') }}">
   <script defer src="{{ url_for('static',filename='vendor/leaflet/leaflet.js') }}"></script>
   <script defer src="{{ url_for('static',filename='app.js',v='e1-ui-1') }}"></script>
+  <script defer src="{{ url_for('static',filename='e2.js',v='e2-ui-1') }}"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Ir al contenido</a>
@@ -31,7 +32,7 @@
   <div class="sidebar-bottom"><div class="dataset-badge"><span>YELP OPEN DATASET</span><strong>16.944 <small>negocios</small></strong><p>Restaurants · selección académica</p></div><a href="/health" target="_blank" rel="noopener" class="service-link"><i id="service-dot"></i><span id="service-status">Comprobando servicio</span><span aria-hidden="true">↗</span></a></div>
 </aside>
 <main id="main">
-  <header class="topbar"><nav aria-label="Secciones"><a class="active" href="#explorer">Explorar</a><a href="#closure">Tasas de cierre</a><a href="#sentiment">Analizar una reseña</a></nav><span class="edition">LIFEMAP <b>E1</b></span></header>
+  <header class="topbar"><nav aria-label="Secciones"><a class="active" href="#explorer">Explorar</a><a href="#closure">Tasas de cierre</a><a href="#sentiment">Analizar reseña</a><a href="#monitor">Señales</a><a href="#survival">Supervivencia</a></nav><span class="edition">LIFEMAP <b>E2</b></span></header>
   <div class="content">
     <section class="intro"><div><div class="eyebrow">UNA CIUDAD, MILES DE HISTORIAS</div><h1>Conoce el lugar.<br><em>Entiende su historia.</em></h1><p>Negocios, reseñas y vida observada en Filadelfia.</p></div><div class="source-note"><span class="dot"></span> Datos reales de Yelp<small>Fuente histórica · corte enero de 2022</small></div></section>
     <section class="explorer" id="explorer" aria-label="Mapa y negocios">
@@ -42,6 +43,34 @@
       <section class="insight-card" id="closure" aria-labelledby="closure-title"><div class="card-heading"><div><div class="eyebrow">VIDA OBSERVADA</div><h2 id="closure-title">El cierre, en contexto.</h2></div><span class="card-index">01</span></div><p class="card-description">Grupos con más cierres registrados en toda la selección.</p><div class="segmented" role="group" aria-label="Agrupar tasas de cierre"><button type="button" data-group="category" aria-pressed="true">Por categoría</button><button type="button" data-group="geohash" aria-pressed="false">Por zona</button></div><p id="stats-message" class="message" role="status" aria-live="polite">Consultando las tasas…</p><div id="closure-chart" class="closure-chart" aria-label="Tasas de cierre anualizadas"></div><p class="method-note">Cierres por 100 negocios-año de vida observada. Mínimo: 3.650 días-negocio por grupo. Aproximación con primera y última reseña; no son fechas reales de apertura y cierre. Esta vista no cambia con el radio del mapa.</p></section>
       <section class="insight-card" id="sentiment" aria-labelledby="sentiment-title"><div class="card-heading"><div><div class="eyebrow">LAS PALABRAS TAMBIÉN CUENTAN</div><h2 id="sentiment-title">¿Qué dice una reseña?</h2></div><span class="card-index">02</span></div><p class="card-description">Explora su sentimiento con el modelo entrenado de LifeMap.</p><form id="predict-form"><label for="review-text">Texto de la reseña</label><textarea id="review-text" rows="4" maxlength="10000" placeholder="The food was excellent and the staff made us feel welcome…" required></textarea><div class="review-help"><span>Modelo entrenado con reseñas en inglés.</span><span id="char-count">0 / 10.000</span></div><button class="button primary" id="predict-button" type="submit">Clasificar reseña <span aria-hidden="true">↗</span></button></form><p id="predict-message" class="message" role="status" aria-live="polite"></p><div id="prediction-result" class="prediction-result" aria-live="polite"><p class="prediction-placeholder">Una nueva perspectiva, a unas palabras de distancia.</p></div></section>
     </div>
+    <section class="insight-card e2-section" id="monitor" aria-labelledby="monitor-title">
+      <div class="eyebrow">STREAMING · RELOJ HISTÓRICO</div><h2 id="monitor-title">Señales del vecindario</h2>
+      <p class="card-description">Ventanas de 30 días por geohash y alertas calculadas con el modelo temporal. Actualiza para consultar MongoDB de nuevo.</p>
+      <form id="monitor-form" class="e2-filters">
+        <label>Desde (UTC)<input id="event-from" type="date" value="2019-01-01" required></label>
+        <label>Hasta, exclusivo (UTC)<input id="event-to" type="date" value="2022-01-20" required></label>
+        <label>Radio desde el punto de búsqueda (m)<input id="monitor-radius" type="number" min="1" max="50000" value="50000" required></label>
+        <label>Score mínimo<input id="minimum-score" type="number" min="0" max="1" step="0.01" value="0" required></label>
+        <button class="button primary" id="monitor-refresh" type="submit">Actualizar señales</button>
+      </form>
+      <p id="monitor-message" class="message" role="status" aria-live="polite">Consultando señales reales…</p>
+      <div class="e2-columns"><div><h3>Hotspots en el mapa</h3><p id="hotspot-summary" class="method-note"></p><div id="hotspot-list" class="e2-list"></div></div><div><h3>Alertas activas</h3><p class="method-note">Score no calibrado: no representa una probabilidad poblacional de cierre. Pulsa una alerta para ubicarla.</p><div id="alert-list" class="e2-list"></div></div></div>
+      <p id="stream-status" class="method-note"></p>
+    </section>
+    <section class="insight-card e2-section" id="survival" aria-labelledby="survival-title">
+      <div class="eyebrow">SUPERVIVENCIA OBSERVADA</div><h2 id="survival-title">Kaplan–Meier, por categoría y zona</h2>
+      <form id="survival-form" class="e2-filters">
+        <label>Categoría principal<input id="survival-category" list="category-options" value="American (New)" maxlength="128" required></label>
+        <label>Método<select id="survival-method"><option value="observed_origin">Desde primera reseña</option><option value="landmark_T">Entrada observada desde T (2019)</option></select></label>
+        <label>Zonas<select id="survival-zone"><option value="">Comparar este y oeste</option><option value="sector_oeste">Sector oeste</option><option value="sector_este">Sector este</option></select></label>
+        <button class="button primary" id="survival-refresh" type="submit">Consultar curvas</button>
+      </form>
+      <p id="survival-message" class="message" role="status" aria-live="polite"></p>
+      <div id="survival-chart" class="survival-chart" aria-label="Curvas interactivas Kaplan-Meier"></div>
+      <p id="survival-point" class="method-note" role="status" aria-live="polite">Pasa el cursor o enfoca un punto para consultar el número en riesgo.</p>
+      <div id="survival-groups" class="e2-columns"></div>
+      <p class="method-note">Curvas retrospectivas: primera reseña ≠ fundación; última reseña ≠ cierre verificado. Abiertos censurados al corte del dataset. No se conoce la edad anterior a la primera reseña. Mínimo 50 negocios; interpretar con cautela tramos con menos de 20 en riesgo. Estas curvas no alimentan el modelo predictivo.</p>
+    </section>
     <footer class="page-footer"><span>LifeMap <b>·</b> Proyecto académico de Big Data</span><span>Yelp v4 · 1.320.594 reseñas en la selección</span></footer>
   </div>
 </main>

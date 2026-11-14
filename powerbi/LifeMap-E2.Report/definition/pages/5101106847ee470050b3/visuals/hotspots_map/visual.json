@@ -1,0 +1,193 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "hotspots_map",
+  "position": {
+    "x": 20,
+    "y": 110,
+    "z": 2,
+    "height": 300,
+    "width": 600,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "azureMap",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Hotspots"
+                    }
+                  },
+                  "Property": "geohash"
+                }
+              },
+              "queryRef": "Hotspots.geohash",
+              "nativeQueryRef": "geohash",
+              "active": true
+            }
+          ]
+        },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Hotspots"
+                        }
+                      },
+                      "Property": "reviews"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Hotspots.reviews)",
+              "nativeQueryRef": "reviews"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Hotspots"
+                        }
+                      },
+                      "Property": "negative_percentage"
+                    }
+                  },
+                  "Function": 4
+                }
+              },
+              "queryRef": "Max(Hotspots.negative_percentage)",
+              "nativeQueryRef": "negative_percentage"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Hotspots"
+                        }
+                      },
+                      "Property": "change_percentage_points"
+                    }
+                  },
+                  "Function": 4
+                }
+              },
+              "queryRef": "Max(Hotspots.change_percentage_points)",
+              "nativeQueryRef": "change_percentage_points"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Hotspots"
+                        }
+                      },
+                      "Property": "longitude"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Avg(Hotspots.longitude)",
+              "nativeQueryRef": "longitude"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Hotspots"
+                        }
+                      },
+                      "Property": "latitude"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Avg(Hotspots.latitude)",
+              "nativeQueryRef": "latitude"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "mapControls": [
+        {
+          "properties": {
+            "zoom": {
+              "expr": {
+                "Literal": {
+                  "Value": "-1.28D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Hotspots geográficos (0 observados)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

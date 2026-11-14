@@ -19,6 +19,8 @@ def create_app():
     app = Flask(__name__)
     app.config["MAX_CONTENT_LENGTH"] = 32 * 1024
     repository.configure(app)
+    from api.e2 import routes
+    app.register_blueprint(routes)
 
     @app.get('/')
     def index():
@@ -102,11 +104,15 @@ def create_app():
             }
             services = {name: future.result() for name, future in futures.items()}
         services["api"] = {"status": "ok"}
+        e2_enabled=os.environ.get('E2_ENABLED','0')=='1'
+        if e2_enabled:
+            from api.stream_health import probes
+            services['kafka'],services['streaming']=probes()
         ready = all(value["status"] == "ok" for value in services.values())
         commit = os.environ.get("DEPLOYED_COMMIT", "unreleased")
         return jsonify(
             service="lifemap-api", status="ok" if ready else "degraded",
-            scope="delivery_1", services=services, commit=commit,
+            scope="delivery_2_local" if e2_enabled else "delivery_1", services=services, commit=commit,
             commit_configured=bool(re.fullmatch(r"[0-9a-f]{40}", commit)),
         ), 200 if ready else 503
 

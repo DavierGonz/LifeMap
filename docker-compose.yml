@@ -203,8 +203,10 @@ services:
       SPARK_STATUS_URL: http://spark-master:8080/json/
       DASK_STATUS_URL: http://dask-scheduler:8787/json/counts.json
       DEPLOYED_COMMIT: ${DEPLOYED_COMMIT:-unreleased}
+      E2_ENABLED: ${E2_ENABLED:-0}
+      STREAM_STATUS_FILE: /checkpoints/production/status.json
     secrets: [mongo_reader_password]
-    volumes: [model_store:/models:ro]
+    volumes: [model_store:/models:ro, stream_checkpoints:/checkpoints:ro]
     mem_limit: 256m
     cpus: 0.5
     depends_on:

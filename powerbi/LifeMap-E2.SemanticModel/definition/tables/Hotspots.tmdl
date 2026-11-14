@@ -1,0 +1,99 @@
+table Hotspots
+	lineageTag: 141cc163-83d7-4ea1-a771-dbf6a13203a3
+
+	column geohash
+		dataType: string
+		lineageTag: 8e0d35c2-d2b4-4e55-a6d1-b83597671293
+		summarizeBy: none
+		sourceColumn: geohash
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: 2a623746-e013-4976-8fba-fc52f04c15e4
+		dataCategory: Latitude
+		summarizeBy: none
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: ad644b47-6c87-40bb-88d6-d590861e4db9
+		dataCategory: Longitude
+		summarizeBy: none
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column start
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 27f1812d-3c9c-40c9-880b-a272d431808d
+		summarizeBy: none
+		sourceColumn: start
+
+		variation Variation
+			isDefault
+			relationship: 389cb7fc-f198-4a60-85a0-b729ae5364c4
+			defaultHierarchy: LocalDateTable_63b347e1-83a6-423c-844d-13fe63c8744d.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column end
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4ee662db-0791-43e2-9a85-fbc8ceceaf36
+		summarizeBy: none
+		sourceColumn: end
+
+		variation Variation
+			isDefault
+			relationship: 907bb7b3-2740-4dd5-a48a-c58d01cca121
+			defaultHierarchy: LocalDateTable_d79193a4-1ac7-457b-8cf3-a1745b9deb74.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column reviews
+		dataType: int64
+		formatString: 0
+		lineageTag: c36a2c1c-1cbb-49ea-a5c3-46495f473ed3
+		summarizeBy: sum
+		sourceColumn: reviews
+
+		annotation SummarizationSetBy = Automatic
+
+	column negative_percentage
+		dataType: double
+		formatString: 0.00
+		lineageTag: 55c76607-2abe-4e66-a576-8e575d16b5fb
+		summarizeBy: none
+		sourceColumn: negative_percentage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column change_percentage_points
+		dataType: double
+		formatString: 0.00
+		lineageTag: 406e4a2f-602a-4214-9d9f-779e798f29e7
+		summarizeBy: none
+		sourceColumn: change_percentage_points
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Hotspots = m
+		mode: import
+		source = LifeMap[Hotspots]
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table

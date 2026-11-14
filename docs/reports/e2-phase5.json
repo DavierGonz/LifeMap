@@ -1,0 +1,384 @@
+{
+  "phase": 5,
+  "scope": "local API/UI/Power BI; no Azure/Jenkins/push",
+  "parent_commit": "3a563d4",
+  "branch": "e2/phase5-api-ui-powerbi",
+  "api": {
+    "status": "passed",
+    "checks": [
+      "Kafka protocol/end offsets + checkpoint lag",
+      "alerts: radius, polygon, date, state, score, pagination",
+      "risk: real named businesses, six features, uncalibrated score, selection/empty",
+      "hotspots: genuine production windows, valid geometry, temporal empty; no fixtures",
+      "Kaplan-Meier: two categories/two zones/both methods, risk sets, censures, zone/category intersection",
+      "14 invalid/unknown/repeated/range/polygon/date inputs rejected"
+    ],
+    "alerts": 96,
+    "risk_states": 99,
+    "hotspots": 0,
+    "finalized_windows": 66,
+    "survival": [
+      {
+        "category": "American (New)",
+        "method": "observed_origin",
+        "businesses": 1902,
+        "zones": [
+          {
+            "zone": "sector_oeste",
+            "businesses": 212
+          },
+          {
+            "zone": "sector_este",
+            "businesses": 267
+          }
+        ]
+      },
+      {
+        "category": "American (New)",
+        "method": "landmark_T",
+        "businesses": 1346,
+        "zones": [
+          {
+            "zone": "sector_oeste",
+            "businesses": 142
+          },
+          {
+            "zone": "sector_este",
+            "businesses": 172
+          }
+        ]
+      },
+      {
+        "category": "American (Traditional)",
+        "method": "observed_origin",
+        "businesses": 1788,
+        "zones": [
+          {
+            "zone": "sector_oeste",
+            "businesses": 115
+          },
+          {
+            "zone": "sector_este",
+            "businesses": 154
+          }
+        ]
+      },
+      {
+        "category": "American (Traditional)",
+        "method": "landmark_T",
+        "businesses": 1420,
+        "zones": [
+          {
+            "zone": "sector_oeste",
+            "businesses": 87
+          },
+          {
+            "zone": "sector_este",
+            "businesses": 119
+          }
+        ]
+      }
+    ],
+    "consumer_lag_messages": 0
+  },
+  "ui": {
+    "base": "http://127.0.0.1:5100",
+    "e2": {
+      "real_alerts": true,
+      "no_fictitious_hotspots": true,
+      "selected_business_risk": true,
+      "interactive_survival": true,
+      "zone_category_method_filters": true,
+      "manual_refresh": true,
+      "empty_alerts": true
+    },
+    "pizza_count": 20,
+    "selection": true,
+    "marker_selection": true,
+    "filters_match_real_api": true,
+    "empty_state": true,
+    "location_change": true,
+    "closure_groups": true,
+    "positive": "Positiva",
+    "negative": "Negativa",
+    "mobile_width": 390,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "passed": true
+  },
+  "real_stream_refresh": {
+    "status": "passed",
+    "published_messages": 1,
+    "real_yelp_review": "x3tqiSqx9fpH50xWNYscYA",
+    "business_id": "ZCj5o6j6_0JjGOe04WoLsg",
+    "before_as_of": "2019-01-03T14:44:03+00:00",
+    "after_as_of": "2020-10-30T19:33:53+00:00",
+    "data_changed": true,
+    "before_score": 0.5808298803270954,
+    "after_score": 0.5545494313114067,
+    "response_timestamp_advanced": true,
+    "verified": {
+      "review_id": "x3tqiSqx9fpH50xWNYscYA",
+      "business_id": "ZCj5o6j6_0JjGOe04WoLsg",
+      "date": "2020-10-30T19:33:53+00:00",
+      "processed": true,
+      "current_as_of": "2020-10-30T19:33:53+00:00",
+      "businesses": 16944,
+      "reviews": 1320594,
+      "survival_results": 424
+    },
+    "powerbi_refresh": "Desktop verified separately: loaded_at advanced; updated real event/score matches model"
+  },
+  "powerbi": {
+    "status": "verified_in_Desktop",
+    "version": "2.159.1231.0",
+    "mode": "Import; manual Inicio > Actualizar",
+    "source": "http://127.0.0.1:5100",
+    "visuals": {
+      "active_alerts": "tableEx",
+      "hotspots_map": "azureMap",
+      "kaplan_meier": "lineChart",
+      "lifemap_header": "textbox",
+      "lifemap_method": "textbox",
+      "negative_evolution": "lineChart",
+      "refresh_evidence": "tableEx"
+    },
+    "tables": [
+      "Hotspots",
+      "Alerts",
+      "KaplanMeier",
+      "Evolution",
+      "Refresh"
+    ],
+    "before": {
+      "hotspots": 0,
+      "loaded_at": "2026-11-14T13:13:25.080Z",
+      "km_points": 2384,
+      "evolution_points": 10,
+      "api_at": "2026-11-14T13:13:25.253Z",
+      "alerts": 96
+    },
+    "after": {
+      "hotspots": 0,
+      "selected_event": "2020-10-30T19:33:53.000Z",
+      "loaded_at": "2026-11-14T13:15:44.823Z",
+      "selected_score": 0.5545494313114067,
+      "km_points": 2384,
+      "evolution_points": 10,
+      "api_at": "2026-11-14T13:15:44.940Z",
+      "alerts": 96
+    },
+    "active_pbix_verified": {
+      "hotspots": 0,
+      "selected_event": "2020-10-30T19:33:53.000Z",
+      "loaded_at": "2026-11-14T13:15:44.823Z",
+      "selected_score": 0.5545494313114067,
+      "km_points": 2384,
+      "evolution_points": 10,
+      "api_at": "2026-11-14T13:15:44.940Z",
+      "alerts": 96
+    },
+    "refresh_api_requests_observed": "Microsoft.Data.Mashup; HTTP 200",
+    "artifact": "powerbi/LifeMap-E2.pbix",
+    "bytes": 240597,
+    "sha256": "150a311bcf3e7c8151e9f11e815b78ec73a48f4415865d7c7ab74fdfeb2ba3ba",
+    "source_project": "powerbi/LifeMap-E2.pbip",
+    "privacy_and_sign_in_completed_manually_by_user": true,
+    "license": "free",
+    "manual_work_remaining": []
+  },
+  "tests": {
+    "host_unittest": 52,
+    "container_e1_pytest": 14,
+    "compose_static": "passed",
+    "browser": "desktop 1440x1080 and mobile 390x844; no JS errors/overflow"
+  },
+  "preserved": {
+    "businesses": 16944,
+    "reviews": 1320594,
+    "survival_results": 424,
+    "e1_sentiment_model": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+    "containers": 10
+  },
+  "resources": {
+    "windows": {
+      "FreePhysicalMemory": 978124,
+      "TotalVisibleMemorySize": 16547704
+    },
+    "observed_available_gib_range": [
+      0.63,
+      2.63
+    ],
+    "counts_not_added_to_docker_or_wsl": true,
+    "docker": [
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "0.04%",
+        "Container": "918ac46f943baeabf5a79a69bd5fd2a9a6ede2de88608ddc0f5e0bdfc690f1ae",
+        "ID": "918ac46f943b",
+        "MemPerc": "23.89%",
+        "MemUsage": "61.17MiB / 256MiB",
+        "Name": "lifemap-api-1",
+        "NetIO": "3.53MB / 3.74MB",
+        "PIDs": "8"
+      },
+      {
+        "BlockIO": "0B / 579MB",
+        "CPUPerc": "3.31%",
+        "Container": "fb9d1295d00f26a727bceed52be0f3a38f6823f07f1ab85e53ee0418bd9aeb06",
+        "ID": "fb9d1295d00f",
+        "MemPerc": "60.41%",
+        "MemUsage": "618.6MiB / 1GiB",
+        "Name": "lifemap-streaming-1",
+        "NetIO": "3.44MB / 1.1MB",
+        "PIDs": "88"
+      },
+      {
+        "BlockIO": "16.4kB / 230MB",
+        "CPUPerc": "1.07%",
+        "Container": "aa320221fb4d8452503ed92f1fdd7e2e44097f3c26b6f9e66d015bfba0dad203",
+        "ID": "aa320221fb4d",
+        "MemPerc": "42.14%",
+        "MemUsage": "431.5MiB / 1GiB",
+        "Name": "lifemap-kafka-1",
+        "NetIO": "2.89MB / 7.54MB",
+        "PIDs": "100"
+      },
+      {
+        "BlockIO": "129MB / 161MB",
+        "CPUPerc": "0.07%",
+        "Container": "0e137ba39ac48d397918eafd19d1196f6e469b55b6263f162ad7e2594b297a5a",
+        "ID": "0e137ba39ac4",
+        "MemPerc": "15.25%",
+        "MemUsage": "234.2MiB / 1.5GiB",
+        "Name": "lifemap-spark-worker-1",
+        "NetIO": "303MB / 3.6MB",
+        "PIDs": "33"
+      },
+      {
+        "BlockIO": "38.4MB / 0B",
+        "CPUPerc": "4.15%",
+        "Container": "4877397dbe6ea2b09893fc71bbe0e4b704f6812d69080e074ceafd7221807f33",
+        "ID": "4877397dbe6e",
+        "MemPerc": "12.28%",
+        "MemUsage": "125.8MiB / 1GiB",
+        "Name": "lifemap-dask-worker-1-1",
+        "NetIO": "9.44MB / 32.8MB",
+        "PIDs": "13"
+      },
+      {
+        "BlockIO": "44MB / 0B",
+        "CPUPerc": "4.40%",
+        "Container": "ea72a228451605e932ea11b8d80e9e1ff36c8d3f5188bfd3f419ed2ca2d51a0e",
+        "ID": "ea72a2284516",
+        "MemPerc": "12.83%",
+        "MemUsage": "131.4MiB / 1GiB",
+        "Name": "lifemap-dask-worker-2-1",
+        "NetIO": "9.44MB / 32.8MB",
+        "PIDs": "13"
+      },
+      {
+        "BlockIO": "5.44GB / 3.3GB",
+        "CPUPerc": "0.07%",
+        "Container": "4db100e5ab8f33e032feb881ac8d2ad09f0e43e7bda9adfd63b99228073889fa",
+        "ID": "4db100e5ab8f",
+        "MemPerc": "13.23%",
+        "MemUsage": "135.5MiB / 1GiB",
+        "Name": "lifemap-spark-master-1",
+        "NetIO": "756MB / 2.4MB",
+        "PIDs": "30"
+      },
+      {
+        "BlockIO": "17.9GB / 795MB",
+        "CPUPerc": "0.39%",
+        "Container": "ae9f032dd7a2a26f95791fe362720af0fb66a2e6213197db0030264080683287",
+        "ID": "ae9f032dd7a2",
+        "MemPerc": "68.47%",
+        "MemUsage": "525.9MiB / 768MiB",
+        "Name": "lifemap-mongodb-1",
+        "NetIO": "36.9MB / 1.24GB",
+        "PIDs": "48"
+      },
+      {
+        "BlockIO": "5.3MB / 0B",
+        "CPUPerc": "1.78%",
+        "Container": "831fcab02dc6537beabd3206fae77c67f2fddd4f2d93e832d59eef6900cf60c5",
+        "ID": "831fcab02dc6",
+        "MemPerc": "23.18%",
+        "MemUsage": "89.01MiB / 384MiB",
+        "Name": "lifemap-dask-scheduler-1",
+        "NetIO": "65.9MB / 19.5MB",
+        "PIDs": "3"
+      },
+      {
+        "BlockIO": "189MB / 19.7MB",
+        "CPUPerc": "0.08%",
+        "Container": "8d615c137a12297d30017fad80d40f333f34708e42413063186994a05701fad6",
+        "ID": "8d615c137a12",
+        "MemPerc": "53.86%",
+        "MemUsage": "413.6MiB / 768MiB",
+        "Name": "lifemap-jenkins-1",
+        "NetIO": "4.02MB / 111kB",
+        "PIDs": "49"
+      }
+    ],
+    "oom_killed": false,
+    "container_states": [
+      {
+        "name": "lifemap-api-1",
+        "health": "healthy",
+        "restart_count": 0
+      },
+      {
+        "name": "lifemap-dask-scheduler-1",
+        "health": "healthy",
+        "restart_count": 0
+      },
+      {
+        "name": "lifemap-dask-worker-1-1",
+        "health": "healthy",
+        "restart_count": 0
+      },
+      {
+        "name": "lifemap-dask-worker-2-1",
+        "health": "healthy",
+        "restart_count": 0
+      },
+      {
+        "name": "lifemap-jenkins-1",
+        "health": "healthy",
+        "restart_count": 0
+      },
+      {
+        "name": "lifemap-kafka-1",
+        "health": "healthy",
+        "restart_count": 0
+      },
+      {
+        "name": "lifemap-mongodb-1",
+        "health": "healthy",
+        "restart_count": 0
+      },
+      {
+        "name": "lifemap-spark-master-1",
+        "health": "healthy",
+        "restart_count": 0
+      },
+      {
+        "name": "lifemap-spark-worker-1",
+        "health": "healthy",
+        "restart_count": 0
+      },
+      {
+        "name": "lifemap-streaming-1",
+        "health": "healthy",
+        "restart_count": 0
+      }
+    ]
+  },
+  "limitations": [
+    "Zero production hotspots, not replaced with test fixtures",
+    "Spatial 50km API/BI subset: 99 scored businesses, 66 finalized windows; collections globally 100/67",
+    "Risk is an uncalibrated score, retrospective proxy labels"
+  ]
+}

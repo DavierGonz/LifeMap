@@ -1,0 +1,104 @@
+table Alerts
+	lineageTag: c7f8a004-5b93-4985-a9c6-5c63af24618b
+
+	column business_id
+		dataType: string
+		lineageTag: cb4c4534-0712-4cc6-9feb-a58812823841
+		summarizeBy: none
+		sourceColumn: business_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column review_id
+		dataType: string
+		lineageTag: 8ad54596-9f43-46bf-8af6-01a0e04242c3
+		summarizeBy: none
+		sourceColumn: review_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: dbb88979-1e21-4243-b654-43154623a44b
+		dataCategory: Latitude
+		summarizeBy: none
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 526ca5f6-3427-47b0-878d-1bc95cb432ce
+		dataCategory: Longitude
+		summarizeBy: none
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column risk_score
+		dataType: double
+		formatString: 0.000
+		lineageTag: a4c78336-3d4d-457c-8c6a-ca3cde15c401
+		summarizeBy: none
+		sourceColumn: risk_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column event_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 210a753f-bb11-4cea-b578-ce899d3512fa
+		summarizeBy: none
+		sourceColumn: event_date
+
+		variation Variation
+			isDefault
+			relationship: cc5234c0-569e-4218-9e2b-7ace68210390
+			defaultHierarchy: LocalDateTable_36829ee8-4d16-4af8-a7ab-9bc1c3d37cd7.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column processed_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e66c6f75-dbdf-4b10-8d0f-9c8e76665054
+		summarizeBy: none
+		sourceColumn: processed_at
+
+		variation Variation
+			isDefault
+			relationship: 409e5900-664a-4056-8306-a03b46f6b847
+			defaultHierarchy: LocalDateTable_35c24b70-80df-4851-a3b8-a067f83ff0e1.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column model_id
+		dataType: string
+		lineageTag: 921b2d7b-bc70-4473-9879-d2c85c5f4153
+		summarizeBy: none
+		sourceColumn: model_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column active
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ea3415fa-7c35-48d4-80d5-a3caa304a16d
+		summarizeBy: none
+		sourceColumn: active
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Alerts = m
+		mode: import
+		source = LifeMap[Alerts]
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table

@@ -11,6 +11,7 @@ COPY api /app/api
 COPY ml /app/ml
 COPY analytics /app/analytics
 COPY storage /app/storage
+COPY config/survival.json /app/config/survival.json
 COPY tests/e1 /app/tests/e1
 COPY ci/__init__.py ci/azure_promote.py /app/ci/
 ENV PYTHONPATH=/app

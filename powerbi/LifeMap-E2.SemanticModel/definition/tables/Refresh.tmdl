@@ -1,0 +1,68 @@
+table Refresh
+	lineageTag: 06c1fe55-5936-4a02-9332-b6781e20def1
+
+	column api_generated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8f921249-6f2c-49e2-aed9-904ebfbdcf32
+		summarizeBy: none
+		sourceColumn: api_generated_at
+
+		variation Variation
+			isDefault
+			relationship: acf28f17-a4ca-4e36-9d19-548ff1c9d0a0
+			defaultHierarchy: LocalDateTable_735bb224-ce2a-4339-b2b3-a89e9a917420.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column loaded_at_utc
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3f497650-bd95-4081-95b6-a3659325ec90
+		summarizeBy: none
+		sourceColumn: loaded_at_utc
+
+		variation Variation
+			isDefault
+			relationship: 819a3322-0d6d-4db3-9938-90359623f272
+			defaultHierarchy: LocalDateTable_fda60f00-de4c-402d-b55a-536f2cc1bbf6.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column hotspots
+		dataType: double
+		lineageTag: 6df860af-6896-401f-be79-bdd6fa9350d3
+		summarizeBy: sum
+		sourceColumn: hotspots
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column active_alerts
+		dataType: double
+		lineageTag: 82443ee7-131d-4fc9-a912-67adaa459eeb
+		summarizeBy: sum
+		sourceColumn: active_alerts
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column windows
+		dataType: double
+		lineageTag: a6e1d5ce-404c-452a-a372-306e463cbb4a
+		summarizeBy: sum
+		sourceColumn: windows
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Refresh = m
+		mode: import
+		source = LifeMap[Refresh]
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table

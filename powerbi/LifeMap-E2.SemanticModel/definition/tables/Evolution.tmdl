@@ -1,0 +1,67 @@
+table Evolution
+	lineageTag: 07c652f9-31b9-4b6b-9e6f-80c8f6d03bbc
+
+	column start
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 10c3a1a4-5a09-40ba-b388-0556593772ca
+		summarizeBy: none
+		sourceColumn: start
+
+		variation Variation
+			isDefault
+			relationship: f19efe7e-6387-4555-93fc-3f4171e8d897
+			defaultHierarchy: LocalDateTable_2fc66c28-b8f5-466b-bab8-2ee07df1f760.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column end
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7580e900-f957-4d18-9e81-089a363ff0f7
+		summarizeBy: none
+		sourceColumn: end
+
+		variation Variation
+			isDefault
+			relationship: ecbc8c6e-722f-4dad-9aed-4c1171f398ed
+			defaultHierarchy: LocalDateTable_c988721d-a43f-457f-9b3b-ea350a1842a0.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column reviews
+		dataType: int64
+		formatString: 0
+		lineageTag: b3ed5a9b-5c19-4051-b7cc-59476d0af2b7
+		summarizeBy: sum
+		sourceColumn: reviews
+
+		annotation SummarizationSetBy = Automatic
+
+	column negative
+		dataType: int64
+		formatString: 0
+		lineageTag: ef2d5caf-97b8-48c5-8bc8-ff5e1cc8bc47
+		summarizeBy: sum
+		sourceColumn: negative
+
+		annotation SummarizationSetBy = Automatic
+
+	column negative_percentage
+		dataType: double
+		formatString: 0.00
+		lineageTag: b5429eb5-2a20-4694-9c0e-bdce7b0b79da
+		summarizeBy: none
+		sourceColumn: negative_percentage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Evolution = m
+		mode: import
+		source = LifeMap[Evolution]
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table

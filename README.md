@@ -202,4 +202,13 @@ La fase 3 agrega [Kaplan-Meier por categoria y zona](docs/survival.md), con
 censura, entrada tardia observable y exportaciones para el futuro dashboard.
 La fase 4 agrega [modelo de riesgo y alertas foreachBatch](docs/risk.md), con
 variables temporales, evaluacion MLlib y pruebas reales. Sin endpoints nuevos,
-Power BI ni cambios de interfaz o Azure.
+Power BI ni cambios de interfaz o Azure en esa fase.
+
+La fase 5 incorpora cuatro endpoints E2 de solo lectura, salud Kafka/lag y
+amplía la interfaz Leaflet con alertas, hotspots y curvas interactivas.
+[Contratos y consultas Power BI](powerbi/README.md). Power BI Desktop usa
+la API en modo Import y el dashboard `powerbi/LifeMap-E2.pbix` está guardado y
+comprobado con sus cuatro visuales. Actualización manual: Inicio → Actualizar.
+El proyecto PBIP se versiona; los datos/cachés/PBIX quedan fuera de Git.
+Ejecutar `.\.venv\Scripts\python.exe scripts/test_api_phase5.py` para comprobar
+los contratos con los datos y checkpoints existentes. Sin cambios Jenkins/Azure.

@@ -1,0 +1,370 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "kaplan_meier",
+  "position": {
+    "x": 20,
+    "y": 430,
+    "z": 4,
+    "height": 340,
+    "width": 600,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KaplanMeier"
+                    }
+                  },
+                  "Property": "time_days"
+                }
+              },
+              "queryRef": "KaplanMeier.time_days",
+              "nativeQueryRef": "time_days",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "KaplanMeier"
+                    }
+                  },
+                  "Property": "group"
+                }
+              },
+              "queryRef": "KaplanMeier.group",
+              "nativeQueryRef": "group"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "KaplanMeier"
+                        }
+                      },
+                      "Property": "at_risk"
+                    }
+                  },
+                  "Function": 4
+                }
+              },
+              "queryRef": "Max(KaplanMeier.at_risk)",
+              "nativeQueryRef": "at_risk"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "KaplanMeier"
+                        }
+                      },
+                      "Property": "events"
+                    }
+                  },
+                  "Function": 4
+                }
+              },
+              "queryRef": "Max(KaplanMeier.events)",
+              "nativeQueryRef": "events"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "KaplanMeier"
+                        }
+                      },
+                      "Property": "censored"
+                    }
+                  },
+                  "Function": 4
+                }
+              },
+              "queryRef": "Max(KaplanMeier.censored)",
+              "nativeQueryRef": "censored"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "KaplanMeier"
+                        }
+                      },
+                      "Property": "survival"
+                    }
+                  },
+                  "Function": 4
+                }
+              },
+              "queryRef": "Max(KaplanMeier.survival)",
+              "nativeQueryRef": "survival"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "KaplanMeier"
+                  }
+                },
+                "Property": "time_days"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "lineStyles": [
+        {
+          "properties": {
+            "lineChartType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'step'"
+                }
+              }
+            },
+            "interpolationStep": {
+              "expr": {
+                "Literal": {
+                  "Value": "'after'"
+                }
+              }
+            },
+            "strokeWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "2D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Scalar'"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "start": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            },
+            "end": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Kaplan–Meier · American (New) y zonas'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ed5827b8e30462e2e173",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KaplanMeier"
+              }
+            },
+            "Property": "time_days"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "cbc9f0e596ce90196e00",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "KaplanMeier"
+              }
+            },
+            "Property": "group"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "4fcdcdd9a105122abc5c",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "KaplanMeier"
+                  }
+                },
+                "Property": "survival"
+              }
+            },
+            "Function": 4
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a039333083e4a0577d00",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "KaplanMeier"
+                  }
+                },
+                "Property": "at_risk"
+              }
+            },
+            "Function": 4
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c80bab671dcc92041eeb",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "KaplanMeier"
+                  }
+                },
+                "Property": "events"
+              }
+            },
+            "Function": 4
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8a341b6056c980c7e8a2",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "KaplanMeier"
+                  }
+                },
+                "Property": "censored"
+              }
+            },
+            "Function": 4
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
