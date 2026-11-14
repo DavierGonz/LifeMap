@@ -1,0 +1,353 @@
+{
+  "status": "passed",
+  "scope": "test_632006184891",
+  "real_published": {
+    "sent": 103,
+    "partitions": {
+      "1": 33,
+      "2": 29,
+      "0": 41
+    },
+    "first_date": "2019-01-01T00:03:16+00:00",
+    "last_date": "2019-04-15T00:02:28+00:00",
+    "seconds": 0.154,
+    "model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+    "replay_id": "phase2-real"
+  },
+  "real": {
+    "scope": "production",
+    "classified": 103,
+    "predictions": {
+      "negative": 27,
+      "positive": 60,
+      "neutral": 16
+    },
+    "geo_query_matches": 1,
+    "first_doc_processed_at": null,
+    "dropped_by_watermark": 0,
+    "window_count": 52,
+    "hotspot_count": 0,
+    "finalized_reviews": 102,
+    "reviews_by_window_start": {
+      "2019-01-01 00:00:00": 100,
+      "2019-03-02 00:00:00": 1,
+      "2019-01-31 00:00:00": 1
+    },
+    "kafka_partitions_verified": [
+      0,
+      1,
+      2
+    ],
+    "query_progress": {
+      "production_reviews": {
+        "batch_id": 4,
+        "event_time": {},
+        "end_offsets": [
+          {
+            "reviews": {
+              "2": 87,
+              "1": 98,
+              "0": 119
+            }
+          }
+        ]
+      },
+      "production_windows": {
+        "batch_id": 5,
+        "event_time": {
+          "watermark": "2019-04-08T00:02:28.000Z"
+        },
+        "end_offsets": [
+          {
+            "reviews": {
+              "2": 87,
+              "1": 98,
+              "0": 119
+            }
+          }
+        ]
+      }
+    }
+  },
+  "fault_injection_partial_documents": 13,
+  "sink_retry_idempotent": true,
+  "offset_checkpoint_resumed": true,
+  "late_within_seven_days_included": true,
+  "too_late_excluded_from_windows": true,
+  "late_reviews_still_classified": true,
+  "synthetic_fixture": {
+    "scope": "test_632006184891",
+    "classified": 62,
+    "predictions": {
+      "negative": 28,
+      "positive": 34
+    },
+    "geo_query_matches": 2,
+    "first_doc_processed_at": "2026-11-14 03:50:19.291000",
+    "dropped_by_watermark": 2,
+    "window_count": 2,
+    "hotspot_count": 1,
+    "finalized_reviews": 60,
+    "reviews_by_window_start": {
+      "2019-01-01 00:00:00": 30,
+      "2019-01-31 00:00:00": 30
+    },
+    "kafka_partitions_verified": [
+      0,
+      1,
+      2
+    ],
+    "query_progress": {
+      "test_632006184891_reviews": {
+        "batch_id": 7,
+        "event_time": {},
+        "end_offsets": [
+          {
+            "reviews": {
+              "2": 87,
+              "1": 98,
+              "0": 183
+            }
+          }
+        ]
+      },
+      "test_632006184891_windows": {
+        "batch_id": 10,
+        "event_time": {
+          "avg": "2019-01-18T00:00:00.000Z",
+          "max": "2019-01-20T12:00:00.000Z",
+          "min": "2019-01-15T12:00:00.000Z",
+          "watermark": "2019-03-03T12:00:00.000Z"
+        },
+        "end_offsets": [
+          {
+            "reviews": {
+              "2": 87,
+              "1": 98,
+              "0": 183
+            }
+          }
+        ]
+      }
+    },
+    "windows": [
+      {
+        "end": "2019-01-31 00:00:00",
+        "finalized": true,
+        "first_batch_id": 7,
+        "geohash": "dr4dt",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -75.0146484375,
+                39.814453125
+              ],
+              [
+                -74.970703125,
+                39.814453125
+              ],
+              [
+                -74.970703125,
+                39.8583984375
+              ],
+              [
+                -75.0146484375,
+                39.8583984375
+              ],
+              [
+                -75.0146484375,
+                39.814453125
+              ]
+            ]
+          ]
+        },
+        "model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+        "model_sha256": "e650fc89e70986bd9069b557bf2ea254f98ccbf7558cdfe42bcfae3346f6b15c",
+        "negative": 6,
+        "negative_percentage": 20.0,
+        "processed_at": "2026-11-14 03:51:59.475000",
+        "reviews": 30,
+        "start": "2019-01-01 00:00:00",
+        "change_percentage_points": null,
+        "is_hotspot": false,
+        "minimum_reviews": 30,
+        "previous_window_id": null,
+        "threshold_percentage_points": 15
+      },
+      {
+        "end": "2019-03-02 00:00:00",
+        "finalized": true,
+        "first_batch_id": 9,
+        "geohash": "dr4dt",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -75.0146484375,
+                39.814453125
+              ],
+              [
+                -74.970703125,
+                39.814453125
+              ],
+              [
+                -74.970703125,
+                39.8583984375
+              ],
+              [
+                -75.0146484375,
+                39.8583984375
+              ],
+              [
+                -75.0146484375,
+                39.814453125
+              ]
+            ]
+          ]
+        },
+        "model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+        "model_sha256": "e650fc89e70986bd9069b557bf2ea254f98ccbf7558cdfe42bcfae3346f6b15c",
+        "negative": 21,
+        "negative_percentage": 70.0,
+        "processed_at": "2026-11-14 03:52:32.113000",
+        "reviews": 30,
+        "start": "2019-01-31 00:00:00",
+        "change_percentage_points": 49.99999999999999,
+        "is_hotspot": true,
+        "minimum_reviews": 30,
+        "previous_window_id": "dr4dt:2019-01-01T00:00:00",
+        "threshold_percentage_points": 15
+      }
+    ],
+    "hotspots": [
+      {
+        "end": "2019-03-02 00:00:00",
+        "finalized": true,
+        "first_batch_id": 9,
+        "geohash": "dr4dt",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -75.0146484375,
+                39.814453125
+              ],
+              [
+                -74.970703125,
+                39.814453125
+              ],
+              [
+                -74.970703125,
+                39.8583984375
+              ],
+              [
+                -75.0146484375,
+                39.8583984375
+              ],
+              [
+                -75.0146484375,
+                39.814453125
+              ]
+            ]
+          ]
+        },
+        "model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+        "model_sha256": "e650fc89e70986bd9069b557bf2ea254f98ccbf7558cdfe42bcfae3346f6b15c",
+        "negative": 21,
+        "negative_percentage": 70.0,
+        "processed_at": "2026-11-14 03:52:32.113000",
+        "reviews": 30,
+        "start": "2019-01-31 00:00:00",
+        "is_hotspot": true,
+        "change_percentage_points": 49.99999999999999,
+        "previous_window_id": "dr4dt:2019-01-01T00:00:00",
+        "minimum_reviews": 30,
+        "threshold_percentage_points": 15
+      }
+    ]
+  },
+  "synthetic_hotspots_not_real_world_findings": true,
+  "Azure_accessed": false,
+  "model_retrained": false,
+  "resources": {
+    "streaming_limit_mib": 1024,
+    "driver_heap_mib": 512,
+    "cpus": 1,
+    "execution": "Spark local[1] in isolated container",
+    "observed_peak_streaming_mib": 637.1,
+    "minimum_Windows_available_mib_during_job": 2209,
+    "Windows_available_final_mib": 2739,
+    "samples_with_streaming": 86,
+    "OOM_observed": false,
+    "unexpected_restarts": 0
+  },
+  "unit_tests_passed": 33,
+  "pytest_passed": 28,
+  "E1_preserved": {
+    "data": {
+      "counts": {
+        "businesses": 16944,
+        "reviews": 1320594
+      },
+      "E1_model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+      "E1_model_sha256": "7e6b9fb0b8872e6d247e3c8586f1323fbc6adcc040240bcfc180b05304afa0e9"
+    },
+    "api": {
+      "/health": {
+        "status": 200
+      },
+      "/": {
+        "status": 200,
+        "interface": true
+      },
+      "/businesses/near?lat=39.9526&lon=-75.1652&radius_m=5000&category=Restaurants&limit=5": {
+        "status": 200
+      },
+      "/businesses/within": {
+        "status": 200
+      },
+      "/zones/summary?lat=39.9526&lon=-75.1652&radius_m=5000": {
+        "status": 200
+      },
+      "/stats/closure?group_by=geohash&min_business_days=3650&limit=5": {
+        "status": 200
+      },
+      "/predict": {
+        "status": 200
+      },
+      "/businesses/near?lat=nan&lon=0&radius_m=10 [invalid input]": {
+        "status": 400
+      },
+      "/predict [invalid input]": {
+        "status": 400
+      },
+      "commit": "036c8aa182afe65c872741d4e5d8d640850ea3ca",
+      "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+      "passed": true
+    }
+  },
+  "continuous_consumer": {
+    "healthy": true,
+    "unexpected_restarts": 0,
+    "OOM_killed": false,
+    "public_ports": false
+  },
+  "model": {
+    "model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+    "model_sha256": "e650fc89e70986bd9069b557bf2ea254f98ccbf7558cdfe42bcfae3346f6b15c",
+    "spark_pipeline_sha256": "3c9e22f62346a5201ee0303bfc5f0284581c5145599ed361e60a281ba8f30644",
+    "cutoff": "2019-01-01T00:00:00+00:00"
+  },
+  "scope_restrictions": {
+    "Azure_accessed": false,
+    "GitHub_pushed": false,
+    "new_training": false,
+    "Yelp_downloaded": false,
+    "risk_survival_alerts_PowerBI_implemented": false,
+    "protected_projects_modified": false
+  }
+}

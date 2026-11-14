@@ -44,6 +44,14 @@ class InfrastructureIsolationTests(unittest.TestCase):
         model["services"]["jenkins"]["ports"][0]["host_ip"] = "0.0.0.0"
         self.assertTrue(any("non-loopback" in error for error in validate_model(model)))
 
+    def test_streaming_has_isolated_checkpoints_and_readonly_model(self):
+        model = load_model(include_streaming=True)
+        self.assertEqual(validate_model(model), [])
+        for name, service in self.model['services'].items():
+            self.assertEqual(model['services'][name], service)
+        model['services']['streaming']['volumes'] = []
+        self.assertTrue(any('persistent checkpoints' in e for e in validate_model(model)))
+
     def test_dask_coordinator_and_workers_share_persistent_cache(self):
         for name in ('dask-scheduler','dask-worker-1','dask-worker-2'):
             mounts=self.model['services'][name]['volumes']

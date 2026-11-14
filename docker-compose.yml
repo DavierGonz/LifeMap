@@ -30,6 +30,28 @@ x-spark: &spark
   entrypoint: [/opt/spark/bin/spark-class]
 
 services:
+  streaming:
+    <<: *common
+    profiles: [streaming]
+    image: lifemap-spark:stream-v2
+    build: {context: ., dockerfile: docker/spark/Dockerfile}
+    networks: [backend]
+    secrets: [mongo_writer_password]
+    volumes: [model_store:/models:ro, stream_checkpoints:/checkpoints]
+    entrypoint: [/opt/spark/bin/spark-submit, --master, 'local[1]', --driver-memory, 512m, --conf, spark.driver.host=127.0.0.1, --conf, spark.driver.bindAddress=127.0.0.1, --conf, spark.sql.shuffle.partitions=2]
+    command: [/opt/lifemap/streaming/consumer.py]
+    mem_limit: 1024m
+    cpus: 1.0
+    depends_on:
+      mongodb: {condition: service_healthy}
+      kafka: {condition: service_healthy}
+    healthcheck:
+      test: [CMD, python3, /opt/lifemap/streaming/health.py]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
+
   kafka:
     <<: *common
     profiles: [e2]
@@ -222,6 +244,7 @@ networks:
   ci: {}
 
 volumes:
+  stream_checkpoints:
   kafka_data:
   mongo_data:
   mongo_config:
