@@ -39,6 +39,7 @@ kaggle.json
 !/docs/reports/e1-jenkins.json
 !/docs/reports/e2-phase1.json
 !/docs/reports/e2-phase2.json
+!/docs/reports/e2-phase3.json
 !/docs/reports/LifeMap-Entrega1.pdf
 *.pbix
 *.pbit
