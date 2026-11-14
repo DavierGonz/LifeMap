@@ -63,16 +63,18 @@ def ensure_indexes(db, scope):
         db[name].create_index([('geohash', 1), ('start', 1)], unique=True, name='cell_window')
 
 
-def save_reviews(frame, batch_id, scope, manifest, checkpoint, simulate_failure=False):
+def save_reviews(frame, batch_id, scope, manifest, checkpoint, simulate_failure=False, risk_assets=None):
     from pymongo import UpdateOne
     db = writer()
     try:
         name = collections(scope)[0]
         operations = []
+        received = []
         processed = 0
         for row in frame.toLocalIterator():
             processed += 1
             r = row.asDict(recursive=True)
+            received.append(r)
             doc = {k: r[k] for k in ('review_id', 'business_id', 'text', 'date', 'date_original', 'geohash')}
             doc.update(date=r['date'].replace(tzinfo=timezone.utc),
                        location={'type': 'Point', 'coordinates': [r['longitude'], r['latitude']]},
@@ -89,6 +91,9 @@ def save_reviews(frame, batch_id, scope, manifest, checkpoint, simulate_failure=
                 operations.clear()
         if operations:
             db[name].bulk_write(operations, ordered=False)
+        if risk_assets is not None:
+            from streaming.risk import update_risk
+            update_risk(db, received, scope, risk_assets, frame.sparkSession)
         marker = Path(checkpoint)/'injected-sink-failure'
         if processed and simulate_failure and not marker.exists():
             if scope == 'production':

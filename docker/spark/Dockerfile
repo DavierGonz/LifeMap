@@ -14,6 +14,7 @@ COPY analytics /opt/lifemap/analytics
 COPY storage /opt/lifemap/storage
 COPY streaming /opt/lifemap/streaming
 COPY config/streaming.json /opt/lifemap/config/streaming.json
+COPY config/risk.json /opt/lifemap/config/risk.json
 ENV PYTHONPATH=/opt/lifemap
 ENV SPARK_DAEMON_MEMORY=256m SPARK_LOCAL_DIRS=/scratch PYSPARK_PYTHON=python3
 USER 185:0

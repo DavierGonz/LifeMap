@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 import time
+import uuid
 
 from analytics.common import save, session
 from analytics.geo import geohash
@@ -23,6 +24,8 @@ def main():
     p.add_argument('--available-now', action='store_true')
     p.add_argument('--simulate-sink-failure', action='store_true')
     args = p.parse_args()
+    instance=uuid.uuid4().hex
+    Path('/tmp/lifemap-stream-instance').write_text(instance)
     collections(args.scope)
     if args.simulate_sink_failure and args.scope == 'production':
         raise ValueError('Test fault injection is not allowed for production')
@@ -39,9 +42,18 @@ def main():
     binding = {'model_id': manifest['model_id'], 'predictor_sha256': manifest['sha256'],
                'spark_pipeline_sha256': fingerprint, 'config': config, 'shuffle_partitions': 2}
     bind_checkpoint(checkpoint, binding)
+    from ml.risk import load_risk
+    from streaming.risk import ensure_risk_indexes
+    risk_model,risk_manifest=load_risk()
+    risk_fingerprint=pipeline_hash(Path('/models')/risk_manifest['spark_pipeline'])
+    if risk_fingerprint!=risk_manifest['spark_pipeline_sha256']:
+        raise ValueError('Saved risk MLlib pipeline differs from its manifest')
+    bind_checkpoint(checkpoint/'risk',{'model_id':risk_model['model_id'],'sha256':risk_manifest['sha256'],
+                    'spark_pipeline_sha256':risk_fingerprint})
     db = writer()
     try:
         ensure_indexes(db, args.scope)
+        ensure_risk_indexes(db, args.scope)
         metadata = []
         for b in db.businesses.find({}, {'business_id': 1, 'location': 1, '_id': 0}):
             lon, lat = b['location']['coordinates']
@@ -53,6 +65,7 @@ def main():
     queries = []
     try:
         model = PipelineModel.load(str(pipeline))  # LOAD only; no fit/train anywhere in this consumer.
+        risk_native=PipelineModel.load('/models/'+risk_manifest['spark_pipeline'])
         businesses = spark.createDataFrame(metadata, 'business_id string, longitude double, latitude double, geohash string')
         schema = StructType([StructField(k, StringType()) for k in
                              ['review_id', 'business_id', 'text', 'date', 'model_id', 'replay_id']]
@@ -81,7 +94,8 @@ def main():
                     probability_array.alias('probabilities'))
         # Independent sinks: late events remain classified; only windows apply late-data policy.
         def review_sink(frame, batch_id):
-            save_reviews(frame, batch_id, args.scope, manifest, checkpoint, args.simulate_sink_failure)
+            save_reviews(frame, batch_id, args.scope, manifest, checkpoint, args.simulate_sink_failure,
+                         (risk_model,risk_manifest,risk_native))
         deduped = classified.withWatermark('date', '7 days').dropDuplicatesWithinWatermark(['review_id'])
         anchor_days = (instant(config['cutoff']) - instant('1970-01-01')).days % 30
         windows = deduped.groupBy('geohash', F.window('date', '30 days', '30 days', f'{anchor_days} days')).agg(
@@ -99,7 +113,9 @@ def main():
         def status(active):
             progress = {q.name: q.lastProgress for q in queries}
             save(checkpoint/'status.json', {'active': active, 'scope': args.scope,
+                 'instance':instance,
                  'model_id': manifest['model_id'], 'updated_epoch': time.time(), 'progress': progress,
+                 'risk_model_id':risk_model['model_id'],
                  'recent': {q.name: q.recentProgress for q in queries}})
         if args.available_now:
             status(False)

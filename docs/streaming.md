@@ -111,6 +111,9 @@ y [ejemplo KRaft de Apache](https://github.com/apache/kafka/blob/4.1.1/docker/ex
 
 ## Fase 2: Structured Streaming local
 
+En el codigo que incluye Fase 4, entrenar/preparar primero el modelo batch de
+[riesgo](risk.md). El consumidor carga ambos modelos guardados; no los entrena.
+
 ```powershell
 docker compose --profile e2 --profile streaming build streaming
 # Flujo continuo; no recrea Spark/Dask/API/Jenkins de E1.
