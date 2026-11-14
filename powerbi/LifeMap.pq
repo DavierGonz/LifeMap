@@ -1,6 +1,6 @@
 // Consulta llamada LifeMap. Import, API local, sin credenciales ni archivos de datos.
 let
-    BaseUrl = "http://127.0.0.1:5100",
+    BaseUrl = Text.TrimEnd(LifeMapApiUrl,"/"),
     Area = [lat="39.9526", lon="-75.1652", radius_m="50000", from="2019-01-01", to="2022-01-20"],
     Category = "American (New)",
     Get = (Path as text, Query as record) as record => Json.Document(Web.Contents(BaseUrl,

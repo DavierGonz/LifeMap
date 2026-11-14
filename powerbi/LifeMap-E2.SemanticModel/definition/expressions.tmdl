@@ -1,7 +1,7 @@
 expression LifeMap =
 		// Consulta llamada LifeMap. Import, API local, sin credenciales ni archivos de datos.
 		let
-		    BaseUrl = "http://127.0.0.1:5100",
+		    BaseUrl = Text.TrimEnd(LifeMapApiUrl,"/"),
 		    Area = [lat="39.9526", lon="-75.1652", radius_m="50000", from="2019-01-01", to="2022-01-20"],
 		    Category = "American (New)",
 		    Get = (Path as text, Query as record) as record => Json.Document(Web.Contents(BaseUrl,
@@ -46,3 +46,9 @@ expression LifeMap =
 	annotation PBI_NavigationStepName = Navegación
 
 	annotation PBI_ResultType = Record
+
+expression LifeMapApiUrl =
+		"http://127.0.0.1:5100" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true,
+		    List={"http://127.0.0.1:5100", "https://lifemap-e1-davier-2026.westus2.cloudapp.azure.com"},
+		    DefaultValue="http://127.0.0.1:5100"]
+	annotation PBI_ResultType = Text

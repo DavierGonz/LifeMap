@@ -30,6 +30,7 @@ kaggle.json
 /artifacts/
 /outputs/
 /reports/
+.ci/
 /work/
 *.log
 *.pid
@@ -42,6 +43,7 @@ kaggle.json
 !/docs/reports/e2-phase3.json
 !/docs/reports/e2-phase4.json
 !/docs/reports/e2-phase5.json
+!/docs/reports/e2-phase6.json
 !/docs/reports/LifeMap-Entrega1.pdf
 *.pbix
 *.pbit

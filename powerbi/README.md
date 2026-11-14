@@ -76,6 +76,13 @@ Radio 50 km es selección espacial; no representa todo el dataset académico.
 
 ## Actualización y estado comprobado
 
+Preparación F6: el **PBIP** ahora expone `LifeMapApiUrl` en Administrar parámetros,
+con opciones local/HTTPS existente. `LifeMapApiUrl.pq` permite crear el parámetro
+también manualmente antes de pegar LifeMap.pq. El PBIX F5 se conserva byte por
+byte: no se cambió su origen ni se llamó a Azure. Para el despliegue autorizado,
+abrir PBIP, elegir HTTPS, autorizar manualmente ese origen y guardar una copia
+LifeMap-E2-Azure.pbix. No declarar verificado el refresco remoto antes de esa prueba.
+
 Es modo **Import**: requiere **Inicio → Actualizar**; no hay refresco automático
 continuo ni programado en el servicio Power BI. `Web.Contents(IsRetry=true)`
 evita reutilizar la respuesta de caché HTTP al evaluar una consulta. La fuente

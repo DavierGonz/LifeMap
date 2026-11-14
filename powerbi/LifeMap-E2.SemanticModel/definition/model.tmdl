@@ -9,7 +9,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["LifeMap","Hotspots","Alerts","KaplanMeier","Evolution","Refresh"]
+annotation PBI_QueryOrder = ["LifeMapApiUrl","LifeMap","Hotspots","Alerts","KaplanMeier","Evolution","Refresh"]
 
 annotation PBI_ProTooling = ["DevMode"]
 

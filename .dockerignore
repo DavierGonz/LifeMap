@@ -19,7 +19,9 @@ checkpoints
 artifacts
 outputs
 reports
+.ci
 work
 **/*.log
 **/*.pbix
 **/*.pbit
+**/.pbi

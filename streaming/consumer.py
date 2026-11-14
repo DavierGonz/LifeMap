@@ -13,6 +13,17 @@ from streaming.sinks import (bind_checkpoint, collections, ensure_indexes,
                              pipeline_hash, save_reviews, save_windows, writer)
 
 
+def validate_starting_offsets(value,scope):
+    if value is None:return None
+    if scope=='production':raise ValueError('Production must resume its preserved checkpoint')
+    offsets=json.loads(value)
+    if set(offsets)!={'reviews'} or set(offsets['reviews'])!={'0','1','2'}:
+        raise ValueError('Expected offsets for three reviews partitions')
+    if not all(type(v) is int and v>=0 for v in offsets['reviews'].values()):
+        raise ValueError('Explicit nonnegative test offsets required')
+    return offsets
+
+
 def main():
     from pyspark.ml import PipelineModel
     from pyspark.sql.column import Column, _to_java_column
@@ -23,7 +34,9 @@ def main():
     p.add_argument('--checkpoint-root', default='/checkpoints')
     p.add_argument('--available-now', action='store_true')
     p.add_argument('--simulate-sink-failure', action='store_true')
+    p.add_argument('--starting-offsets',help='CI scope only: offsets captured before its 100 events, no historical scan')
     args = p.parse_args()
+    test_offsets=validate_starting_offsets(args.starting_offsets,args.scope)
     instance=uuid.uuid4().hex
     Path('/tmp/lifemap-stream-instance').write_text(instance)
     collections(args.scope)
@@ -41,6 +54,7 @@ def main():
     assert fingerprint == config['spark_pipeline_sha256'], 'Saved Spark pipeline differs from versioned model'
     binding = {'model_id': manifest['model_id'], 'predictor_sha256': manifest['sha256'],
                'spark_pipeline_sha256': fingerprint, 'config': config, 'shuffle_partitions': 2}
+    if test_offsets is not None:binding['test_starting_offsets']=test_offsets
     bind_checkpoint(checkpoint, binding)
     from ml.risk import load_risk
     from streaming.risk import ensure_risk_indexes
@@ -71,7 +85,7 @@ def main():
                              ['review_id', 'business_id', 'text', 'date', 'model_id', 'replay_id']]
                             + [StructField('test_fixture', BooleanType()), StructField('schema_version', IntegerType())])
         kafka = (spark.readStream.format('kafka').option('kafka.bootstrap.servers', 'kafka:9092')
-                 .option('subscribe', 'reviews').option('startingOffsets', 'earliest')
+                 .option('subscribe', 'reviews').option('startingOffsets',json.dumps(test_offsets) if test_offsets is not None else 'earliest')
                  .option('failOnDataLoss', 'true').option('maxOffsetsPerTrigger', 100).load())
         data = kafka.select(F.from_json(F.col('value').cast('string'), schema).alias('r'),
                             F.col('key').cast('string').alias('kafka_key'), 'topic', 'partition', 'offset')

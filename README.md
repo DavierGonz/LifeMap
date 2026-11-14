@@ -212,3 +212,10 @@ comprobado con sus cuatro visuales. Actualización manual: Inicio → Actualizar
 El proyecto PBIP se versiona; los datos/cachés/PBIX quedan fuera de Git.
 Ejecutar `.\.venv\Scripts\python.exe scripts/test_api_phase5.py` para comprobar
 los contratos con los datos y checkpoints existentes. Sin cambios Jenkins/Azure.
+
+La fase 6 prepara [CI/CD y actualización E2](deploy/azure/E2.md): Jenkins prueba
+modelos fijados, 100 reseñas reales, imagen nueva del consumidor y diez endpoints;
+la promoción requiere todos los gates. `pollSCM` sigue cada dos minutos. Scripts
+de snapshot consistente/restore conservador y parámetro LifeMapApiUrl para Power BI.
+La publicación y la actualización de Azure requieren autorización; la preparación
+local no acredita todavía E2.1/E2.10 desplegados ni la sustentación pública.

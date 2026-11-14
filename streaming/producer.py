@@ -115,6 +115,7 @@ def main():
     parser.add_argument('--bootstrap', default='kafka:9092')
     parser.add_argument('--seconds-per-day', type=float, default=10 / 30)
     parser.add_argument('--limit', type=int)
+    parser.add_argument('--after', help='UTC lower bound for demo replay, or latest received event; model cutoff stays unchanged')
     parser.add_argument('--run-id', required=True, help='Identifica una reproduccion; repetirlo no deduplica Kafka')
     args = parser.parse_args()
     manifest = json.loads(Path(args.manifest).read_text())
@@ -126,8 +127,15 @@ def main():
                              value_serializer=lambda v: json.dumps(v, ensure_ascii=False).encode('utf-8'))
     client = reader()
     try:
+        lower=instant(args.cutoff)
+        if args.after=='latest':
+            latest=client.lifemap.stream_reviews.find_one(sort=[('date',-1)])
+            if latest:lower=max(lower,instant(latest['date']))
+        elif args.after:
+            lower=instant(args.after)
+            if lower<instant(args.cutoff):raise ValueError('after must not precede the immutable model cutoff')
         # External Mongo sort may spill to disk; no index/data mutation is necessary.
-        rows = (client.lifemap.reviews.find({'date': {'$gt': instant(args.cutoff)}},
+        rows = (client.lifemap.reviews.find({'date': {'$gt': lower}},
                  {'review_id': 1, 'business_id': 1, 'text': 1, 'date': 1, '_id': 0})
                 .sort([('date', 1), ('review_id', 1)]).allow_disk_use(True).batch_size(100))
         def send(key, event, timestamp):

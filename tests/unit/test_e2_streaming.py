@@ -10,9 +10,20 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from analytics.geo import geometry
 from streaming.sinks import bind_checkpoint, collections, hotspot, save_windows
+from streaming.consumer import validate_starting_offsets
 
 
 class StreamingTests(unittest.TestCase):
+    def test_ci_starts_at_captured_offsets_without_changing_production(self):
+        value=json.dumps({'reviews':{'0':10,'1':20,'2':30}})
+        self.assertEqual(validate_starting_offsets(value,'test_ci_1')['reviews']['1'],20)
+        self.assertIsNone(validate_starting_offsets(None,'production'))
+        with self.assertRaises(ValueError):validate_starting_offsets(value,'production')
+
+    def test_ci_rejects_incomplete_or_negative_offsets(self):
+        for offsets in [{'reviews':{'0':-1,'1':2,'2':3}},{'reviews':{'0':1}},{'other':{'0':1,'1':2,'2':3}}]:
+            with self.assertRaises(ValueError):validate_starting_offsets(json.dumps(offsets),'test_ci_1')
+
     def test_hotspot_requires_consecutive_sufficient_samples_and_percentage_points(self):
         self.assertEqual(hotspot({'reviews': 30, 'negative': 21}, {'reviews': 30, 'negative': 6}), (True, 49.99999999999999))
         self.assertFalse(hotspot({'reviews': 29, 'negative': 29}, {'reviews': 30, 'negative': 0})[0])
