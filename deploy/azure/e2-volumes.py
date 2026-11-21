@@ -1,7 +1,7 @@
 """Transferencia conservadora de modelos/Kafka/checkpoints; no invoca Docker/SSH.
 
 Ejecutar en helper Docker, montando /source:ro o /dest y /transfer. Kafka y
-streaming deben estar detenidos por el operador antes del snapshot/restauración.
+streaming deben estar detenidos por el operador antes del snapshot/restauraciÃ³n.
 No modifica E1 ni sobrescribe un archivo existente con distinto contenido.
 """
 import argparse
@@ -37,7 +37,10 @@ def pack(source,archive,kind):
     assert not archive.exists(),'Preserve existing archive; choose a new transfer directory'
     names=model_paths(source) if kind=='models' else ['production'] if kind=='checkpoints' else ['lifemap-e2/ci-smoke-100.json'] if kind=='cache' else [p.name for p in source.iterdir()]
     assert names and all((source/name).exists() for name in names)
-    with tarfile.open(archive,'x:gz') as tar:
+    root_stat=source.stat()
+    root_metadata={f'lifemap.root_{key}':str(value) for key,value in
+                   {'uid':root_stat.st_uid,'gid':root_stat.st_gid,'mode':root_stat.st_mode & 0o7777}.items()}
+    with tarfile.open(archive,'x:gz',pax_headers=root_metadata) as tar:
         for name in names:tar.add(source/name,arcname=name,recursive=True)
     return dict(file=archive.name,sha256=sha(archive),bytes=archive.stat().st_size,kind=kind)
 
@@ -49,6 +52,11 @@ def restore(destination,archive,kind,expected):
     if kind=='checkpoints':assert not (destination/'production').exists(),'Checkpoint already exists; preserve it'
     with tarfile.open(archive,'r:gz') as tar:
         members=tar.getmembers()
+        root_metadata={key:int(tar.pax_headers[f'lifemap.root_{key}']) for key in ['uid','gid','mode']
+                       if f'lifemap.root_{key}' in tar.pax_headers}
+        assert not root_metadata or (set(root_metadata)=={'uid','gid','mode'} and
+               root_metadata['uid']>=0 and root_metadata['gid']>=0 and
+               0<=root_metadata['mode']<=0o7777),'Invalid volume root metadata'
         assert sum(m.size for m in members)<32*1024**3,'Unexpected transfer size'
         for m in members:
             rel=PurePosixPath(m.name)
@@ -71,6 +79,9 @@ def restore(destination,archive,kind,expected):
                 with tar.extractfile(m) as src,target.open('xb') as dst:shutil.copyfileobj(src,dst)
             if os.name!='nt':
                 os.chown(target,m.uid,m.gid);os.chmod(target,m.mode)
+    if root_metadata and os.name!='nt':
+        os.chown(destination,root_metadata['uid'],root_metadata['gid'])
+        os.chmod(destination,root_metadata['mode'])
     return dict(restored=kind,sha256=expected,existing_different_files_overwritten=False)
 
 
