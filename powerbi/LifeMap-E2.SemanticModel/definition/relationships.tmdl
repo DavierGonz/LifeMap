@@ -1,0 +1,39 @@
+relationship 389cb7fc-f198-4a60-85a0-b729ae5364c4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Hotspots.start
+	toColumn: LocalDateTable_63b347e1-83a6-423c-844d-13fe63c8744d.Date
+
+relationship 907bb7b3-2740-4dd5-a48a-c58d01cca121
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Hotspots.end
+	toColumn: LocalDateTable_d79193a4-1ac7-457b-8cf3-a1745b9deb74.Date
+
+relationship cc5234c0-569e-4218-9e2b-7ace68210390
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Alerts.event_date
+	toColumn: LocalDateTable_36829ee8-4d16-4af8-a7ab-9bc1c3d37cd7.Date
+
+relationship 409e5900-664a-4056-8306-a03b46f6b847
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Alerts.processed_at
+	toColumn: LocalDateTable_35c24b70-80df-4851-a3b8-a067f83ff0e1.Date
+
+relationship f19efe7e-6387-4555-93fc-3f4171e8d897
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Evolution.start
+	toColumn: LocalDateTable_2fc66c28-b8f5-466b-bab8-2ee07df1f760.Date
+
+relationship ecbc8c6e-722f-4dad-9aed-4c1171f398ed
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Evolution.end
+	toColumn: LocalDateTable_c988721d-a43f-457f-9b3b-ea350a1842a0.Date
+
+relationship acf28f17-a4ca-4e36-9d19-548ff1c9d0a0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Refresh.api_generated_at
+	toColumn: LocalDateTable_735bb224-ce2a-4339-b2b3-a89e9a917420.Date
+
+relationship 819a3322-0d6d-4db3-9938-90359623f272
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Refresh.loaded_at_utc
+	toColumn: LocalDateTable_fda60f00-de4c-402d-b55a-536f2cc1bbf6.Date

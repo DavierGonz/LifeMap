@@ -1,0 +1,482 @@
+{
+  "run_id": "b0f6c7f694b8bf5e370d2988f471489e9bf4c097352fbc569d059c3a9ab75a65",
+  "source_businesses": 16944,
+  "open": 11191,
+  "closed": 5753,
+  "unknown_birth_entry_age": 16944,
+  "dataset_cutoff": "2022-01-19 19:48:45",
+  "category_groups": 210,
+  "eligible_categories": 45,
+  "saved_documents": 424,
+  "direct_risk_set_checks": 1030,
+  "review_timelines_verified": 4,
+  "comparisons": [
+    {
+      "group_type": "category",
+      "group_id": "American (New)",
+      "method": "observed_origin",
+      "polygon": null,
+      "businesses": 1902,
+      "events": 831,
+      "censored": 1071,
+      "delayed_entries": 0,
+      "minimum_businesses": 50,
+      "minimum_at_risk_for_interpretation": 20,
+      "median_days": 4421.861180555556,
+      "median_at_risk": 383,
+      "median_supported": true,
+      "median_reason": "reached",
+      "status": "ok",
+      "support_start_days": 0.0,
+      "support_end_days": 6083.774895833333,
+      "source_businesses": 1902,
+      "exclusions": {},
+      "descriptive_retrospective": true,
+      "allowed_as_risk_predictor": false,
+      "uses_post_T": true,
+      "origin": "first_review; not actual opening",
+      "event_proxy": "last_review when is_open=0",
+      "censoring": "dataset_cutoff when is_open=1 (Word administrative snapshot)",
+      "true_birth_age_entry_identifiable": false,
+      "entry": "0 on observed clock",
+      "landmark": null
+    },
+    {
+      "group_type": "category",
+      "group_id": "American (New)",
+      "method": "landmark_T",
+      "polygon": null,
+      "businesses": 1346,
+      "events": 275,
+      "censored": 1071,
+      "delayed_entries": 1232,
+      "minimum_businesses": 50,
+      "minimum_at_risk_for_interpretation": 20,
+      "median_days": 2296.832199074074,
+      "median_at_risk": 233,
+      "median_supported": true,
+      "median_reason": "reached",
+      "status": "ok",
+      "support_start_days": 0.0,
+      "support_end_days": 6083.774895833333,
+      "source_businesses": 1902,
+      "exclusions": {
+        "ended_before_or_at_landmark": 556
+      },
+      "descriptive_retrospective": true,
+      "allowed_as_risk_predictor": false,
+      "uses_post_T": true,
+      "origin": "first_review; not actual opening",
+      "event_proxy": "last_review when is_open=0",
+      "censoring": "dataset_cutoff when is_open=1 (Word administrative snapshot)",
+      "true_birth_age_entry_identifiable": false,
+      "entry": "max(0,T-first_review); observed-age left truncation only",
+      "landmark": "2019-01-01T00:00:00+00:00"
+    },
+    {
+      "group_type": "category",
+      "group_id": "American (Traditional)",
+      "method": "observed_origin",
+      "polygon": null,
+      "businesses": 1788,
+      "events": 557,
+      "censored": 1231,
+      "delayed_entries": 0,
+      "minimum_businesses": 50,
+      "minimum_at_risk_for_interpretation": 20,
+      "median_days": null,
+      "median_at_risk": null,
+      "median_supported": false,
+      "median_reason": "not_reached",
+      "status": "ok",
+      "support_start_days": 0.0,
+      "support_end_days": 6181.654386574074,
+      "source_businesses": 1788,
+      "exclusions": {},
+      "descriptive_retrospective": true,
+      "allowed_as_risk_predictor": false,
+      "uses_post_T": true,
+      "origin": "first_review; not actual opening",
+      "event_proxy": "last_review when is_open=0",
+      "censoring": "dataset_cutoff when is_open=1 (Word administrative snapshot)",
+      "true_birth_age_entry_identifiable": false,
+      "entry": "0 on observed clock",
+      "landmark": null
+    },
+    {
+      "group_type": "category",
+      "group_id": "American (Traditional)",
+      "method": "landmark_T",
+      "polygon": null,
+      "businesses": 1420,
+      "events": 189,
+      "censored": 1231,
+      "delayed_entries": 1271,
+      "minimum_businesses": 50,
+      "minimum_at_risk_for_interpretation": 20,
+      "median_days": 4615.375092592592,
+      "median_at_risk": 348,
+      "median_supported": true,
+      "median_reason": "reached",
+      "status": "ok",
+      "support_start_days": 0.0,
+      "support_end_days": 6181.654386574074,
+      "source_businesses": 1788,
+      "exclusions": {
+        "ended_before_or_at_landmark": 368
+      },
+      "descriptive_retrospective": true,
+      "allowed_as_risk_predictor": false,
+      "uses_post_T": true,
+      "origin": "first_review; not actual opening",
+      "event_proxy": "last_review when is_open=0",
+      "censoring": "dataset_cutoff when is_open=1 (Word administrative snapshot)",
+      "true_birth_age_entry_identifiable": false,
+      "entry": "max(0,T-first_review); observed-age left truncation only",
+      "landmark": "2019-01-01T00:00:00+00:00"
+    },
+    {
+      "group_type": "zone",
+      "group_id": "sector_oeste",
+      "method": "observed_origin",
+      "polygon": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.24,
+              39.9
+            ],
+            [
+              -75.17,
+              39.9
+            ],
+            [
+              -75.17,
+              40.02
+            ],
+            [
+              -75.24,
+              40.02
+            ],
+            [
+              -75.24,
+              39.9
+            ]
+          ]
+        ]
+      },
+      "businesses": 1463,
+      "events": 600,
+      "censored": 863,
+      "delayed_entries": 0,
+      "minimum_businesses": 50,
+      "minimum_at_risk_for_interpretation": 20,
+      "median_days": 4646.7478125,
+      "median_at_risk": 267,
+      "median_supported": true,
+      "median_reason": "reached",
+      "status": "ok",
+      "support_start_days": 0.0,
+      "support_end_days": 6083.774895833333,
+      "source_businesses": 1463,
+      "exclusions": {},
+      "descriptive_retrospective": true,
+      "allowed_as_risk_predictor": false,
+      "uses_post_T": true,
+      "origin": "first_review; not actual opening",
+      "event_proxy": "last_review when is_open=0",
+      "censoring": "dataset_cutoff when is_open=1 (Word administrative snapshot)",
+      "true_birth_age_entry_identifiable": false,
+      "entry": "0 on observed clock",
+      "landmark": null
+    },
+    {
+      "group_type": "zone",
+      "group_id": "sector_oeste",
+      "method": "landmark_T",
+      "polygon": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.24,
+              39.9
+            ],
+            [
+              -75.17,
+              39.9
+            ],
+            [
+              -75.17,
+              40.02
+            ],
+            [
+              -75.24,
+              40.02
+            ],
+            [
+              -75.24,
+              39.9
+            ]
+          ]
+        ]
+      },
+      "businesses": 1028,
+      "events": 165,
+      "censored": 863,
+      "delayed_entries": 865,
+      "minimum_businesses": 50,
+      "minimum_at_risk_for_interpretation": 20,
+      "median_days": 3955.4796412037035,
+      "median_at_risk": 206,
+      "median_supported": true,
+      "median_reason": "reached",
+      "status": "ok",
+      "support_start_days": 0.0,
+      "support_end_days": 6083.774895833333,
+      "source_businesses": 1463,
+      "exclusions": {
+        "ended_before_or_at_landmark": 435
+      },
+      "descriptive_retrospective": true,
+      "allowed_as_risk_predictor": false,
+      "uses_post_T": true,
+      "origin": "first_review; not actual opening",
+      "event_proxy": "last_review when is_open=0",
+      "censoring": "dataset_cutoff when is_open=1 (Word administrative snapshot)",
+      "true_birth_age_entry_identifiable": false,
+      "entry": "max(0,T-first_review); observed-age left truncation only",
+      "landmark": "2019-01-01T00:00:00+00:00"
+    },
+    {
+      "group_type": "zone",
+      "group_id": "sector_este",
+      "method": "observed_origin",
+      "polygon": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.16,
+              39.9
+            ],
+            [
+              -75.09,
+              39.9
+            ],
+            [
+              -75.09,
+              40.02
+            ],
+            [
+              -75.16,
+              40.02
+            ],
+            [
+              -75.16,
+              39.9
+            ]
+          ]
+        ]
+      },
+      "businesses": 2051,
+      "events": 891,
+      "censored": 1160,
+      "delayed_entries": 0,
+      "minimum_businesses": 50,
+      "minimum_at_risk_for_interpretation": 20,
+      "median_days": 4226.206666666667,
+      "median_at_risk": 459,
+      "median_supported": true,
+      "median_reason": "reached",
+      "status": "ok",
+      "support_start_days": 0.0,
+      "support_end_days": 6181.654386574074,
+      "source_businesses": 2051,
+      "exclusions": {},
+      "descriptive_retrospective": true,
+      "allowed_as_risk_predictor": false,
+      "uses_post_T": true,
+      "origin": "first_review; not actual opening",
+      "event_proxy": "last_review when is_open=0",
+      "censoring": "dataset_cutoff when is_open=1 (Word administrative snapshot)",
+      "true_birth_age_entry_identifiable": false,
+      "entry": "0 on observed clock",
+      "landmark": null
+    },
+    {
+      "group_type": "zone",
+      "group_id": "sector_este",
+      "method": "landmark_T",
+      "polygon": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.16,
+              39.9
+            ],
+            [
+              -75.09,
+              39.9
+            ],
+            [
+              -75.09,
+              40.02
+            ],
+            [
+              -75.16,
+              40.02
+            ],
+            [
+              -75.16,
+              39.9
+            ]
+          ]
+        ]
+      },
+      "businesses": 1453,
+      "events": 293,
+      "censored": 1160,
+      "delayed_entries": 1210,
+      "minimum_businesses": 50,
+      "minimum_at_risk_for_interpretation": 20,
+      "median_days": 2767.222534722222,
+      "median_at_risk": 200,
+      "median_supported": true,
+      "median_reason": "reached",
+      "status": "ok",
+      "support_start_days": 0.0,
+      "support_end_days": 6181.654386574074,
+      "source_businesses": 2051,
+      "exclusions": {
+        "ended_before_or_at_landmark": 598
+      },
+      "descriptive_retrospective": true,
+      "allowed_as_risk_predictor": false,
+      "uses_post_T": true,
+      "origin": "first_review; not actual opening",
+      "event_proxy": "last_review when is_open=0",
+      "censoring": "dataset_cutoff when is_open=1 (Word administrative snapshot)",
+      "true_birth_age_entry_identifiable": false,
+      "entry": "max(0,T-first_review); observed-age left truncation only",
+      "landmark": "2019-01-01T00:00:00+00:00"
+    }
+  ],
+  "directory": "/data/lifemap-e2/survival/b0f6c7f694b8bf5e",
+  "seconds": 2.776,
+  "peak_rss_mib": 158.89,
+  "true_opening_age_recovered": false,
+  "temporal_risk_features_created": false,
+  "status": "passed",
+  "audit": {
+    "businesses": 16944,
+    "primary_categories": [
+      [
+        "American (New)",
+        1902
+      ],
+      [
+        "American (Traditional)",
+        1788
+      ],
+      [
+        "Pizza",
+        994
+      ],
+      [
+        "Italian",
+        988
+      ],
+      [
+        "Chinese",
+        903
+      ],
+      [
+        "Bars",
+        800
+      ],
+      [
+        "Burgers",
+        774
+      ],
+      [
+        "Breakfast & Brunch",
+        749
+      ],
+      [
+        "Bakeries",
+        566
+      ],
+      [
+        "Asian Fusion",
+        504
+      ]
+    ],
+    "open": 11191,
+    "closed": 5753,
+    "unknown_entry_age": 16944,
+    "known_entry_age": 0,
+    "missing_dates": 0,
+    "zero_duration": 0,
+    "invalid_duration": 0,
+    "dataset_cutoffs": [
+      "2022-01-19 19:48:45"
+    ],
+    "first_date": "2005-02-16 04:06:26",
+    "last_date": "2022-01-19 19:46:34"
+  },
+  "validation": {
+    "category_totals": {
+      "observed_origin": {
+        "businesses": 16944,
+        "events": 5753,
+        "censored": 11191,
+        "delayed_entries": 0
+      },
+      "landmark_T": {
+        "businesses": 12905,
+        "events": 1714,
+        "censored": 11191,
+        "delayed_entries": 11237
+      }
+    },
+    "E1_counts": {
+      "businesses": 16944,
+      "reviews": 1320594
+    },
+    "E1_model_unchanged": true
+  },
+  "tests": {
+    "unit_passed": 42,
+    "survival_cases_passed": 9,
+    "container_pytest_passed": 27,
+    "E1_six_endpoints_and_UI_passed": true
+  },
+  "resources": {
+    "job_limit_mib": 256,
+    "cpu_limit": 0.5,
+    "peak_job_rss_mib": 158.89,
+    "job_seconds": 2.776,
+    "Windows_available_before_mib": 2545,
+    "Windows_available_after_mib": 3020
+  },
+  "restrictions": {
+    "Azure_accessed": false,
+    "pushed": false,
+    "models_retrained": false,
+    "Yelp_downloaded": false,
+    "E1_records_changed": false,
+    "risk_or_alerts_or_endpoints_or_PowerBI_implemented": false,
+    "protected_projects_modified": false
+  },
+  "interpretation": {
+    "clock": "days since first review, not founding",
+    "closed_event": "last review proxy; actual closure date unknown",
+    "open_censoring": "administrative dataset snapshot per Word; original last_review and business_days unchanged",
+    "true_birth_entry_age_identifiable": false,
+    "landmark_entry": "max(0,T-first_review); observed-age correction only",
+    "post_T_retrospective_results_forbidden_as_risk_predictors": true
+  }
+}

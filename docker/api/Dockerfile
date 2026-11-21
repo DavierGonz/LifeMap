@@ -11,8 +11,10 @@ COPY api /app/api
 COPY ml /app/ml
 COPY analytics /app/analytics
 COPY storage /app/storage
+COPY config /app/config
+COPY streaming /app/streaming
 COPY tests/e1 /app/tests/e1
-COPY ci/__init__.py ci/azure_promote.py /app/ci/
+COPY ci /app/ci
 ENV PYTHONPATH=/app
 USER app
 EXPOSE 5000
@@ -20,6 +22,8 @@ CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "1", "--threads", "2", "
 
 FROM base AS test
 USER root
+COPY tests/unit /app/tests/unit
+COPY deploy/azure/e2-volumes.py /app/deploy/azure/e2-volumes.py
 COPY requirements/test.lock.txt requirements/api.lock.txt requirements/mongo.lock.txt /tmp/
 COPY ci/faults /app/ci/faults
 RUN python -m pip install --no-cache-dir -r /tmp/test.lock.txt

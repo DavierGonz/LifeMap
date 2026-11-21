@@ -1,0 +1,31 @@
+model Model
+	culture: es-CO
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-CO
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["LifeMapApiUrl","LifeMap","Hotspots","Alerts","KaplanMeier","Evolution","Refresh"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Hotspots
+ref table DateTableTemplate_46c23796-4943-4718-8c66-a3e21bf56620
+ref table LocalDateTable_63b347e1-83a6-423c-844d-13fe63c8744d
+ref table LocalDateTable_d79193a4-1ac7-457b-8cf3-a1745b9deb74
+ref table Alerts
+ref table LocalDateTable_36829ee8-4d16-4af8-a7ab-9bc1c3d37cd7
+ref table LocalDateTable_35c24b70-80df-4851-a3b8-a067f83ff0e1
+ref table KaplanMeier
+ref table Evolution
+ref table LocalDateTable_2fc66c28-b8f5-466b-bab8-2ee07df1f760
+ref table LocalDateTable_c988721d-a43f-457f-9b3b-ea350a1842a0
+ref table Refresh
+ref table LocalDateTable_735bb224-ce2a-4339-b2b3-a89e9a917420
+ref table LocalDateTable_fda60f00-de4c-402d-b55a-536f2cc1bbf6
+
+ref cultureInfo es-CO

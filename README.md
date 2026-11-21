@@ -6,7 +6,7 @@ Proyecto universitario: Yelp -> Dask -> MongoDB -> Spark MLlib/MapReduce -> Flas
 La ruta `/` abre el explorador visual con Leaflet/OpenStreetMap, filtros,
 negocios reales, tasas de cierre y clasificador de resenas. `/health` conserva
 el estado JSON de la API. No requiere Node ni un servicio frontend adicional.
-Presupuesto $0 COP. Entrega 2 fuera de alcance. Referencias Geoespacial y Discos
+Presupuesto $0 COP. E1 publicada; E2 en desarrollo local (fases 1 a 4). Referencias Geoespacial y Discos
 consultadas sin modificar sus recursos. Codigo adaptado y limites: [REUSE](docs/REUSE.md).
 
 ## Resultado y alcance
@@ -192,3 +192,30 @@ Las capturas corresponden a sus ejecuciones originales, no al tiempo presente.
 Jenkins #4 SUCCESS y #5 FAILURE son la demostracion final del gate; #1 conserva
 el error inicial de configuracion y #2/#3 las primeras pruebas. #5 conserva
 la misma imagen API y no archiva artifacts de despliegues anteriores.
+# Entrega 2 — fases 1 a 4 locales
+
+Kafka y productor temporal: [ejecucion y verificacion](docs/streaming.md).
+La fase 2 agrega inferencia Structured Streaming y ventanas geoespaciales;
+las instrucciones y pruebas estan en la misma guia. Sin despliegue Azure.
+
+La fase 3 agrega [Kaplan-Meier por categoria y zona](docs/survival.md), con
+censura, entrada tardia observable y exportaciones para el futuro dashboard.
+La fase 4 agrega [modelo de riesgo y alertas foreachBatch](docs/risk.md), con
+variables temporales, evaluacion MLlib y pruebas reales. Sin endpoints nuevos,
+Power BI ni cambios de interfaz o Azure en esa fase.
+
+La fase 5 incorpora cuatro endpoints E2 de solo lectura, salud Kafka/lag y
+amplía la interfaz Leaflet con alertas, hotspots y curvas interactivas.
+[Contratos y consultas Power BI](powerbi/README.md). Power BI Desktop usa
+la API en modo Import y el dashboard `powerbi/LifeMap-E2.pbix` está guardado y
+comprobado con sus cuatro visuales. Actualización manual: Inicio → Actualizar.
+El proyecto PBIP se versiona; los datos/cachés/PBIX quedan fuera de Git.
+Ejecutar `.\.venv\Scripts\python.exe scripts/test_api_phase5.py` para comprobar
+los contratos con los datos y checkpoints existentes. Sin cambios Jenkins/Azure.
+
+La fase 6 prepara [CI/CD y actualización E2](deploy/azure/E2.md): Jenkins prueba
+modelos fijados, 100 reseñas reales, imagen nueva del consumidor y diez endpoints;
+la promoción requiere todos los gates. `pollSCM` sigue cada dos minutos. Scripts
+de snapshot consistente/restore conservador y parámetro LifeMapApiUrl para Power BI.
+La publicación y la actualización de Azure requieren autorización; la preparación
+local no acredita todavía E2.1/E2.10 desplegados ni la sustentación pública.

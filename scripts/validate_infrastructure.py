@@ -17,7 +17,7 @@ SERVICES = {
 FORBIDDEN_HOST_PORTS = {27017, 27018, 5000, 8080, 8081, 8787}
 
 
-def load_model(root=ROOT):
+def load_model(root=ROOT, include_e2=False, include_streaming=False):
     # config analiza archivos; no consulta ni inicia el motor Docker.
     environment = os.environ.copy()
     for key in (
@@ -27,7 +27,9 @@ def load_model(root=ROOT):
     ):
         environment.pop(key, None)
     result = subprocess.run(
-        ["docker", "compose", "--project-name", "lifemap", "--env-file",
+        ["docker", "compose", *( ['--profile', 'e2'] if include_e2 or include_streaming else [] ),
+         *( ['--profile', 'streaming'] if include_streaming else [] ),
+         "--project-name", "lifemap", "--env-file",
          str(root / ".env.example"), "-f", str(root / "docker-compose.yml"),
          "config", "--format", "json"],
         cwd=root, env=environment, text=True, capture_output=True,
@@ -43,12 +45,14 @@ def is_inside(path, parent):
 def validate_model(model, root=ROOT):
     errors = []
     services = model.get("services", {})
-    if model.get("name") != "lifemap" or set(services) != SERVICES:
-        errors.append("Expected the lifemap project and exactly eight base services")
+    if model.get("name") != "lifemap" or set(services) not in (SERVICES, SERVICES | {'kafka'}, SERVICES | {'kafka', 'streaming'}):
+        errors.append("Expected eight E1 services and optional E2 Kafka/streaming")
     total_memory = 0
     published = []
     for name, service in services.items():
-        if not service.get("image", "").startswith("lifemap-"):
+        if not service.get("image", "").startswith("lifemap-") and not (
+            name == 'kafka' and re.fullmatch(r'apache/kafka:4\.1\.2@sha256:[0-9a-f]{64}', service.get('image', ''))
+        ):
             errors.append(f"{name}: image must belong to LifeMap")
         if "container_name" in service:
             errors.append(f"{name}: fixed global container names are forbidden")
@@ -69,6 +73,12 @@ def validate_model(model, root=ROOT):
                 and volume["target"] == "/var/run/docker.sock"
             ):
                 errors.append(f"{name}: unexpected host bind mount")
+        if name == 'kafka':
+            if service.get('ports') or set(service.get('networks', {})) != {'backend'}:
+                errors.append('Kafka must have no host port and remain on internal backend')
+            if service.get('environment', {}).get('KAFKA_PROCESS_ROLES') != 'broker,controller':
+                errors.append('Kafka must use KRaft')
+            continue
         build = service.get("build", {})
         context = Path(build.get("context", "."))
         dockerfile = context / build.get("dockerfile", "Dockerfile")
@@ -78,8 +88,8 @@ def validate_model(model, root=ROOT):
             errors.append(f"{name}: missing Dockerfile")
     if len(published) != len(set(published)):
         errors.append("Duplicate published host ports")
-    if total_memory > 7 * 1024 ** 3:
-        errors.append("Base memory limits exceed the initial 7 GiB budget")
+    if total_memory > (9 if 'streaming' in services else 8 if 'kafka' in services else 7) * 1024 ** 3:
+        errors.append("Memory limits exceed E1 plus 1 GiB each for Kafka and streaming")
     mongo = services.get("mongodb", {})
     if mongo.get("ports") or "--auth" not in mongo.get("command", []):
         errors.append("MongoDB must authenticate and have no host port")
@@ -110,6 +120,16 @@ def validate_model(model, root=ROOT):
     api_secrets = {secret["source"] for secret in services.get("api", {}).get("secrets", [])}
     if api_secrets != {"mongo_reader_password"}:
         errors.append("API may mount only the read-only MongoDB credential")
+    stream = services.get('streaming')
+    if stream:
+        if stream.get('ports') or set(stream.get('networks', {})) != {'backend'}:
+            errors.append('Streaming must remain internal without host ports')
+        if {s['source'] for s in stream.get('secrets', [])} != {'mongo_writer_password'}:
+            errors.append('Streaming must use only the LifeMap writer credential')
+        if not any(v['source'] == 'stream_checkpoints' and v['target'] == '/checkpoints' for v in stream.get('volumes', [])):
+            errors.append('Streaming requires independent persistent checkpoints')
+        if not any(v['source'] == 'model_store' and v.get('read_only') for v in stream.get('volumes', [])):
+            errors.append('Streaming model volume must be read-only')
     for name, service in services.items():
         mounted = {secret["source"] for secret in service.get("secrets", [])}
         if name != "mongodb" and "mongo_root_password" in mounted:
@@ -120,7 +140,7 @@ def validate_model(model, root=ROOT):
 def validate_sources(root=ROOT):
     errors = []
     # Compilar a memoria no importa los modulos ni ejecuta instaladores/sondas.
-    for directory in ("api", "scripts", "docker", "tests"):
+    for directory in ("api", "scripts", "docker", "tests", "streaming"):
         for path in (root / directory).rglob("*.py"):
             try:
                 ast.parse(path.read_text(encoding="utf-8"), filename=str(path))

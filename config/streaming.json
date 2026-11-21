@@ -1,0 +1,22 @@
+{
+  "cutoff": "2019-01-01T00:00:00+00:00",
+  "dataset": "yelp-dataset/yelp-dataset",
+  "dataset_version": 4,
+  "scope": "Philadelphia / Restaurants; same approved E1 corpus",
+  "topic": "reviews",
+  "partitions_minimum": 3,
+  "key": "business_id",
+  "seconds_per_day": 0.3333333333333333,
+  "temporal_manifest": "/models/sentiment-temporal.json",
+  "model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+  "model_sha256": "e650fc89e70986bd9069b557bf2ea254f98ccbf7558cdfe42bcfae3346f6b15c",
+  "spark_pipeline_sha256": "3c9e22f62346a5201ee0303bfc5f0284581c5145599ed361e60a281ba8f30644",
+  "geohash_precision": 5,
+  "window_days": 30,
+  "watermark_days": 7,
+  "hotspot_min_reviews": 30,
+  "hotspot_increase_percentage_points": 15,
+  "risk_horizon_end": "2020-01-01T00:00:00+00:00",
+  "rationale": "994877 historical reviews; 325717 future reviews; 709 retrospective positive proxy cases and 10265 negative cases among businesses with history and future activity; full 12-month horizon and further follow-up. Cutoff precedes pandemic disruption.",
+  "dates_are_review_activity_proxies": true
+}

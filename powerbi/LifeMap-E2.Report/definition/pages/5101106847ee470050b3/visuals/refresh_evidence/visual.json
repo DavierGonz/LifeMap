@@ -1,0 +1,144 @@
+{
+  "name": "refresh_evidence",
+  "position": {
+    "x": 20,
+    "y": 790,
+    "width": 1240,
+    "height": 90,
+    "z": 6,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "autoSizeColumnWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "columnAdjustment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'growToFit'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Refresh"
+                    }
+                  },
+                  "Property": "api_generated_at"
+                }
+              },
+              "queryRef": "Refresh.api_generated_at",
+              "nativeQueryRef": "api_generated_at"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Refresh"
+                    }
+                  },
+                  "Property": "loaded_at_utc"
+                }
+              },
+              "queryRef": "Refresh.loaded_at_utc",
+              "nativeQueryRef": "loaded_at_utc"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Refresh"
+                    }
+                  },
+                  "Property": "hotspots"
+                }
+              },
+              "queryRef": "Refresh.hotspots",
+              "nativeQueryRef": "hotspots"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Refresh"
+                    }
+                  },
+                  "Property": "active_alerts"
+                }
+              },
+              "queryRef": "Refresh.active_alerts",
+              "nativeQueryRef": "active_alerts"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Refresh"
+                    }
+                  },
+                  "Property": "windows"
+                }
+              },
+              "queryRef": "Refresh.windows",
+              "nativeQueryRef": "windows"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Fuente API · pulsa Inicio → Actualizar'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json"
+}

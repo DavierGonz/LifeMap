@@ -1,0 +1,661 @@
+{
+  "phase": 6,
+  "scope": "LOCAL preparation only; Azure not contacted; no Git push/merge",
+  "verified_utc": "2026-11-14T14:24:56.816098+00:00",
+  "github": {
+    "url": "https://github.com/DavierGonz/LifeMap",
+    "public": true,
+    "remote_heads": [
+      "36be4870586f62faa08acffcbb66deccac272828\trefs/heads/demo/e1-pollscm",
+      "036c8aa182afe65c872741d4e5d8d640850ea3ca\trefs/heads/main"
+    ],
+    "all_five_phases_ancestors": true,
+    "e2_published": false
+  },
+  "jenkins": {
+    "local_audit": {
+      "url": "http://127.0.0.1:8083",
+      "jobs": [
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+          "name": "lifemap-local-e1",
+          "buildable": true,
+          "lastBuild": {
+            "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+            "building": false,
+            "number": 5,
+            "result": "FAILURE"
+          }
+        },
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+          "name": "lifemap-local-e2",
+          "buildable": true,
+          "lastBuild": {
+            "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+            "building": false,
+            "number": 11,
+            "result": "FAILURE"
+          }
+        },
+        {
+          "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+          "name": "lifemap-main",
+          "buildable": false,
+          "lastBuild": null
+        }
+      ],
+      "e1_main": {
+        "disabled": "true",
+        "url": "https://github.com/DavierGonz/LifeMap.git",
+        "poll_scm": "H/2 * * * *"
+      },
+      "credential_ids": [
+        "lifemap-kaggle"
+      ]
+    },
+    "azure_current_state": "Not inspected: authorization required; stored E1 evidence is historical",
+    "poll_scm": "H/2 * * * *",
+    "credential_kaggle_id_present": true,
+    "credentials_changed": false,
+    "precommit_worktree_snapshot": true,
+    "source_base_commit": "ef25d14fd40a3b4f27cccdbbbdc5edd69c8223c5",
+    "success": {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "artifacts": [
+        {
+          "relativePath": "reports/api-image-before.txt"
+        },
+        {
+          "relativePath": "reports/candidate-api.json"
+        },
+        {
+          "relativePath": "reports/candidate-error.txt"
+        },
+        {
+          "relativePath": "reports/candidate-stream-publish.json"
+        },
+        {
+          "relativePath": "reports/candidate-stream.json"
+        },
+        {
+          "relativePath": "reports/candidate-stream.log"
+        },
+        {
+          "relativePath": "reports/deployed-api.json"
+        },
+        {
+          "relativePath": "reports/models.json"
+        },
+        {
+          "relativePath": "reports/promotion.txt"
+        },
+        {
+          "relativePath": "reports/pytest.xml"
+        },
+        {
+          "relativePath": "reports/source-commit.txt"
+        },
+        {
+          "relativePath": "reports/stream-100.json"
+        },
+        {
+          "relativePath": "reports/stream-image-before.txt"
+        }
+      ],
+      "building": false,
+      "duration": 117688,
+      "number": 10,
+      "result": "SUCCESS",
+      "junit": {
+        "_class": "hudson.tasks.junit.TestResult",
+        "failCount": 0,
+        "passCount": 56,
+        "skipCount": 0
+      }
+    },
+    "failure": {
+      "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+      "artifacts": [
+        {
+          "relativePath": "reports/api-image-before.txt"
+        },
+        {
+          "relativePath": "reports/pytest.xml"
+        },
+        {
+          "relativePath": "reports/source-commit.txt"
+        },
+        {
+          "relativePath": "reports/stream-image-before.txt"
+        }
+      ],
+      "building": false,
+      "duration": 7234,
+      "number": 11,
+      "result": "FAILURE",
+      "junit": {
+        "_class": "hudson.tasks.junit.TestResult",
+        "failCount": 1,
+        "passCount": 56,
+        "skipCount": 0
+      }
+    },
+    "blocked": {
+      "build": 11,
+      "before": {
+        "api_image": "sha256:2477a71edceeef2aeaf28da99e44ad97ca460443886b18ad50dacef829114ff5",
+        "stream_image": "sha256:2b420b2aee53c62aa759868eae7165c625df7614f205f85292dc9d8fb5d11ba3",
+        "commit": "ef25d14fd40a3b4f27cccdbbbdc5edd69c8223c5",
+        "status": "ok"
+      },
+      "after": {
+        "api_image": "sha256:2477a71edceeef2aeaf28da99e44ad97ca460443886b18ad50dacef829114ff5",
+        "stream_image": "sha256:2b420b2aee53c62aa759868eae7165c625df7614f205f85292dc9d8fb5d11ba3",
+        "commit": "ef25d14fd40a3b4f27cccdbbbdc5edd69c8223c5",
+        "status": "ok"
+      },
+      "unchanged": true,
+      "production_tags_unchanged": true
+    },
+    "real_smoke": {
+      "classified": 100,
+      "predictions": {
+        "positive": 65,
+        "neutral": 4,
+        "negative": 31
+      },
+      "risk_processed": 100,
+      "windows": 130,
+      "alerts": 140,
+      "active_alerts": 135,
+      "hotspots": 0,
+      "model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+      "sentiment_sha256": "e650fc89e70986bd9069b557bf2ea254f98ccbf7558cdfe42bcfae3346f6b15c",
+      "risk_model_id": "closure-risk-20190101-lr-v1",
+      "risk_score_calibrated": false,
+      "real_events": true,
+      "synthetic_texts": false,
+      "scope": "production",
+      "isolated_test_scope": false,
+      "immutable_e1_counts": {
+        "businesses": 16944,
+        "reviews": 1320594
+      },
+      "published_messages": 100,
+      "partitions": {
+        "0": 28,
+        "2": 37,
+        "1": 35
+      },
+      "chronological_send": true,
+      "key": "business_id",
+      "cached_selection": true,
+      "replayed": true,
+      "idempotent_replay_verified": true,
+      "sampling": "100 chronological real Yelp events; directed F4 alert sample is not population prevalence",
+      "kafka_end_offsets": {
+        "0": 550,
+        "2": 594,
+        "1": 568
+      },
+      "published": {
+        "sent": 100,
+        "partitions": {
+          "0": 28,
+          "2": 37,
+          "1": 35
+        },
+        "first_date": "2020-10-30T19:39:57+00:00",
+        "last_date": "2020-10-31T01:29:05+00:00",
+        "seconds": 0.188,
+        "model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+        "replay_id": "production"
+      },
+      "verified_utc": "2026-11-14T14:17:24.065724+00:00"
+    },
+    "new_image_isolated_real_smoke": {
+      "classified": 100,
+      "predictions": {
+        "positive": 65,
+        "neutral": 4,
+        "negative": 31
+      },
+      "risk_processed": 100,
+      "windows": 130,
+      "alerts": 43,
+      "active_alerts": 39,
+      "hotspots": 0,
+      "model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+      "sentiment_sha256": "e650fc89e70986bd9069b557bf2ea254f98ccbf7558cdfe42bcfae3346f6b15c",
+      "risk_model_id": "closure-risk-20190101-lr-v1",
+      "risk_score_calibrated": false,
+      "real_events": true,
+      "synthetic_texts": false,
+      "scope": "test_ci_lifemap_local_e2_10",
+      "isolated_test_scope": true,
+      "immutable_e1_counts": {
+        "businesses": 16944,
+        "reviews": 1320594
+      }
+    },
+    "models": {
+      "verified": true,
+      "sentiment": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+      "sha256": "e650fc89e70986bd9069b557bf2ea254f98ccbf7558cdfe42bcfae3346f6b15c",
+      "risk": "closure-risk-20190101-lr-v1",
+      "cutoff": "2019-01-01T00:00:00+00:00",
+      "loaded_checkpoint_models_match": true
+    },
+    "candidate": {
+      "/health": {
+        "status": 200
+      },
+      "/": {
+        "status": 200,
+        "interface": true
+      },
+      "/businesses/near?lat=39.9526&lon=-75.1652&radius_m=5000&category=Restaurants&limit=5": {
+        "status": 200
+      },
+      "/businesses/within": {
+        "status": 200
+      },
+      "/zones/summary?lat=39.9526&lon=-75.1652&radius_m=5000": {
+        "status": 200
+      },
+      "/stats/closure?group_by=geohash&min_business_days=3650&limit=5": {
+        "status": 200
+      },
+      "/predict": {
+        "status": 200
+      },
+      "/businesses/near?lat=nan&lon=0&radius_m=10 [invalid input]": {
+        "status": 400
+      },
+      "/predict [invalid input]": {
+        "status": 400
+      },
+      "commit": "ef25d14fd40a3b4f27cccdbbbdc5edd69c8223c5",
+      "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+      "passed": true,
+      "e2": {
+        "hotspots": 0,
+        "windows": 129,
+        "active_alerts": 135,
+        "risk_states": 197,
+        "survival_businesses": 1902,
+        "risk_score_calibrated": false
+      },
+      "academic_endpoints": 10,
+      "consumer_lag_messages": 0
+    }
+  },
+  "demo": {
+    "real_yelp": true,
+    "synthetic_events": false,
+    "published": [
+      {
+        "sent": 1,
+        "partitions": {
+          "2": 1
+        },
+        "first_date": "2020-10-31T01:34:23+00:00",
+        "last_date": "2020-10-31T01:34:23+00:00",
+        "seconds": 13.792,
+        "model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+        "replay_id": "e2-local-final-demo"
+      },
+      {
+        "sent": 1,
+        "partitions": {
+          "0": 1
+        },
+        "first_date": "2021-03-01T00:03:06+00:00",
+        "last_date": "2021-03-01T00:03:06+00:00",
+        "seconds": 12.25,
+        "model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+        "replay_id": "e2-local-final-demo"
+      }
+    ],
+    "windows_before": 66,
+    "windows_after": 129,
+    "hotspots": 0,
+    "alerts": 135,
+    "risk_states": 197,
+    "consumer_lag_messages": 0,
+    "cutoff_model_unchanged": "2019-01-01T00:00:00Z",
+    "source": "Existing MongoDB Yelp; actual review timestamps; sample, not population prevalence"
+  },
+  "api": {
+    "status": "passed",
+    "checks": [
+      "Kafka protocol/end offsets + checkpoint lag",
+      "alerts: radius, polygon, date, state, score, pagination",
+      "risk: real named businesses, six features, uncalibrated score, selection/empty",
+      "hotspots: genuine production windows, valid geometry, temporal empty; no fixtures",
+      "Kaplan-Meier: two categories/two zones/both methods, risk sets, censures, zone/category intersection",
+      "14 invalid/unknown/repeated/range/polygon/date inputs rejected"
+    ],
+    "alerts": 135,
+    "risk_states": 197,
+    "hotspots": 0,
+    "finalized_windows": 129,
+    "survival": [
+      {
+        "category": "American (New)",
+        "method": "observed_origin",
+        "businesses": 1902,
+        "zones": [
+          {
+            "zone": "sector_oeste",
+            "businesses": 212
+          },
+          {
+            "zone": "sector_este",
+            "businesses": 267
+          }
+        ]
+      },
+      {
+        "category": "American (New)",
+        "method": "landmark_T",
+        "businesses": 1346,
+        "zones": [
+          {
+            "zone": "sector_oeste",
+            "businesses": 142
+          },
+          {
+            "zone": "sector_este",
+            "businesses": 172
+          }
+        ]
+      },
+      {
+        "category": "American (Traditional)",
+        "method": "observed_origin",
+        "businesses": 1788,
+        "zones": [
+          {
+            "zone": "sector_oeste",
+            "businesses": 115
+          },
+          {
+            "zone": "sector_este",
+            "businesses": 154
+          }
+        ]
+      },
+      {
+        "category": "American (Traditional)",
+        "method": "landmark_T",
+        "businesses": 1420,
+        "zones": [
+          {
+            "zone": "sector_oeste",
+            "businesses": 87
+          },
+          {
+            "zone": "sector_este",
+            "businesses": 119
+          }
+        ]
+      }
+    ],
+    "consumer_lag_messages": 0
+  },
+  "ui": {
+    "base": "http://127.0.0.1:5100",
+    "e2": {
+      "real_alerts": true,
+      "no_fictitious_hotspots": true,
+      "selected_business_risk": true,
+      "interactive_survival": true,
+      "zone_category_method_filters": true,
+      "manual_refresh": true,
+      "empty_alerts": true
+    },
+    "pizza_count": 20,
+    "selection": true,
+    "marker_selection": true,
+    "filters_match_real_api": true,
+    "empty_state": true,
+    "location_change": true,
+    "closure_groups": true,
+    "positive": "Positiva",
+    "negative": "Negativa",
+    "mobile_width": 390,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "passed": true
+  },
+  "compatibility": {
+    "linux_amd64": true,
+    "services": [
+      {
+        "name": "api",
+        "image": "lifemap-api:infra-v1",
+        "bytes": 51935817,
+        "memory_mib": 256,
+        "cpu": 0.5,
+        "ports": [
+          {
+            "mode": "ingress",
+            "host_ip": "127.0.0.1",
+            "target": 5000,
+            "published": "5100",
+            "protocol": "tcp"
+          }
+        ]
+      },
+      {
+        "name": "dask-scheduler",
+        "image": "lifemap-dask:infra-v1",
+        "bytes": 165504889,
+        "memory_mib": 384,
+        "cpu": 0.5,
+        "ports": [
+          {
+            "mode": "ingress",
+            "host_ip": "127.0.0.1",
+            "target": 8787,
+            "published": "8788",
+            "protocol": "tcp"
+          }
+        ]
+      },
+      {
+        "name": "dask-worker-1",
+        "image": "lifemap-dask:infra-v1",
+        "bytes": 165504889,
+        "memory_mib": 1024,
+        "cpu": 1.0,
+        "ports": []
+      },
+      {
+        "name": "dask-worker-2",
+        "image": "lifemap-dask:infra-v1",
+        "bytes": 165504889,
+        "memory_mib": 1024,
+        "cpu": 1.0,
+        "ports": []
+      },
+      {
+        "name": "jenkins",
+        "image": "lifemap-jenkins:infra-v1",
+        "bytes": 416650962,
+        "memory_mib": 768,
+        "cpu": 1.0,
+        "ports": [
+          {
+            "mode": "ingress",
+            "host_ip": "127.0.0.1",
+            "target": 8080,
+            "published": "8083",
+            "protocol": "tcp"
+          }
+        ]
+      },
+      {
+        "name": "kafka",
+        "image": "apache/kafka:4.1.2@sha256:5cc2a2fd93fa2687b44015eee04fb2c3edd9e526bd64bf8bec5ff1e268772e0e",
+        "bytes": 234734547,
+        "memory_mib": 1024,
+        "cpu": 1.0,
+        "ports": []
+      },
+      {
+        "name": "mongodb",
+        "image": "lifemap-mongo:infra-v1",
+        "bytes": 298754878,
+        "memory_mib": 768,
+        "cpu": 1.0,
+        "ports": []
+      },
+      {
+        "name": "spark-master",
+        "image": "lifemap-spark:infra-v1",
+        "bytes": 690549095,
+        "memory_mib": 1024,
+        "cpu": 1.0,
+        "ports": [
+          {
+            "mode": "ingress",
+            "host_ip": "127.0.0.1",
+            "target": 8080,
+            "published": "8082",
+            "protocol": "tcp"
+          }
+        ]
+      },
+      {
+        "name": "spark-worker",
+        "image": "lifemap-spark:infra-v1",
+        "bytes": 690549095,
+        "memory_mib": 1536,
+        "cpu": 1.0,
+        "ports": []
+      },
+      {
+        "name": "streaming",
+        "image": "lifemap-spark:stream-v2",
+        "bytes": 695841848,
+        "memory_mib": 1024,
+        "cpu": 1.0,
+        "ports": []
+      }
+    ],
+    "memory_limits_total_mib": 8832,
+    "volumes": [
+      {
+        "name": "lifemap_dataset_cache",
+        "size": "17.85GB"
+      },
+      {
+        "name": "lifemap_jenkins_home",
+        "size": "327.9MB"
+      },
+      {
+        "name": "lifemap_dask_worker_1_scratch",
+        "size": "0B"
+      },
+      {
+        "name": "lifemap_spark_master_scratch",
+        "size": "588kB"
+      },
+      {
+        "name": "lifemap_stream_checkpoints",
+        "size": "560kB"
+      },
+      {
+        "name": "lifemap_mongo_config",
+        "size": "0B"
+      },
+      {
+        "name": "lifemap_dask_worker_2_scratch",
+        "size": "0B"
+      },
+      {
+        "name": "lifemap_model_store",
+        "size": "2.264MB"
+      },
+      {
+        "name": "lifemap_spark_worker_scratch",
+        "size": "0B"
+      },
+      {
+        "name": "lifemap_mongo_data",
+        "size": "2.114GB"
+      },
+      {
+        "name": "lifemap_kafka_data",
+        "size": "88.92MB"
+      }
+    ],
+    "measured_windows_available_gib_range_after_manual_release": [
+      1.9,
+      4.6
+    ],
+    "oom_observed": false,
+    "ci_native_spark_cap_mib": 1024,
+    "azure_free_disk": "Pending authorized audit; minimum operational reserve 30 GiB"
+  },
+  "transfer": {
+    "scripts": [
+      "scripts/prepare_e2_transfer.py",
+      "deploy/azure/e2-volumes.py",
+      "deploy/azure/e2-mongo-transfer.sh"
+    ],
+    "tested": "volume roundtrip/checksums/path safety/no overwrite; shell syntax; no live snapshot while services run",
+    "snapshot_created": false,
+    "reason": "must quiesce Kafka/streaming consistently after authorization; all ten services preserved now",
+    "components": [
+      "reviewed Git code and bundle",
+      "API/streaming/Kafka images",
+      "temporal sentiment and risk models",
+      "complete Kafka data",
+      "production checkpoints",
+      "nine E2 collections/indexes",
+      "CI selection cache"
+    ],
+    "exclusions": [
+      "credentials/SSH keys",
+      "E1 reviews/businesses transfer",
+      "complete Kaggle cache 17.85 GB",
+      "test collections/checkpoints",
+      "local Jenkins data",
+      "scratch"
+    ],
+    "rollback": "prior stream/API images + Caddy transaction; no Mongo drop or checkpoint rewind; Azure execution pending"
+  },
+  "powerbi": {
+    "existing_pbix_unchanged": true,
+    "sha256": "150a311bcf3e7c8151e9f11e815b78ec73a48f4415865d7c7ab74fdfeb2ba3ba",
+    "parameter": "LifeMapApiUrl",
+    "default": "http://127.0.0.1:5100",
+    "remote": "https://lifemap-e1-davier-2026.westus2.cloudapp.azure.com",
+    "remote_connected": false,
+    "refresh": "manual Desktop Actualizar",
+    "next": "Open PBIP parameter; after authorization choose HTTPS, authorize source manually, save separate Azure PBIX"
+  },
+  "security_audit": {
+    "history_blobs_scanned": 282,
+    "versionable_files_scanned": 247,
+    "findings": [],
+    "values_printed": false
+  },
+  "tests": {
+    "host_unit": 54,
+    "pipeline_pytest": 56,
+    "browser": "desktop/mobile passed",
+    "shell_syntax": "passed"
+  },
+  "authorization_pending": [
+    "power on/audit existing Azure VM and inspect private Jenkins",
+    "backup and consistent local snapshot/transfer/restore E2 bootstrap",
+    "fast-forward main and push E2",
+    "enable Azure pollSCM deployment and verify HTTPS/ten endpoints",
+    "Power BI HTTPS refresh, public full demo, final report maximum 10 pages and team defense"
+  ]
+}

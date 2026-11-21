@@ -1,0 +1,2 @@
+-r mongo.lock.txt
+kafka-python==2.3.2

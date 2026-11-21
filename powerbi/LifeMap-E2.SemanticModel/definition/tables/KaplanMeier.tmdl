@@ -1,0 +1,130 @@
+table KaplanMeier
+	lineageTag: d226b43a-a8dd-4643-9038-c5cad1bb1963
+
+	column category
+		dataType: string
+		lineageTag: ffe25764-8825-4296-84a5-9d23997ad16a
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column group
+		dataType: string
+		lineageTag: 7cb36ca8-273c-4ea6-a4f5-516b82514097
+		summarizeBy: none
+		sourceColumn: group
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_days
+		dataType: double
+		formatString: 0.00
+		lineageTag: aea9ab04-2b97-4a15-9344-76c814781ed0
+		summarizeBy: none
+		sourceColumn: time_days
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column survival
+		dataType: double
+		formatString: 0.0%
+		lineageTag: ba2a97f4-bc08-49bd-a825-519d952b1dbc
+		summarizeBy: none
+		sourceColumn: survival
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column at_risk
+		dataType: int64
+		formatString: 0
+		lineageTag: 9f4a3f94-7242-48e4-ba61-dd272dfe6925
+		summarizeBy: sum
+		sourceColumn: at_risk
+
+		annotation SummarizationSetBy = Automatic
+
+	column events
+		dataType: int64
+		formatString: 0
+		lineageTag: 98077d86-9458-455d-8cbe-1f96f5b88d16
+		summarizeBy: sum
+		sourceColumn: events
+
+		annotation SummarizationSetBy = Automatic
+
+	column censored
+		dataType: int64
+		formatString: 0
+		lineageTag: 9d5e4e2a-e3e8-4820-b4ec-5d806b33e268
+		summarizeBy: sum
+		sourceColumn: censored
+
+		annotation SummarizationSetBy = Automatic
+
+	column entered
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e60a8d3-be8f-4b1f-a60f-6c29a572d4e7
+		summarizeBy: sum
+		sourceColumn: entered
+
+		annotation SummarizationSetBy = Automatic
+
+	column supported
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3e617238-158c-4fdb-8c08-f2a840067bf1
+		summarizeBy: none
+		sourceColumn: supported
+
+		annotation SummarizationSetBy = Automatic
+
+	column businesses
+		dataType: int64
+		formatString: 0
+		lineageTag: 7c8bac82-e963-4050-8fb2-358063da9aed
+		summarizeBy: sum
+		sourceColumn: businesses
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_events
+		dataType: int64
+		formatString: 0
+		lineageTag: fbb7b283-f7d2-4995-a2d0-aa99ac3cb20e
+		summarizeBy: sum
+		sourceColumn: total_events
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_censored
+		dataType: int64
+		formatString: 0
+		lineageTag: 776509df-2927-476b-bc9d-52798cacc917
+		summarizeBy: sum
+		sourceColumn: total_censored
+
+		annotation SummarizationSetBy = Automatic
+
+	column median_days
+		dataType: double
+		lineageTag: 947f72e8-7595-4ded-8df9-3b8963856b00
+		summarizeBy: sum
+		sourceColumn: median_days
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition KaplanMeier = m
+		mode: import
+		source = LifeMap[KaplanMeier]
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table

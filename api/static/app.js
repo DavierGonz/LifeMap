@@ -52,6 +52,7 @@
     $('tile-message').textContent = 'El mapa no pudo cargarse. Puedes consultar los negocios con los filtros.';
     $('tile-message').hidden = false;
   }
+  window.LifeMap = {map, api, node};
   function setLocation(lat, lon) {
     $('latitude').value = Number(lat).toFixed(6); $('longitude').value = Number(lon).toFixed(6);
     $('location').value = 'custom';
@@ -73,6 +74,7 @@
     const tags = node('div', undefined, 'detail-tags');
     (business.categories || []).slice(0, 3).forEach(category => tags.append(node('span', category)));
     detail.append(tags, node('p', 'Estado histórico de Yelp, no una confirmación de apertura actual.', 'historical-note'));
+    window.dispatchEvent(new CustomEvent('lifemap:business', {detail: business}));
     if (map && state.markers[index]) {
       state.markers[index].bringToFront().openTooltip();
       if (pan) map.panTo(state.markers[index].getLatLng(), {animate: false});

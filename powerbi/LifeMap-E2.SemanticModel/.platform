@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "LifeMap-E2"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2273e0ea-f31b-401b-8ca7-7feeb4ff901e"
+  }
+}

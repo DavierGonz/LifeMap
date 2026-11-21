@@ -6,7 +6,7 @@ RUN_ID="${JOB_BASE_NAME}-${BUILD_NUMBER}"
 [[ "$RUN_ID" =~ ^lifemap-[a-z0-9-]+$ ]] || exit 2
 TEST="$RUN_ID-tests"; CANDIDATE="$RUN_ID-candidate"
 TEST_IMAGE="lifemap-api-test:$RUN_ID"; IMAGE="lifemap-api:$RUN_ID"
-compose() { docker compose --project-name lifemap --env-file .env.ci "$@"; }
+compose() { docker compose --project-name lifemap --profile e2 --profile streaming --env-file .env.ci "$@"; }
 reader_source() { docker inspect --format '{{range .Mounts}}{{if eq .Destination "/run/secrets/mongo_reader_password"}}{{.Source}}{{end}}{{end}}' lifemap-mongodb-1; }
 proxy() { docker run --rm --network host --memory 128m --user 0 --mount type=bind,src=/etc/caddy,dst=/host-caddy --entrypoint python "$IMAGE" /app/ci/azure_promote.py switch "$2" --port "$1"; }
 set_revision() { docker run --rm --network none --memory 128m --user 0 --mount "type=bind,src=$(cat .ci/host-project)/.env,dst=/host-env" --entrypoint python "$IMAGE" /app/ci/azure_promote.py revision "$1"; }
@@ -68,6 +68,10 @@ case "${1:-}" in
   test -f .ci/tests.passed; test -f .ci/candidate.passed
   revision=$(git rev-parse HEAD); previous=$(cat .ci/previous-commit)
   rollback() {
+    # Restore the dependency before probing candidate health; a failed stream
+    # makes the E2 /health red even when the candidate API itself is alive.
+    docker tag "$(cat reports/stream-image-before.txt)" lifemap-spark:stream-v2
+    compose up -d --no-deps --no-build --wait --wait-timeout 180 streaming
     proxy 5101 "$revision"
     docker tag "$(cat reports/api-image-before.txt)" lifemap-api:infra-v1
     DEPLOYED_COMMIT="$previous" compose up -d --no-deps --no-build --wait --wait-timeout 90 api
@@ -77,12 +81,15 @@ case "${1:-}" in
   }
   trap 'status=$?; trap - ERR; rollback; exit "$status"' ERR
   proxy 5101 "$revision"
+  test -n "${E2_STREAM_CANDIDATE:-}"
+  docker tag "$E2_STREAM_CANDIDATE" lifemap-spark:stream-v2
+  compose up -d --no-deps --no-build --wait --wait-timeout 180 streaming
   docker tag "$IMAGE" lifemap-api:infra-v1
   compose up -d --no-deps --no-build --wait --wait-timeout 90 api
-  docker exec lifemap-api-1 python /app/tests/e1/smoke_api.py --expected-commit "$revision" > reports/deployed-api.json
+  docker exec lifemap-api-1 python /app/ci/smoke_e2_api.py --expected-commit "$revision" > reports/deployed-api.json
   proxy 5100 "$revision"
   set_revision "$revision"
-  docker run --rm --network host --memory 128m --cpus 0.5 --entrypoint python "$IMAGE" /app/tests/e1/smoke_api.py https://lifemap-e1-davier-2026.westus2.cloudapp.azure.com --expected-commit "$revision" > reports/public-api.json
+  docker run --rm --network host --memory 128m --cpus 0.5 --entrypoint python "$IMAGE" /app/ci/smoke_e2_api.py https://lifemap-e1-davier-2026.westus2.cloudapp.azure.com --expected-commit "$revision" > reports/public-api.json
   printf 'Azure promotion passed all gates.\n' > reports/deployment.txt
   ;;
  cleanup)

@@ -1,0 +1,196 @@
+{
+  "status": "passed",
+  "selected_real": {
+    "selected": 100,
+    "businesses": 100,
+    "selection": "held-out test businesses, high model score only; no outcome selection",
+    "sample_cache_hit": true,
+    "date_min": "2019-01-01T19:34:35+00:00",
+    "date_max": "2020-10-29T19:30:34+00:00"
+  },
+  "real": {
+    "scope": "production",
+    "expected": 100,
+    "risk_processed": 100,
+    "alerts": 96,
+    "end_offsets": {
+      "2": 211,
+      "1": 210,
+      "0": 267
+    },
+    "active": 96,
+    "alert_fingerprint": "691221132b251c962074c08c8993bbd11cb3b5181f5608ff5a078cd12b26bf3d",
+    "probability_range": [
+      0.5476536880665437,
+      0.8055250679822086
+    ],
+    "states": 100
+  },
+  "replay_identical": true,
+  "actual_consumer_restart": true,
+  "partial_failure_alerts": 5,
+  "retry_scoped": {
+    "scope": "test_risk_2c5908e7",
+    "expected": 20,
+    "risk_processed": 20,
+    "alerts": 20,
+    "end_offsets": {
+      "2": 259,
+      "1": 252,
+      "0": 297
+    },
+    "active": 20,
+    "alert_fingerprint": "c01be69027860b88c9746eed0f194d8958410cdeeba3706dabe6c1b67696fb24",
+    "probability_range": [
+      0.5779533182093295,
+      0.7737557113219452
+    ],
+    "states": 20
+  },
+  "retry_preserved_prior_alert_timestamps": true,
+  "training": {
+    "model_id": "closure-risk-20190101-lr-v1",
+    "eligible": 10974,
+    "labels": {
+      "0": 10265,
+      "1": 709
+    },
+    "split": {
+      "train": {
+        "0": 7185,
+        "1": 496
+      },
+      "validation": {
+        "1": 106,
+        "0": 1540
+      },
+      "test": {
+        "1": 107,
+        "0": 1540
+      }
+    },
+    "baseline_businesses": 15276,
+    "historical_reviews": 994877,
+    "validation": {
+      "areaUnderROC": 0.6493261455525606,
+      "areaUnderPR": 0.14832737333425017,
+      "tp": 45,
+      "fp": 283,
+      "tn": 1257,
+      "fn": 61,
+      "precision": 0.13719512195121952,
+      "recall": 0.42452830188679247,
+      "f2": 0.2992021276595745
+    },
+    "test": {
+      "areaUnderROC": 0.5942711494113355,
+      "areaUnderPR": 0.1331908824833342,
+      "tp": 42,
+      "fp": 288,
+      "tn": 1252,
+      "fn": 65,
+      "precision": 0.12727272727272726,
+      "recall": 0.3925233644859813,
+      "f2": 0.2770448548812665
+    },
+    "threshold_selection": {
+      "threshold": 0.5418682407185197,
+      "precision": 0.13719512195121952,
+      "recall": 0.42452830188679247,
+      "f2": 0.2992021276595745,
+      "validation_prevalence": 0.06439854191980558,
+      "precision_constraint_satisfied": true
+    },
+    "threshold": 0.5418682407185197,
+    "manifest": {
+      "model_id": "closure-risk-20190101-lr-v1",
+      "predictor": "risk/closure-risk-20190101-lr-v1/predictor.json",
+      "spark_pipeline": "risk/closure-risk-20190101-lr-v1/spark_pipeline",
+      "sha256": "eb5b0c46391ce2610335e4abb443e3ff721e3dbf676721313f56add192613e6e",
+      "spark_pipeline_sha256": "a0d60f1fd3533ed0612a72fb38c50615421ac3ac08d05d7e7fcfc16ede2557f8"
+    },
+    "features": [
+      "mean_sentiment",
+      "negative_trend_6m",
+      "mean_stars",
+      "review_count",
+      "observable_age_days",
+      "competitor_density_km2"
+    ],
+    "classifier_parameters": {
+      "algorithm": "weighted LogisticRegression",
+      "maxIter": 50,
+      "regParam": 0.05,
+      "class_weights_train_only": {
+        "0": 0.5345163535142659,
+        "1": 7.742943548387097
+      }
+    },
+    "scaler_fit_train_only": true,
+    "threshold_chosen_validation_only": true,
+    "business_overlap": 0,
+    "predictor_parity_samples": 30,
+    "catalog_sha256": "848930ab7e35d8c5143a6d952702ceab566ec3c298a0ad90561997f9fd33d271",
+    "static_metadata_stability_assumption": true,
+    "retrospective_model_not_available_historically_at_T": true,
+    "seconds": 72.674,
+    "artifact_directory": "/data/lifemap-e2/closure-risk-20190101-lr-v1"
+  },
+  "real_demo_is_score_selected_not_population_precision_estimate": true,
+  "tests": {
+    "unit_passed": 48,
+    "pytest_passed": 43,
+    "real_Kafka_Spark_model_Mongo_passed": true,
+    "all_six_E1_endpoints_and_UI_passed": true,
+    "actual_split_verification": {
+      "business_overlap": 0,
+      "train": 7681,
+      "validation": 1646,
+      "test": 1647
+    },
+    "causal_feature_vectors_verified": 116
+  },
+  "preservation": {
+    "E1_counts": {
+      "businesses": 16944,
+      "reviews": 1320594
+    },
+    "sentiment_models_unchanged": true,
+    "KM_documents_preserved": 424,
+    "risk_catalog_avoids_future_outcome_fields": true,
+    "baseline_cutoff_verified": true,
+    "alerts": 96,
+    "active_alerts": 96,
+    "geospatial_alert_query_matches": 3,
+    "stream_window_documents": 67
+  },
+  "resources": {
+    "training_seconds": 72.674,
+    "training_limit_mib": 1024,
+    "driver_heap_mib": 512,
+    "training_cpus": 1,
+    "peak_training_sample_mib": 760.6,
+    "minimum_Windows_available_during_training_mib": 2326,
+    "peak_live_driver_sample_mib": 739.4,
+    "minimum_Windows_available_live_mib": 2390,
+    "Windows_available_final_mib": 2733,
+    "OOM": false,
+    "unexpected_streaming_restarts": 0
+  },
+  "restrictions": {
+    "Azure_accessed": false,
+    "pushed": false,
+    "new_endpoints_or_UI_or_PowerBI": false,
+    "sentiment_retrained": false,
+    "KM_recalculated": false,
+    "Yelp_downloaded": false,
+    "protected_projects_modified": false
+  },
+  "caveats": [
+    "Fixed location/category assumption: Yelp has no historical metadata changes",
+    "Density measures known presence, not known-active competitors",
+    "Retrospective training labels span T to T+12 months; model was not historically available at T",
+    "Weighted output is uncalibrated; test discrimination is modest",
+    "Live dates beyond training horizon are temporal extrapolation, not validated prospective forecasts"
+  ]
+}

@@ -22,6 +22,20 @@ async function shot(name){const r=await send('Page.getLayoutMetrics');const clip
   await send('Emulation.setDeviceMetricsOverride',{width:1440,height:1080,deviceScaleFactor:1,mobile:false});
   await send('Page.navigate',{url:base+'/'});
   await wait("document.querySelectorAll('.business-row').length>0 && document.querySelectorAll('.chart-row').length===6");
+  await wait("document.querySelectorAll('#alert-list .e2-row').length>0 && document.querySelectorAll('#survival-chart svg path').length===3 && !document.getElementById('monitor-refresh').disabled");
+  assert((await evaluate("document.getElementById('hotspot-list').textContent")).includes('No hay hotspots observados'));
+  await wait("document.getElementById('business-risk')?.textContent.includes('Score de riesgo:')");
+  assert((await evaluate("document.getElementById('business-risk').textContent")).includes('no calibrado'));
+  await evaluate("document.querySelector('#survival-chart circle').dispatchEvent(new MouseEvent('mouseenter'))");
+  assert((await evaluate("document.getElementById('survival-point').textContent")).includes('en riesgo'));
+  await evaluate("document.getElementById('survival-category').value='American (Traditional)';document.getElementById('survival-zone').value='sector_este';document.getElementById('survival-method').value='landmark_T';document.getElementById('survival-form').requestSubmit()");
+  await wait("!document.getElementById('survival-refresh').disabled && document.querySelectorAll('#survival-chart svg path').length===2");
+  assert((await evaluate("document.getElementById('survival-message').textContent")).includes('landmark_T'));
+  await evaluate("document.getElementById('minimum-score').value='1';document.getElementById('monitor-form').requestSubmit()");
+  await wait("!document.getElementById('monitor-refresh').disabled");
+  assert((await evaluate("document.getElementById('alert-list').textContent")).includes('No hay alertas activas'));
+  await evaluate("document.getElementById('minimum-score').value='0';document.getElementById('monitor-form').requestSubmit()");
+  await wait("!document.getElementById('monitor-refresh').disabled && document.querySelectorAll('#alert-list .e2-row').length>0");
   assert.equal(await evaluate('document.documentElement.scrollWidth<=innerWidth'),true,'Desktop horizontal overflow');
   const initial=await evaluate("({count:document.querySelectorAll('.business-row').length,name:document.querySelector('#business-detail h3').textContent,markers:document.querySelectorAll('.leaflet-overlay-pane .leaflet-interactive').length,tiles:document.querySelectorAll('.leaflet-tile-loaded').length})");
   assert(initial.count>0 && initial.markers>=initial.count,'Actual map markers absent');
@@ -58,7 +72,7 @@ async function shot(name){const r=await send('Page.getLayoutMetrics');const clip
   assert.equal(await evaluate('document.documentElement.scrollWidth<=innerWidth'),true,'Mobile horizontal overflow');
   await shot('mobile.png');
   assert.equal(errors.length,0,'Browser JS errors: '+errors.join('; '));
-  const result={base,initial,pizza_count:pizza.count,selection:true,marker_selection:true,filters_match_real_api:true,empty_state:true,location_change:true,closure_groups:true,positive,negative,mobile_width:390,horizontal_overflow:false,js_errors:errors,requests:responses,passed:true};
+  const result={base,initial,e2:{real_alerts:true,no_fictitious_hotspots:true,selected_business_risk:true,interactive_survival:true,zone_category_method_filters:true,manual_refresh:true,empty_alerts:true},pizza_count:pizza.count,selection:true,marker_selection:true,filters_match_real_api:true,empty_state:true,location_change:true,closure_groups:true,positive,negative,mobile_width:390,horizontal_overflow:false,js_errors:errors,requests:responses,passed:true};
   fs.writeFileSync(path.join(output,base.startsWith('https')?'public-tests.json':'local-tests.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result));
  }catch(error){console.log('DEBUG',JSON.stringify({errors,responses,dom:await evaluate("({title:document.title,body:document.body.innerText.slice(-5000),messages:document.querySelector('#search-message')?.textContent})")}));await shot('failed.png');throw error;}finally{if(ws){try{await send('Browser.close');}catch{}ws.close();}chrome.kill();}
 })().catch(e=>{console.error(e.stack);process.exitCode=1;});

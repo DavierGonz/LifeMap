@@ -5,13 +5,16 @@ COPY requirements/spark.lock.txt requirements/mongo.lock.txt /tmp/
 RUN python3 -m pip install --no-cache-dir -r /tmp/spark.lock.txt
 COPY docker/spark/install_connector.py /opt/lifemap/install_connector.py
 RUN python3 /opt/lifemap/install_connector.py \
-    && mkdir -p /data /models /scratch \
-    && chown -R 185:0 /data /models /scratch && chmod 2775 /data /models
+    && mkdir -p /data /models /scratch /checkpoints \
+    && chown -R 185:0 /data /models /scratch /checkpoints && chmod 2775 /data /models /checkpoints
 COPY docker/spark/spark-defaults.conf /opt/spark/conf/spark-defaults.conf
 COPY scripts/check_spark.py /opt/lifemap/check_spark.py
 COPY ml /opt/lifemap/ml
 COPY analytics /opt/lifemap/analytics
 COPY storage /opt/lifemap/storage
+COPY streaming /opt/lifemap/streaming
+COPY config/streaming.json /opt/lifemap/config/streaming.json
+COPY config/risk.json /opt/lifemap/config/risk.json
 ENV PYTHONPATH=/opt/lifemap
 ENV SPARK_DAEMON_MEMORY=256m SPARK_LOCAL_DIRS=/scratch PYSPARK_PYTHON=python3
 USER 185:0

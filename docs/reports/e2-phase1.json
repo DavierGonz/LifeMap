@@ -1,0 +1,395 @@
+{
+  "phase": "E2 phase 1 local",
+  "status": "passed",
+  "cutoff": "2019-01-01T00:00:00+00:00",
+  "corpus": {
+    "businesses": 16944,
+    "reviews": 1320594,
+    "date_min": "2005-02-16T04:06:26+00:00",
+    "date_max": "2022-01-19T19:46:34+00:00",
+    "through_T": 994877,
+    "after_T": 325717,
+    "after_T_plus_12_months": 175122,
+    "risk_proxy_eligible_businesses": 10974,
+    "risk_proxy_positive": 709,
+    "risk_proxy_negative": 10265,
+    "risk_dates_are_review_activity_not_actual_closure": true
+  },
+  "original_model_temporal_leak": {
+    "training_reviews_after_T": 262727,
+    "training_max_date": "2022-01-19T19:46:34+00:00",
+    "original_preserved": true
+  },
+  "temporal_model": {
+    "model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+    "cutoff": "2019-01-01T00:00:00+00:00",
+    "temporal_training_verified": true,
+    "training_max_date": "2018-12-31T23:56:46+00:00",
+    "selection_max_date": "2018-12-31T23:49:31+00:00",
+    "training_review_ids_sha256": "4358377c36cd8424ef6f3db71fb485fd2f9011cd1822ce2b08d5c216a2876d8d",
+    "training_reviews": 797821,
+    "predictor": "e2-temporal/sentiment-until-20190101T000000Z-v1/predictor.json",
+    "spark_pipeline": "e2-temporal/sentiment-until-20190101T000000Z-v1/spark_pipeline",
+    "sha256": "e650fc89e70986bd9069b557bf2ea254f98ccbf7558cdfe42bcfae3346f6b15c",
+    "distribution": [
+      {
+        "split": "test",
+        "label": 2.0,
+        "count": 129675
+      },
+      {
+        "split": "test",
+        "label": 1.0,
+        "count": 26590
+      },
+      {
+        "split": "train",
+        "label": 0.0,
+        "count": 165299
+      },
+      {
+        "split": "train",
+        "label": 1.0,
+        "count": 108342
+      },
+      {
+        "split": "train",
+        "label": 2.0,
+        "count": 524180
+      },
+      {
+        "split": "test",
+        "label": 0.0,
+        "count": 40791
+      }
+    ],
+    "business_overlap": 0,
+    "models": {
+      "naive_bayes": {
+        "confusion_matrix": [
+          [
+            29519,
+            9352,
+            1920
+          ],
+          [
+            5388,
+            14722,
+            6480
+          ],
+          [
+            6494,
+            17659,
+            105522
+          ]
+        ],
+        "per_class": [
+          {
+            "class": "negative",
+            "support": 40791,
+            "precision": 0.7130021013985169,
+            "recall": 0.7236645338432497,
+            "f1": 0.7182937512166634
+          },
+          {
+            "class": "neutral",
+            "support": 26590,
+            "precision": 0.3527663958977308,
+            "recall": 0.5536667920270778,
+            "f1": 0.43095297337646177
+          },
+          {
+            "class": "positive",
+            "support": 129675,
+            "precision": 0.9262653394427767,
+            "recall": 0.813742047426258,
+            "f1": 0.8663653493269622
+          }
+        ],
+        "macro_f1": 0.6718706913066957,
+        "accuracy": 0.7600022328678142
+      },
+      "logistic_regression": {
+        "confusion_matrix": [
+          [
+            30620,
+            1954,
+            8217
+          ],
+          [
+            5391,
+            4962,
+            16237
+          ],
+          [
+            1584,
+            1970,
+            126121
+          ]
+        ],
+        "per_class": [
+          {
+            "class": "negative",
+            "support": 40791,
+            "precision": 0.8144700093097487,
+            "recall": 0.7506557819126768,
+            "f1": 0.7812619600438854
+          },
+          {
+            "class": "neutral",
+            "support": 26590,
+            "precision": 0.5584064821066846,
+            "recall": 0.18661150808574653,
+            "f1": 0.27973841470289773
+          },
+          {
+            "class": "positive",
+            "support": 129675,
+            "precision": 0.837595882450606,
+            "recall": 0.9725930210140736,
+            "f1": 0.9000606601248885
+          }
+        ],
+        "macro_f1": 0.6536870116238905,
+        "accuracy": 0.8205941458265671
+      }
+    },
+    "selected": "naive_bayes",
+    "parity_samples": 30,
+    "selection_metric": "macro F1 on business-disjoint pre-T holdout; not independent final test",
+    "E1_active_pointer_sha256_unchanged": "248b53bac49c73c8b6e965639106566ec0b0d7fb0d3d21c4c3f7014ec7edb32a",
+    "seconds": 265.109,
+    "mongo_writes": 0
+  },
+  "producer_smoke": {
+    "sent": 100,
+    "partitions": {
+      "1": 32,
+      "2": 29,
+      "0": 39
+    },
+    "first_date": "2019-01-01T00:03:16+00:00",
+    "last_date": "2019-01-01T03:27:15+00:00",
+    "seconds": 13.989,
+    "model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+    "replay_id": "phase1-96dd080a62b240de91b4257ca3ae4d90",
+    "topic": "reviews",
+    "topic_partitions": 3,
+    "readback": 100,
+    "key_consistent": true,
+    "ordered_per_partition": true,
+    "training_temporally_excluded": true,
+    "model_sha256": "e650fc89e70986bd9069b557bf2ea254f98ccbf7558cdfe42bcfae3346f6b15c",
+    "global_consumer_order_guaranteed": false,
+    "mongo_writes": 0,
+    "streaming_inference_test": false
+  },
+  "tests": {
+    "host_unittest_passed": 28,
+    "container_pytest_passed": 24,
+    "producer_cli_real_messages": 1,
+    "compose_static_valid": true
+  },
+  "E1_preservation": {
+    "counts": {
+      "businesses": 16944,
+      "reviews": 1320594
+    },
+    "E1_model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+    "E1_predictor_sha256": "7e6b9fb0b8872e6d247e3c8586f1323fbc6adcc040240bcfc180b05304afa0e9",
+    "E1_pointer_sha256": "248b53bac49c73c8b6e965639106566ec0b0d7fb0d3d21c4c3f7014ec7edb32a",
+    "api": {
+      "/health": {
+        "status": 200
+      },
+      "/": {
+        "status": 200,
+        "interface": true
+      },
+      "/businesses/near?lat=39.9526&lon=-75.1652&radius_m=5000&category=Restaurants&limit=5": {
+        "status": 200
+      },
+      "/businesses/within": {
+        "status": 200
+      },
+      "/zones/summary?lat=39.9526&lon=-75.1652&radius_m=5000": {
+        "status": 200
+      },
+      "/stats/closure?group_by=geohash&min_business_days=3650&limit=5": {
+        "status": 200
+      },
+      "/predict": {
+        "status": 200
+      },
+      "/businesses/near?lat=nan&lon=0&radius_m=10 [invalid input]": {
+        "status": 400
+      },
+      "/predict [invalid input]": {
+        "status": 400
+      },
+      "commit": "036c8aa182afe65c872741d4e5d8d640850ea3ca",
+      "model_id": "restaurants-f56f79e85065-e1-v1-naive_bayes",
+      "passed": true
+    },
+    "compose": {
+      "E1_service_definitions_unchanged": true,
+      "E2_validation_errors": [],
+      "E1_services": [
+        "api",
+        "dask-scheduler",
+        "dask-worker-1",
+        "dask-worker-2",
+        "jenkins",
+        "mongodb",
+        "spark-master",
+        "spark-worker"
+      ],
+      "E2_services": [
+        "api",
+        "dask-scheduler",
+        "dask-worker-1",
+        "dask-worker-2",
+        "jenkins",
+        "kafka",
+        "mongodb",
+        "spark-master",
+        "spark-worker"
+      ]
+    },
+    "local_API_stale_image_corrected": true
+  },
+  "resources": {
+    "windows_total_gib": 15.78,
+    "windows_available_final_mib": 2403,
+    "distributed_attempt_minimum_available_mib": 188,
+    "distributed_attempt_stopped_safely": true,
+    "local_batch_minimum_available_sample_mib": 846,
+    "local_batch_maximum_available_sample_mib": 1994,
+    "local_batch_spark_master_peak_observed_mib": 950.9,
+    "local_batch_execution": "Spark local[1] inside existing container; 512m driver; one CPU; 265.109 seconds",
+    "WSL_available_before_attempt_mib": 5395,
+    "WSL_not_added_to_Windows_memory": true,
+    "steady_state": [
+      {
+        "name": "lifemap-api-1",
+        "memory": "48.51MiB / 256MiB",
+        "cpu": "0.07%"
+      },
+      {
+        "name": "lifemap-kafka-1",
+        "memory": "335.3MiB / 1GiB",
+        "cpu": "1.54%"
+      },
+      {
+        "name": "lifemap-spark-worker-1",
+        "memory": "213.3MiB / 1.5GiB",
+        "cpu": "0.09%"
+      },
+      {
+        "name": "lifemap-dask-worker-1-1",
+        "memory": "117.7MiB / 1GiB",
+        "cpu": "5.91%"
+      },
+      {
+        "name": "lifemap-dask-worker-2-1",
+        "memory": "126.9MiB / 1GiB",
+        "cpu": "5.57%"
+      },
+      {
+        "name": "lifemap-spark-master-1",
+        "memory": "72.48MiB / 1GiB",
+        "cpu": "0.08%"
+      },
+      {
+        "name": "lifemap-mongodb-1",
+        "memory": "546.9MiB / 768MiB",
+        "cpu": "0.45%"
+      },
+      {
+        "name": "lifemap-dask-scheduler-1",
+        "memory": "69.58MiB / 384MiB",
+        "cpu": "2.52%"
+      },
+      {
+        "name": "lifemap-jenkins-1",
+        "memory": "392.4MiB / 768MiB",
+        "cpu": "0.12%"
+      }
+    ],
+    "e2_cache_kib": 600800,
+    "e2_model_store_kib": 1292
+  },
+  "containers": [
+    {
+      "name": "lifemap-api-1",
+      "status": "Up 4 minutes (healthy)"
+    },
+    {
+      "name": "lifemap-kafka-1",
+      "status": "Up 6 minutes (healthy)"
+    },
+    {
+      "name": "lifemap-spark-worker-1",
+      "status": "Up 17 minutes (healthy)"
+    },
+    {
+      "name": "lifemap-dask-worker-1-1",
+      "status": "Up 17 minutes (healthy)"
+    },
+    {
+      "name": "lifemap-dask-worker-2-1",
+      "status": "Up 17 minutes (healthy)"
+    },
+    {
+      "name": "lifemap-spark-master-1",
+      "status": "Up 17 minutes (healthy)"
+    },
+    {
+      "name": "lifemap-mongodb-1",
+      "status": "Up 17 minutes (healthy)"
+    },
+    {
+      "name": "lifemap-dask-scheduler-1",
+      "status": "Up 17 minutes (healthy)"
+    },
+    {
+      "name": "lifemap-jenkins-1",
+      "status": "Up 17 minutes (healthy)"
+    }
+  ],
+  "git_and_jenkins": {
+    "GitHub_main_verified": "036c8aa182afe65c872741d4e5d8d640850ea3ca",
+    "PR_1_verified_merged": true,
+    "local_job_lifemap_main_disabled": true,
+    "local_job_builds": 0,
+    "Azure_current_state_verified": false,
+    "historical_Azure_auto_deployment_evidence": "work/github-release-final.json",
+    "Jenkins_configuration_modified": false
+  },
+  "restrictions": {
+    "Azure_started": false,
+    "Azure_accessed": false,
+    "pushed": false,
+    "Yelp_downloaded": false,
+    "E1_records_modified": false,
+    "external_costs_COP": 0,
+    "host_python": ".venv Python 3.10",
+    "protected_projects_modified": false
+  },
+  "pending": [
+    "Review and approve phase 1 before Structured Streaming",
+    "Verify Azure Jenkins state only when authorized; VM not accessed",
+    "Future phase: streaming consumer and 100-message classification test in Jenkins; current test verifies Kafka transport only"
+  ],
+  "protected_projects": {
+    "registered_containers": 21,
+    "all_stopped": true,
+    "modified": false
+  },
+  "secret_audit": {
+    "staged_files": 16,
+    "findings": 0,
+    "env_secrets_venv_ignored": true,
+    "model_binaries_not_versioned": true
+  }
+}

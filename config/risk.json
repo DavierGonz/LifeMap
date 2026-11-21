@@ -1,0 +1,16 @@
+{
+  "model_id": "closure-risk-20190101-lr-v1",
+  "cutoff": "2019-01-01T00:00:00+00:00",
+  "horizon_end": "2020-01-01T00:00:00+00:00",
+  "feature_version": "risk-temporal-six-v1",
+  "sentiment_model_id": "sentiment-until-20190101T000000Z-v1-naive_bayes",
+  "sentiment_sha256": "e650fc89e70986bd9069b557bf2ea254f98ccbf7558cdfe42bcfae3346f6b15c",
+  "split_seed": "lifemap-risk-v1",
+  "regularization": 0.05,
+  "max_iterations": 50,
+  "threshold_rule": "maximize validation F2 with precision >= twice validation prevalence; fallback F2 if infeasible",
+  "fixed_location_category_assumption": true,
+  "retrospective_simulation_only": true,
+  "model_sha256": "eb5b0c46391ce2610335e4abb443e3ff721e3dbf676721313f56add192613e6e",
+  "spark_pipeline_sha256": "a0d60f1fd3533ed0612a72fb38c50615421ac3ac08d05d7e7fcfc16ede2557f8"
+}

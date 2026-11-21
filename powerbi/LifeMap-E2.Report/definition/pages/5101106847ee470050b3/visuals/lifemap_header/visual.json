@@ -1,0 +1,37 @@
+{
+  "name": "lifemap_header",
+  "position": {
+    "x": 20,
+    "y": 10,
+    "width": 1240,
+    "height": 45,
+    "z": 0,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "LifeMap E2 · Filadelfia y entorno · API real · Actualización manual",
+                    "textStyle": {
+                      "fontSize": "24px",
+                      "color": "#233d35",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json"
+}
