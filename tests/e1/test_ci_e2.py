@@ -25,11 +25,15 @@ def test_missing_gate_blocks_before_docker(tmp_path,missing):
 
 def test_kafka_transfer_roundtrip_and_no_overwrite(tmp_path):
     source=tmp_path/'source';dest=tmp_path/'dest';source.mkdir();dest.mkdir()
+    source.chmod(0o775)
     (source/'meta.properties').write_text('test-only-cluster')
     (source/'reviews-0').mkdir();(source/'reviews-0/log').write_bytes(b'controlled-test-bytes')
     archive=tmp_path/'kafka.tgz';meta=volume.pack(source,archive,'kafka')
     volume.restore(dest,archive,'kafka',meta['sha256'])
     assert (dest/'reviews-0/log').read_bytes()==b'controlled-test-bytes'
+    if os.name!='nt':
+        assert dest.stat().st_mode & 0o7777==source.stat().st_mode & 0o7777
+        assert (dest.stat().st_uid,dest.stat().st_gid)==(source.stat().st_uid,source.stat().st_gid)
     with pytest.raises(AssertionError):volume.restore(dest,archive,'kafka',meta['sha256'])
     assert (dest/'meta.properties').read_text()=='test-only-cluster'
 
